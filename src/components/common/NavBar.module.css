@@ -1,0 +1,22 @@
+.navLinks ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: auto;
+  justify-content: space-evenly;
+  height: 8vh;
+  background-color: #1a1919;
+}
+
+.navLi {
+  margin-top: 20px;
+}
+
+.navLiA {
+  text-decoration: none;
+  padding: 10px;
+  color: #ffffff;
+  font-size: 24px;
+  margin: 20px;
+}

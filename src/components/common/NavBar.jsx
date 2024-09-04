@@ -1,26 +1,29 @@
-import Classes from "../common/NavBar.module.css";
+import React from "react";
 import { NavLink } from "react-router-dom";
+import Classes from "./NavBar.module.css"; // Assuming you're using an external CSS file
 
-function MainHeader() {
+const NavBar = () => {
   return (
-    <>
-      <nav className={Classes.navbar}>
-        <div className={Classes.container}>
-          <ul>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/login">Login</NavLink>
-            </li>
-            <li>
-              <NavLink to="/chatbot">Chat Bot</NavLink>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </>
+    <div className={Classes.navLinks}>
+      <ul>
+        <li className={Classes.navLi}>
+          <NavLink to="/" className={Classes.navLiA}>
+            Home
+          </NavLink>
+        </li>
+        <li className={Classes.navLi}>
+          <NavLink to="/login" className={Classes.navLiA}>
+            Login
+          </NavLink>
+        </li>
+        <li className={Classes.navLi}>
+          <NavLink to="/chatbot" className={Classes.navLiA}>
+            Chat Bot
+          </NavLink>
+        </li>
+      </ul>
+    </div>
   );
-}
+};
 
-export default MainHeader;
+export default NavBar;
