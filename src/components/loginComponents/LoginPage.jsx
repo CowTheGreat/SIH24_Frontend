@@ -9,6 +9,7 @@ function LoginPage() {
       <div className={Classes.pageContainer}>
         <h1>CLETOCITE</h1>
         <div className={Classes.mainContainer}>
+          <div className={Classes.loginCircle}>Login</div>
           <div className={Classes.leftContainer}>
             <img src={LoginBot} className={Classes.botimg}></img>
             <h1>WELCOME</h1>
@@ -34,8 +35,8 @@ function LoginPage() {
                 <div className={Classes.rememberforgot}>
                   <label>
                     <input type="checkbox"></input>Remember Me
+                    <a href="#">Forgot Password?</a>
                   </label>
-                  <a href="#">Forgot Password?</a>
                 </div>
                 <button type="submit">Login Now</button>
               </form>
