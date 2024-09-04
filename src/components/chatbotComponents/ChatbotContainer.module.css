@@ -24,7 +24,7 @@ input[type="text"] {
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
-  width: 40vw;
+  width: 50vw;
 }
 
 button {
@@ -57,4 +57,10 @@ button:hover {
   background-color: #e5e5ea;
   color: black;
   align-self: flex-start;
+}
+
+.chat-box {
+  overflow-y: scroll; /* Enable scrolling */
+  max-height: 80vh; /* Adjust based on your design */
+  scrollbar-width: none; /* For Firefox */
 }
