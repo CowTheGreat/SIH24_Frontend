@@ -1,8 +1,10 @@
+import ChatbotPage from "../components/chatbotComponents/ChatBotPage";
+
 function chatbot() {
   return (
-    <>
-      <h1>chatbot</h1>
-    </>
+    <div>
+      <ChatbotPage />
+    </div>
   );
 }
 

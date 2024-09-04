@@ -1,0 +1,16 @@
+.userCont {
+  display: flex;
+  color: azure;
+  margin: 20px;
+  margin-top: 30px;
+}
+
+.icon {
+  width: 50px;
+  margin-right: 20px;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: 500;
+}

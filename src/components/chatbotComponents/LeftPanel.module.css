@@ -1,0 +1,12 @@
+.leftPanelCont {
+  height: 100vh;
+  width: 18vw;
+  height: 100vh;
+  background-color: #131313;
+}
+
+.logo {
+  font-size: 30px;
+  margin: 20px;
+  font-weight: 700;
+}

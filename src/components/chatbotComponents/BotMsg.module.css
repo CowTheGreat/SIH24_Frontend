@@ -1,0 +1,12 @@
+.botIcon {
+  width: 50px;
+}
+
+.botMsgCont {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.botMsg {
+  margin: 15px;
+}

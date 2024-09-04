@@ -1,0 +1,11 @@
+.msg {
+  background-color: #edf0ff;
+  width: 346px;
+  height: 79px;
+  border-radius: 20px;
+  color: black;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
