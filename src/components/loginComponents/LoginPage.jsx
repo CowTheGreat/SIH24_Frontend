@@ -1,6 +1,7 @@
 import Classes from "../loginComponents/LoginPage.module.css"
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
+import LoginBot from "../../assets/loginbot.png";
 
 
 function LoginPage(){
@@ -11,13 +12,12 @@ function LoginPage(){
    <div className={Classes.mainContainer}>
   
      <div className={Classes.leftContainer}>
-        <div className={Classes.loginCircle}>
-          Login
-
-        </div>
+     <img src={LoginBot} className={Classes.botimg}></img> 
+     <h1>WELCOME</h1>
+      <p>Intelligent Enterprise Assistant</p>
      </div>
      <div className={Classes.rightContainer}>
-         
+      
         <div className={Classes.loginContainer}>
             <form action="">
             <h1>Login</h1>
