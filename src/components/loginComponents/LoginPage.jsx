@@ -1,6 +1,7 @@
 import Classes from "../loginComponents/LoginPage.module.css";
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
+import LoginBot from "../../assets/loginbot.png";
 
 function LoginPage() {
   return (
