@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgb(30, 30, 30);
+  color: white;
+  font-family: "Poppins", sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: rgb(253, 144, 79);
+  margin-bottom: 2rem;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.codeInputContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.codeInputBox {
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: rgb(30, 30, 30);
+  border: 2px solid rgb(253, 144, 79);
+  border-radius: 8px;
+  color: white;
+  margin: 0 5px;
+}
+
+.codeInputBox:focus {
+  border-color: rgb(255, 157, 82);
+  outline: none;
+}
+
+.submitButton {
+  width: 150px;
+  height: 45px;
+  background: linear-gradient(
+    to right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  );
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submitButton:hover {
+  background: linear-gradient(
+    to right,
+    rgb(253, 144, 79),
+    rgb(255, 157, 82),
+    rgb(255, 107, 71)
+  );
+}
