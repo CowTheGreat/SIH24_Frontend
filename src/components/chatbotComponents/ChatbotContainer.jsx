@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import "./ChatbotContainer.module.css"; // Adjust the path to your CSS file if needed
 import UserMsg from "./UserMsg";
 import BotMsg from "./BotMsg";
+import FileUpload from "./FileUpload";
+import SendArrow from "../../assets/sendarrow.png";
 
 const ChatbotContainer = () => {
   const [messages, setMessages] = useState([]);
@@ -95,7 +97,11 @@ const ChatbotContainer = () => {
           </div>
         ))}
       </div>
+
       <div className="input-container">
+        <button>
+          <FileUpload />
+        </button>
         <input
           type="text"
           value={input}
