@@ -61,14 +61,14 @@ const ChatbotContainer = () => {
               >
                 <UserMsg
                   message={msg.text}
-                  style={{
-                    backgroundColor: "#007bff", // Background color for user message
-                    color: "white", // Text color for user message
-                    borderRadius: "10px 10px 0 10px", // Rounded corners for user message
-                    padding: "10px",
-                    maxWidth: "60%", // Limit width of user message
-                    textAlign: "left", // Align text inside the user message
-                  }}
+                  // style={{
+                  //   backgroundColor: "#007bff", // Background color for user message
+                  //   color: "white", // Text color for user message
+                  //   borderRadius: "10px 10px 0 10px", // Rounded corners for user message
+                  //   padding: "10px",
+                  //   maxWidth: "60%", // Limit width of user message
+                  //   textAlign: "left", // Align text inside the user message
+                  // }}
                 />
               </div>
             ) : (
@@ -81,14 +81,14 @@ const ChatbotContainer = () => {
               >
                 <BotMsg
                   message={msg.text}
-                  style={{
-                    backgroundColor: "#e5e5ea", // Background color for bot message
-                    color: "black", // Text color for bot message
-                    borderRadius: "10px 10px 10px 0", // Rounded corners for bot message
-                    padding: "10px",
-                    maxWidth: "60%", // Limit width of bot message
-                    textAlign: "left", // Align text inside the bot message
-                  }}
+                  // style={{
+                  //   backgroundColor: "#e5e5ea", // Background color for bot message
+                  //   color: "black", // Text color for bot message
+                  //   borderRadius: "10px 10px 10px 0", // Rounded corners for bot message
+                  //   padding: "10px",
+                  //   maxWidth: "60%", // Limit width of bot message
+                  //   textAlign: "left", // Align text inside the bot message
+                  // }}
                 />
               </div>
             )}
