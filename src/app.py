@@ -9,7 +9,7 @@ CORS(app)  # Enable CORS for all routes
 @app.route('/message', methods=['POST'])
 def message():
     user_message = request.json.get('message')
-    # Here you could implement some logic or AI to generate a response
+    # Here you could implement some logic or AI to generate a respons
     bot_message = f"{user_message}"  # Simply echoes the user's message back
     return jsonify({'message': bot_message})
 
