@@ -1,11 +1,20 @@
-.msg {
-  background-color: #edf0ff;
-  width: 346px;
-  height: 79px;
-  border-radius: 20px;
-  color: black;
+.msgCont {
   margin: 20px;
+}
+
+.msg {
+  color: black;
+  background-color: #f0f0f0;
+  width: 546px; /* Fixed width */
+  height: 79px; /* Initially fixed height, dynamically adjusted in the component */
+  border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px 20px; /* Adding padding to create space around the text */
+  transition: height 0.3s ease-in-out; /* Smooth height resizing */
+  margin: 10px 0; /* Adding margin for spacing between messages */
+  font-size: 16px; /* Slightly increasing font size */
+  line-height: 1.5; /* Improving line spacing for better readability */
+  text-align: left; /* Aligning the text to the left for better readability */
 }
