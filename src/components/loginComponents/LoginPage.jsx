@@ -3,7 +3,13 @@ import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import LoginBot from "../../assets/loginbot.png";
 
-function LoginPage() {
+
+
+
+
+  
+function LoginPage(){
+
   return (
     <>
       <div className={Classes.pageContainer}>
@@ -22,14 +28,14 @@ function LoginPage() {
                 <div className={Classes.line}></div>
                 <div className={Classes.inputbox}>
                   <FaUser className={Classes.icon} />
-                  <input type="text" placeholder="Email" required></input>
+                  <input type="text" placeholder="Email" required ></input>
                 </div>
                 <div className={Classes.inputbox}>
                   <FaLock className={Classes.icon} />
                   <input
                     type="password"
                     placeholder="Password"
-                    required
+                    required  
                   ></input>
                 </div>
                 <div className={Classes.rememberforgot}>
@@ -38,8 +44,8 @@ function LoginPage() {
                     <a href="#">Forgot Password?</a>
                   </label>
                 </div>
-                <button type="submit">Login Now</button>
-              </form>
+                <button type="submit">Login Now </button>
+             </form>
             </div>
           </div>
         </div>

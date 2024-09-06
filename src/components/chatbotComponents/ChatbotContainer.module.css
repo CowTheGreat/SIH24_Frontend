@@ -64,3 +64,10 @@ button:hover {
   max-height: 80vh; /* Adjust based on your design */
   scrollbar-width: none; /* For Firefox */
 }
+
+.upload{
+font-size: 24px; /* Adjust icon size */
+  color: #007bff; /* Change icon color */
+  cursor: pointer; /* Change cursor to pointer when hovering */
+  transition: color 0.3s ease; 
+}
