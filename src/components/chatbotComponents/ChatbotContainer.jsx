@@ -3,7 +3,6 @@ import "./ChatbotContainer.module.css"; // Adjust the path to your CSS file if n
 import UserMsg from "./UserMsg";
 import BotMsg from "./BotMsg";
 import FileUpload from "./FileUpload";
-import SendArrow from "../../assets/sendarrow.png";
 
 const ChatbotContainer = () => {
   const [messages, setMessages] = useState([]);
@@ -18,16 +17,17 @@ const ChatbotContainer = () => {
       setMessages((prevMessages) => [...prevMessages, newMessage]);
 
       try {
-        const response = await fetch("http://localhost:5000/message", {
+        const response = await fetch("http://localhost:8080/ai", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ message: input }),
+          body: JSON.stringify({ query: input }),
         });
 
         const data = await response.json();
-        const botMessage = { text: data.message, sender: "bot" };
+        const botMessage = { text: data.answer, sender: "bot" };
+        console.log(botMessage);
 
         // Update the state with the bot message
         setMessages((prevMessages) => [...prevMessages, botMessage]);
@@ -61,17 +61,7 @@ const ChatbotContainer = () => {
                   marginBottom: "10px",
                 }}
               >
-                <UserMsg
-                  message={msg.text}
-                  // style={{
-                  //   backgroundColor: "#007bff", // Background color for user message
-                  //   color: "white", // Text color for user message
-                  //   borderRadius: "10px 10px 0 10px", // Rounded corners for user message
-                  //   padding: "10px",
-                  //   maxWidth: "60%", // Limit width of user message
-                  //   textAlign: "left", // Align text inside the user message
-                  // }}
-                />
+                <UserMsg message={msg.text} />
               </div>
             ) : (
               <div
@@ -81,17 +71,7 @@ const ChatbotContainer = () => {
                   marginBottom: "10px",
                 }}
               >
-                <BotMsg
-                  message={msg.text}
-                  // style={{
-                  //   backgroundColor: "#e5e5ea", // Background color for bot message
-                  //   color: "black", // Text color for bot message
-                  //   borderRadius: "10px 10px 10px 0", // Rounded corners for bot message
-                  //   padding: "10px",
-                  //   maxWidth: "60%", // Limit width of bot message
-                  //   textAlign: "left", // Align text inside the bot message
-                  // }}
-                />
+                <BotMsg message={msg.text} />
               </div>
             )}
           </div>
