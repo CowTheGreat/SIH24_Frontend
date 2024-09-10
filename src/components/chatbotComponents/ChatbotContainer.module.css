@@ -128,6 +128,7 @@ input[type="text"] {
   left: 10px;
   width: 200px;
   border-radius: 5px;
+  margin-bottom: 30px;
 }
 
 .optionsContainer label {
