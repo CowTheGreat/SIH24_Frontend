@@ -2,9 +2,14 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import uuid
 import mysql.connector
+import os
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins for now
+
+# Create directories if not exist
+os.makedirs('files', exist_ok=True)
+os.makedirs('videos', exist_ok=True)
 
 CORS(app, origins=["http://localhost:5173"])
 
@@ -29,7 +34,7 @@ def generate_session():
     return jsonify({"session_id": session_id})
 
 # Route to handle incoming messages and bot response
-@app.route('/ai', methods=['POST'])
+@app.route('/query', methods=['POST'])
 def receive_message():
     data = request.json
     session_id = data.get("session_id")
@@ -50,7 +55,7 @@ def receive_message():
         user_message_query = "INSERT INTO messages (session_id, session_title, sender, text) VALUES (%s, %s, %s, %s)"
         cursor.execute(user_message_query, (session_id, session_title, 'user', query))
         connection.commit()
-
+        
         # Dummy bot response (you can replace this with AI response logic)
         bot_reply = f"Echo: {query}"
 
@@ -144,7 +149,31 @@ def fetch_messages_by_title(session_title):
 
     return jsonify({"messages": messages})
 
+@app.route('/submit', methods=['POST'])
+def submit_data():
+    pdf_file = request.files.get('pdf')
+    video_file = request.files.get('video')
+    youtube_url = request.form.get('url')
+    question = request.form.get('url')
 
+    # Save PDF file
+    if pdf_file:
+        pdf_path = os.path.join('files', pdf_file.filename)
+        pdf_file.save(pdf_path)
+    
+    # Save video file
+    if video_file:
+        video_path = os.path.join('videos', video_file.filename)
+        video_file.save(video_path)
+    
+    response_message = {
+        'message': 'Data received successfully',
+        'pdf_path': pdf_path if pdf_file else 'No PDF uploaded',
+        'video_path': video_path if video_file else 'No video uploaded',
+        'youtube_url': youtube_url if youtube_url else 'No YouTube URL provided'
+    }
+
+    return jsonify(response_message), 200
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8080)

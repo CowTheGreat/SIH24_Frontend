@@ -59,3 +59,95 @@ button:hover {
   top: 0;
   right: 0;
 }
+
+/* ChatbotContainer.module.css */
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100vh;
+  background-color: #333;
+}
+
+.chatHistory {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #444;
+  color: white;
+  width: 300px;
+  height: 400px;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.inputContainer {
+  display: flex;
+  padding: 10px;
+  background-color: #222;
+  width: 70%;
+  position: fixed;
+  bottom: 0;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.attachmentButton {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.submitButton {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
+.optionsContainer {
+  background-color: #444;
+  padding: 10px;
+  position: absolute;
+  bottom: 60px;
+  left: 10px;
+  width: 200px;
+  border-radius: 5px;
+}
+
+.optionsContainer label {
+  color: white;
+  margin: 10px 0;
+  display: block;
+}
+
+.optionsContainer input[type="file"],
+.optionsContainer input[type="text"] {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.optionsContainer button {
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}

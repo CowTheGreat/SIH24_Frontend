@@ -7,7 +7,7 @@ const BotMsg = (props) => {
   const [heightFactor, setHeightFactor] = useState(1); // State to track the height grow factor
 
   useEffect(() => {
-    const messageLength = props.message.length;
+    const messageLength = 20;
     const originalHeight = 79; // Fixed original height
 
     if (messageLength > 30) {
