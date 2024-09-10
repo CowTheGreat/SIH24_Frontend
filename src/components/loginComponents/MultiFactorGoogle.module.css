@@ -1,54 +1,99 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1e1e1e;
+}
 
-.pageContainer {
+.steps{
+  color: #ff632d;
+  font-size: 35px;
+}
+
+
+
+
+.authBox {
+  display: flex;
+  width: 900px;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.leftSide {
+  width: 50%;
+  background: linear-gradient(135deg, #ff9d52, #ff632d);
+  padding: 40px;
+}
+
+.authContent {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: rgb(30, 30, 30);
-  color: white;
-  font-family: "Poppins", sans-serif;
+  height: 100%;
+  text-align: center;
+}
+
+.authBot {
+  width: 150px;
+  margin-bottom: 20px;
 }
 
 h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: rgb(253, 144, 79);
-  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1e1e1e;
 }
 
-.formContainer {
+.rightSide {
+  width: 50%;
+  background-color: #2e2e2e;
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
 }
 
-.codeInputContainer {
+.authForm h2 {
+  font-size: 1.5rem;
+  color: #ff9d52;
+}
+
+.authForm p {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.note span {
+  color: #ff9d52;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 0.9rem;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.pinInput {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
-}
-
-.codeInputBox {
-  width: 50px;
-  height: 50px;
-  font-size: 1.5rem;
-  text-align: center;
-  background-color: rgb(30, 30, 30);
-  border: 2px solid rgb(253, 144, 79);
-  border-radius: 8px;
-  color: white;
-  margin: 0 5px;
-}
-
-.codeInputBox:focus {
-  border-color: rgb(255, 157, 82);
-  outline: none;
+  margin-bottom: 20px;
+  color:orange;
 }
 
 .submitButton {
-  width: 150px;
+  width: 325px;
   height: 45px;
   background: linear-gradient(
     to right,
@@ -60,16 +105,8 @@ h1 {
   outline: none;
   border-radius: 40px;
   color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
+  font-size: 16px;
+  margin-top: 15px;
 }
 
-.submitButton:hover {
-  background: linear-gradient(
-    to right,
-    rgb(253, 144, 79),
-    rgb(255, 157, 82),
-    rgb(255, 107, 71)
-  );
-}
+

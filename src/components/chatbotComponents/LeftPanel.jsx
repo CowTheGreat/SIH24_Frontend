@@ -7,8 +7,9 @@ const LeftPanel = () => {
   return (
     <div className={Classes.leftPanelCont}>
       <div className={Classes.logo}>CLETOCITE</div>
-      <UserInfo />
-      <Dropdown />
+      <div className={Classes.userinfo}>
+        <UserInfo />
+      </div>
     </div>
   );
 };

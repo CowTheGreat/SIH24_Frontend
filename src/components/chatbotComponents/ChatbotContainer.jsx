@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Classes from "./ChatbotContainer.module.css";
 import UserMsg from "./UserMsg";
 import BotMsg from "./BotMsg";
+import chatbotpin from "../../assets/chatbotpin.png";
 
 const ChatbotContainer = () => {
   const [sessions, setSessions] = useState([]);
@@ -100,14 +101,20 @@ const ChatbotContainer = () => {
       setMessages((prevMessages) => [...prevMessages, newMessage]);
 
       // Send the user message to the backend
+      const formData = new FormData();
+      formData.append("user_id", "user3");
+      formData.append("question", input);
+      if (pdfFile) {
+        formData.append("pdf", pdfFile);
+      }
+      if (videoFile) {
+        formData.append("video", videoFile);
+      }
       try {
         // Send message to AI backend
         const response = await fetch("http://localhost:8080/query", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ query: input, session_id: sessionId }),
+          body: formData,
         });
 
         const data = await response.json();
@@ -129,6 +136,8 @@ const ChatbotContainer = () => {
           }),
         });
 
+        setInput(""); // Clear the input field
+
         // Send the bot response to SQL backend
         await fetch("http://localhost:8080/submit", {
           method: "POST",
@@ -144,8 +153,6 @@ const ChatbotContainer = () => {
       } catch (error) {
         console.error("Error sending message:", error);
       }
-
-      setInput(""); // Clear the input field
     }
   };
 
@@ -153,7 +160,7 @@ const ChatbotContainer = () => {
     chatBoxRef.current?.scrollTo(0, chatBoxRef.current.scrollHeight);
   }, [messages]);
 
-  //Hairpin
+  //rrpin
   //Hairpin
   //Hairpin
   //Hairpin
@@ -190,11 +197,12 @@ const ChatbotContainer = () => {
   return (
     <div className={Classes.chatcontainer}>
       <div className={Classes.topright}>
-        <h2>Chat History</h2>
+        <h1>Chat History</h1>
         <div>
           {sessions.length > 0 ? (
             sessions.map((session, index) => (
               <button
+                className={Classes.sessionTitles}
                 key={index}
                 onClick={() => fetchMessagesByTitle(session.session_title)}
               >
@@ -281,28 +289,33 @@ const ChatbotContainer = () => {
       </div>
 
       {
-        <div className={Classes.inputcontainer}>
+        <div className={Classes.inputContainer}>
+          {/* Attachment Button */}
           <button className={Classes.attachmentButton} onClick={toggleOptions}>
-            📎
+            <img src={chatbotpin} className={Classes.hairpin} alt="Attach" />
           </button>
+
+          {/* Text Input */}
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type a message..."
+            className={Classes.textInput}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 sendMessage();
               }
             }}
           />
-          <button onClick={sendMessage}>
-            <span className={Classes.sendarrow}>&#x27A4;</span>
+
+          {/* Send Button */}
+          <button className={Classes.sendButton} onClick={sendMessage}>
+            <span className={Classes.sendArrow}>&#x27A4;</span>
           </button>
         </div>
       }
     </div>
   );
 };
-
 export default ChatbotContainer;

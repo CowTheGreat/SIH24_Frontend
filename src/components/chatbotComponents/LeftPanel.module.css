@@ -1,12 +1,18 @@
 .leftPanelCont {
   height: 100vh;
-  width: 18vw;
+  width: 15vw;
   height: 100vh;
   background-color: #131313;
 }
 
 .logo {
-  font-size: 30px;
-  margin: 20px;
+  font-size: 32px;
+  margin: 22px;
   font-weight: 700;
+}
+
+.userinfo {
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
