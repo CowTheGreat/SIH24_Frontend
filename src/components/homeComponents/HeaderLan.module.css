@@ -1,0 +1,83 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #444;
+  background-color: #1c1c1c; /* Added background for better contrast */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoImage {
+  width: 130px;
+  margin-right: 15px; /* Increased margin for more space */
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Increased gap between nav items for better spacing */
+  margin-left: 30vw;
+}
+
+.navItem {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 8px 12px; /* Added padding for better click area and spacing */
+  border-radius: 4px; /* Added subtle rounded corners */
+  transition: background-color 0.3s ease;
+}
+
+.navItem:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Hover effect for better interaction feedback */
+}
+
+.navItem:last-child {
+  margin-right: 0;
+}
+
+.loginButton {
+  text-decoration: none;
+  margin-left: 30px; /* Increased space between nav and button */
+  background-color: #f77d29;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.loginButton:hover {
+  background-color: #d96b23;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px; /* Reduced gap for smaller screens */
+  }
+
+  .loginButton {
+    margin-left: 0;
+    margin-top: 10px;
+    align-self: flex-start; /* Button aligns better on smaller screens */
+  }
+}

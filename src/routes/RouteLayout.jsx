@@ -5,7 +5,7 @@ function RootLayout() {
   return (
     <>
       <NavBar />
-      <Outlet /> {/* PLace holders for child elements to render */}
+      <Outlet />
     </>
   );
 }

@@ -1,0 +1,26 @@
+.title-container {
+  position: relative;
+  display: inline-block;
+}
+
+.editable-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: none;
+  background: transparent;
+  font-size: inherit;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+.title-text {
+  cursor: pointer;
+}
+
+.topright {
+  position: fixed;
+  top: 0;
+  right: 0;
+}

@@ -12,17 +12,17 @@ import MultiFactorG from "./routes/MultiFactorG.jsx"; // Import MultiFactorG com
 import RootLayout from "./routes/RouteLayout.jsx";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-    children: [
-      { path: "/", element: <Home /> },
-      { path: "/login", element: <Login /> },
-      { path: "/chatBot", element: <ChatBot /> },
-      { path: "/multifactor", element: <Multifactor /> },
-      { path: "/multifactor/google", element: <MultiFactorG /> }, // Add route for MultiFactorG
-    ],
-  },
+  // {
+  //   path: "/",
+  //   element: <RootLayout />,
+  //   children: [
+  { path: "/", element: <Home /> },
+  { path: "/login", element: <Login /> },
+  { path: "/multifactor", element: <Multifactor /> },
+  { path: "/multifactor/google", element: <MultiFactorG /> }, // Add route for MultiFactorG
+  //   ],
+  // },
+  { path: "/chatBot", element: <ChatBot /> },
 ]);
 
 createRoot(document.getElementById("root")).render(
