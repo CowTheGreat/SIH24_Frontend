@@ -1,12 +1,18 @@
 .rightPanelCont {
   background-color: #24252d;
-  width: 84vw;
+  width: 64vw;
   margin: 10px;
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .botCont {
   position: absolute;
   bottom: 0px;
   margin-left: 50px;
+}
+
+li {
+  text-wrap: wrap;
 }

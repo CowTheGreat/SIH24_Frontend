@@ -81,13 +81,29 @@ const ChatbotContainer = () => {
     }
   };
 
+  // const fetchMessagesByTitle = async (title) => {
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:8080/messages/title/${encodeURIComponent(title)}`
+  //     );
+  //     const data = await response.json();
+  //     setMessages(data.messages);
+  //   } catch (error) {
+  //     console.error("Error fetching messages by title:", error);
+  //   }
+  // };
+
   const fetchMessagesByTitle = async (title) => {
     try {
+      // Fetch messages by the session title
       const response = await fetch(
         `http://localhost:8080/messages/title/${encodeURIComponent(title)}`
       );
       const data = await response.json();
+
+      // Set the messages and session title in state
       setMessages(data.messages);
+      setCurrentTitle(title); // Set the session title
     } catch (error) {
       console.error("Error fetching messages by title:", error);
     }
@@ -160,7 +176,7 @@ const ChatbotContainer = () => {
     chatBoxRef.current?.scrollTo(0, chatBoxRef.current.scrollHeight);
   }, [messages]);
 
-  //rrpin
+  //Hairpin
   //Hairpin
   //Hairpin
   //Hairpin
@@ -194,10 +210,20 @@ const ChatbotContainer = () => {
     }
   };
 
+  const fetchSessions = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/sessions`);
+      const data = await response.json();
+      setSessions(data.sessions); // Update the session list in the state
+    } catch (error) {
+      console.error("Error fetching session titles:", error);
+    }
+  };
+
   return (
     <div className={Classes.chatcontainer}>
       <div className={Classes.topright}>
-        <h1>Chat History</h1>
+        <h1 className={Classes.chathistory}>Chat History</h1>
         <div>
           {sessions.length > 0 ? (
             sessions.map((session, index) => (
@@ -233,7 +259,7 @@ const ChatbotContainer = () => {
               onChange={handleUrlChange}
             />
           </label>
-          <button onClick={handleSubmit}>Submit</button>
+          {/* <button onClick={handleSubmit}>Submit</button> */}
         </div>
       )}
 

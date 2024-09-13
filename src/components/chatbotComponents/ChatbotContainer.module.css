@@ -35,9 +35,14 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
+/* button:hover {
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  );
+} */
 
 .message {
   margin: 10px 0;
@@ -89,14 +94,8 @@ button:hover {
   display: flex;
   padding: 10px;
   /* background-color: #222; */
-  width: 70%;
-  position: fixed;
-  bottom: 30px; /* Positioned 30px above the bottom */
-  left: 50%;
-  transform: translateX(-50%);
   background-color: white;
   box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
 }
 
 input[type="text"] {
@@ -124,18 +123,27 @@ input[type="text"] {
 }
 
 .submitButton:hover {
-  background-color: #0056b3;
+  background-color: #0a0909;
 }
 
 .optionsContainer {
   background-color: #131313;
-  padding: 10px;
+  padding: 20px;
   position: absolute;
   bottom: 70px;
   width: 200px;
   right: -10;
   border-radius: 5px;
   margin-bottom: 30px;
+}
+
+.file-input {
+  opacity: 0; /* Hide the default file input */
+  position: absolute;
+  z-index: -1;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
 }
 
 .optionsContainer label {
@@ -146,7 +154,7 @@ input[type="text"] {
 
 .optionsContainer input[type="file"],
 .optionsContainer input[type="text"] {
-  width: 80%;
+  width: 90%;
   margin-top: 5px;
 }
 
@@ -171,9 +179,11 @@ input[type="text"] {
   background-color: #1e1e1e; /* Dark background color */
   padding: 10px;
   border-radius: 25px;
-  margin: 10px;
-  width: 50%;
+  /* margin: 10px; */
+  width: 750px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-left: 50px;
+  margin-bottom: 20px;
 }
 
 .attachmentButton {
@@ -220,4 +230,8 @@ input[type="text"] {
 .sendArrow {
   color: #d4d4d4;
   font-size: 24px;
+}
+
+.chathistory {
+  color: #d4d4d4;
 }

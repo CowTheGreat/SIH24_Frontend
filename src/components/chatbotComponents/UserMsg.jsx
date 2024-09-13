@@ -43,7 +43,7 @@ const UserMsg = (props) => {
 
   useEffect(() => {
     const messageLength = props.message.length;
-    const originalHeight = 79; // Fixed original height
+    const originalHeight = 20; // Fixed original height
 
     if (messageLength > 30) {
       const extraCharacters = messageLength - 30;

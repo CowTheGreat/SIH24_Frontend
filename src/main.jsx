@@ -12,6 +12,7 @@ import MultiFactorG from "./routes/MultiFactorG.jsx"; // Import MultiFactorG com
 import RootLayout from "./routes/RouteLayout.jsx";
 import AuthEmail from "./components/loginComponents/authemail.jsx";
 import Steps_google from "./components/loginComponents/Steps_for_google_auth.jsx";
+import Profile from "./components/common/Profile.jsx";
 
 const router = createBrowserRouter([
   // {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
   { path: "/chatBot", element: <ChatBot /> },
   { path: "multifactor/authemail", element: <AuthEmail /> },
   { path: "multifactor/steps_google", element: <Steps_google /> },
+  { path: "/profile", element: <Profile /> },
 ]);
 
 createRoot(document.getElementById("root")).render(
