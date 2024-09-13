@@ -1,0 +1,103 @@
+/* General section style, matching the feature section color scheme */
+.itSupportSection {
+  margin: 40px auto;
+  padding: 40px;
+  max-width: 1200px;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
+/* Glowing heading, same style as in features */
+.itSupportHeading {
+  text-align: center;
+  font-size: 36px;
+  color: #f77d29;
+  margin-bottom: 40px;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+/* Disclaimer */
+.itSupportDisclaimer {
+  font-size: 16px;
+  color: #ddd;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Timeline container, centrally aligned */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align timeline items to center */
+  margin: 20px 0;
+}
+
+/* Timeline item, same background and hover effect as feature boxes */
+.timelineItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.timelineContent {
+  background-color: #20232a;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.timelineContent:hover {
+  transform: translateY(-10px);
+}
+
+/* Glowing title inside each timeline item */
+.timelineTitle {
+  font-size: 24px;
+  color: #f77d29;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(255, 123, 0, 0.8);
+}
+
+/* Description for each timeline item */
+.timelineDescription {
+  font-size: 16px;
+  color: #ddd;
+}
+
+/* Connector for the timeline */
+.timelineConnector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+}
+
+.connectorLine {
+  width: 2px;
+  height: 100%;
+  background-color: #f77d29;
+}
+
+/* Hide the last connector */
+.timelineItem:last-child .timelineConnector {
+  display: none;
+}
+
+/* Glowing animation, reused from features */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px rgba(255, 123, 0, 0.8);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(255, 123, 0, 0.6);
+  }
+}
