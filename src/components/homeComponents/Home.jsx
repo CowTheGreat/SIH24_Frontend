@@ -25,9 +25,9 @@ const Home = () => {
 
       <div className={styles.glowingDivider}></div>
 
-      <HrPolicyLan />
+      {/* <HrPolicyLan /> */}
 
-      <div className={styles.glowingDivider}></div>
+      {/* <div className={styles.glowingDivider}></div> */}
 
       <ItSupportLan />
 

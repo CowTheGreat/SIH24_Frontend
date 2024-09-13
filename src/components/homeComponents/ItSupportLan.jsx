@@ -22,8 +22,6 @@ const itSupportSteps = [
 const ItSupportLan = () => {
   return (
     <section className={`${styles.itSupportSection} ${styles.fadeIn}`}>
-      <h2 className={styles.itSupportHeading}>IT Support Details for GAIL</h2>
-
       <div className={styles.timeline}>
         {itSupportSteps.map((step, index) => (
           <div key={index} className={styles.timelineItem}>
