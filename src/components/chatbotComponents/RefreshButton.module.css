@@ -1,0 +1,41 @@
+.refreshButton {
+  display: flex;
+  align-items: center;
+  color: #000; /* Text color */
+  /* padding: 10px 20px; */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  );
+  padding: auto;
+}
+
+.refreshButton:hover {
+  background-color: #00b33c; /* Darker green on hover */
+}
+
+.buttonText {
+  flex-grow: 1;
+  font-size: 18px;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #fff; /* White background for the icon */
+  border-radius: 50%;
+  color: #000; /* Plus sign color */
+  font-size: 18px;
+  margin-left: 10px;
+}

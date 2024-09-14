@@ -1,6 +1,8 @@
 .leftPanelCont {
   width: 15vw;
   height: 100vh;
+  background-color: #000000;
+  margin-bottom: 10px;
 }
 
 .logo {
@@ -11,6 +13,28 @@
 
 .userinfo {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
+}
+
+.refreshContainer {
+  display: flex;
+  color: azure;
+  margin-top: 20px;
+  margin-left: 25px;
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  );
+  border-radius: 8px;
+  padding: 1vw;
+}
+
+.refreshContainer {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: auto;
 }

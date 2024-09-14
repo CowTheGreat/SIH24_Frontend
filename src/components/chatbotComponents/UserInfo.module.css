@@ -1,8 +1,12 @@
 .userCont {
   display: flex;
   color: azure;
-  margin: 20px;
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-left: 25px;
+  background-color: #202020;
+  padding: auto;
+  border-radius: 8px;
+  padding: 1vw;
 }
 
 .icon {

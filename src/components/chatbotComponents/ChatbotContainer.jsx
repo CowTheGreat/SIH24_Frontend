@@ -3,6 +3,7 @@ import Classes from "./ChatbotContainer.module.css";
 import UserMsg from "./UserMsg";
 import BotMsg from "./BotMsg";
 import chatbotpin from "../../assets/chatbotpin.png";
+import msgicon from "../../assets/msgicon.png";
 
 const ChatbotContainer = () => {
   const [sessions, setSessions] = useState([]);
@@ -220,20 +221,48 @@ const ChatbotContainer = () => {
     }
   };
 
+  const messagesEndRef = useRef(null); // Reference to the end of the messages
+
+  // Scroll to bottom when messages are loaded or updated
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]); // Runs every time the messages array changes
+
   return (
     <div className={Classes.chatcontainer}>
       <div className={Classes.topright}>
-        <h1 className={Classes.chathistory}>Chat History</h1>
+        <h1 className={Classes.chathistory}>Chats</h1>
         <div>
           {sessions.length > 0 ? (
             sessions.map((session, index) => (
-              <button
-                className={Classes.sessionTitles}
-                key={index}
-                onClick={() => fetchMessagesByTitle(session.session_title)}
-              >
-                {session.session_title}
-              </button>
+              <div className={Classes.chatCard} key={index}>
+                <button
+                  className={Classes.sessionButton}
+                  onClick={() => fetchMessagesByTitle(session.session_title)}
+                >
+                  <div className={Classes.sessionContent}>
+                    <div className={Classes.iconWrapper}>
+                      <i className="fas fa-comment"></i>{" "}
+                      <img src={msgicon} className={Classes.msgicon} />
+                    </div>
+                    <div className={Classes.textWrapper}>
+                      <p className={Classes.sessionTitle}>
+                        {session.session_title}
+                      </p>
+                      {/* <p className={Classes.sessionPreview}>
+                        {session.session_preview || "No preview available"}{" "}
+                        Add preview text
+                      </p> */}
+                    </div>
+                    <div className={Classes.menuWrapper}>
+                      <i className="fas fa-ellipsis-h"></i>{" "}
+                      {/* For the dots menu */}
+                    </div>
+                  </div>
+                </button>
+              </div>
             ))
           ) : (
             <p>No sessions found</p>
@@ -264,7 +293,7 @@ const ChatbotContainer = () => {
       )}
 
       <div
-        className={Classes.historypanel}
+        className={Classes.centerpanel}
         style={{ overflowY: "auto", maxHeight: "80vh", padding: "10px" }}
       >
         <div className={Classes.titlecontainer}>
@@ -282,19 +311,18 @@ const ChatbotContainer = () => {
               className={Classes.titletext}
               onClick={() => setIsEditing(true)}
             >
-              {currentTitle}
+              <div className={Classes.currentSessionTitle}> {currentTitle}</div>
             </h4>
           )}
         </div>
 
         {messages.map((msg, index) => (
-          <div key={index}>
+          <div key={index} style={{ marginBottom: "15px" }}>
             {msg.sender === "user" ? (
               <div
                 style={{
                   display: "flex",
                   justifyContent: "flex-end", // Aligns user messages to the right
-                  marginBottom: "10px",
                 }}
               >
                 <UserMsg message={msg.text} />
@@ -304,7 +332,6 @@ const ChatbotContainer = () => {
                 style={{
                   display: "flex",
                   justifyContent: "flex-start", // Aligns bot messages to the left
-                  marginBottom: "10px",
                 }}
               >
                 <BotMsg message={msg.text} />
@@ -312,35 +339,40 @@ const ChatbotContainer = () => {
             )}
           </div>
         ))}
+
+        <div ref={messagesEndRef} />
+
+        {
+          <div className={Classes.inputContainer}>
+            {/* Attachment Button */}
+            <button
+              className={Classes.attachmentButton}
+              onClick={toggleOptions}
+            >
+              <img src={chatbotpin} className={Classes.hairpin} alt="Attach" />
+            </button>
+
+            {/* Text Input */}
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type a message..."
+              className={Classes.textInput}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  sendMessage();
+                }
+              }}
+            />
+
+            {/* Send Button */}
+            <button className={Classes.sendButton} onClick={sendMessage}>
+              <span className={Classes.sendArrow}>&#x27A4;</span>
+            </button>
+          </div>
+        }
       </div>
-
-      {
-        <div className={Classes.inputContainer}>
-          {/* Attachment Button */}
-          <button className={Classes.attachmentButton} onClick={toggleOptions}>
-            <img src={chatbotpin} className={Classes.hairpin} alt="Attach" />
-          </button>
-
-          {/* Text Input */}
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type a message..."
-            className={Classes.textInput}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                sendMessage();
-              }
-            }}
-          />
-
-          {/* Send Button */}
-          <button className={Classes.sendButton} onClick={sendMessage}>
-            <span className={Classes.sendArrow}>&#x27A4;</span>
-          </button>
-        </div>
-      }
     </div>
   );
 };

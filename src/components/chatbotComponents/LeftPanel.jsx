@@ -3,18 +3,24 @@ import Classes from "./LeftPanel.module.css";
 import UserInfo from "./userInfo";
 import Dropdown from "./Dropdown";
 import { useNavigate } from "react-router-dom";
+import RefreshButton from "./RefreshButton";
 
 const LeftPanel = () => {
+  const navigate = useNavigate(); // Hook for redirection
+
   const profilepage = () => {
+    console.log("COw");
     navigate("/profile");
   };
 
   return (
     <>
       <div className={Classes.leftPanelCont}>
-        <div className={Classes.logo}>CLETOCITE</div>
         <div className={Classes.userinfo} onClick={profilepage}>
           <UserInfo />
+        </div>
+        <div className={Classes.refreshContainer}>
+          <RefreshButton className={Classes.refresh} />
         </div>
       </div>
     </>
