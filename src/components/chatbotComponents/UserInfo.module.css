@@ -6,11 +6,13 @@
 }
 
 .icon {
-  width: 50px;
+  width: 45px;
+  height: 45px;
   margin-right: 20px;
+  margin-top: 3px;
 }
 
 .name {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
 }
