@@ -9,7 +9,6 @@ const LeftPanel = () => {
   const navigate = useNavigate(); // Hook for redirection
 
   const profilepage = () => {
-    console.log("COw");
     navigate("/profile");
   };
 

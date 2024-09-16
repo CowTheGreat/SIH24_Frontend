@@ -2,11 +2,12 @@
   display: flex;
   color: azure;
   margin-top: 20px;
-  margin-left: 25px;
+  margin-left: 20px;
   background-color: #202020;
-  padding: auto;
+  width: 14vw;
   border-radius: 8px;
-  padding: 1vw;
+  padding: 10px 20px;
+  margin-bottom: 0px;
 }
 
 .icon {

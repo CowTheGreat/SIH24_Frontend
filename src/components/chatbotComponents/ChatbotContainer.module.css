@@ -17,6 +17,7 @@ input[type="text"] {
   outline: none;
   width: 80%;
   height: 20px;
+  background-color: #fdfdfd;
 }
 
 button {
@@ -27,16 +28,16 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
-
+/* 
 button:hover {
   background-color: #111111;
-  /* background: linear-gradient(
+  background: linear-gradient(
     to bottom right,
     rgb(255, 107, 71),
     rgb(253, 144, 79),
     rgb(255, 157, 82)
-  ); */
-}
+  );
+} */
 
 .message {
   margin: 10px 0;
@@ -56,12 +57,12 @@ button:hover {
 
 .topright {
   position: fixed;
-  top: 14%;
+  top: 9.5%;
   left: 0;
   margin-right: 50px;
   background-color: #202020;
-  height: 66vh;
-  width: 12vw;
+  height: 74vh;
+  width: 14vw;
   margin: 20px;
   padding: 30px;
   border-radius: 3px;
@@ -84,15 +85,8 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 100vh;
+  height: 90vh;
   background-color: #111111;
-}
-
-.attachmentButton {
-  background-color: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
 }
 
 .submitButton {
@@ -151,15 +145,11 @@ button:hover {
   cursor: pointer;
 }
 
-.hairpin {
-  width: 25px;
-}
-
 .inputContainer {
   padding: 10px;
   display: flex;
   align-items: center;
-  background-color: #1e1e1e; /* Dark background color */
+  background-color: #fdfdfd; /* Dark background color */
   padding: 10px;
   border-radius: 25px;
   /* margin: 10px; */
@@ -171,16 +161,17 @@ button:hover {
 }
 
 .attachmentButton {
-  background: none;
   border: none;
   cursor: pointer;
   padding: 0;
-  margin-right: 10px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
 .hairpin {
-  width: 35px;
-  height: 35px;
+  width: 36px;
   margin-top: 4px;
   margin-right: 0px;
 }
@@ -189,7 +180,7 @@ button:hover {
   flex: 1;
   background-color: #1e1e1e; /* Slightly darker for input */
   border: none;
-  color: #d4d4d4;
+  color: #1e1e1e;
   padding: 10px;
   border-radius: 25px;
   margin-right: 10px;
@@ -212,8 +203,14 @@ button:hover {
 }
 
 .sendArrow {
-  color: #d4d4d4;
+  color: rgb(255, 107, 71);
   font-size: 24px;
+  /* color: linear-gradient(
+    to bottom right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  ); */
 }
 
 .chathistory {
@@ -228,7 +225,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 8px;
   background-color: #424242;
   margin-bottom: 10px;
@@ -282,7 +279,7 @@ button:hover {
 }
 
 .msgicon {
-  width: 20px;
+  /* width: 20px; */
   margin-top: 7px;
 }
 
@@ -291,7 +288,6 @@ button:hover {
   position: fixed;
   top: 0;
   margin-top: 30px;
-  color: rgb(255, 107, 71);
 }
 
 .centerpanel {

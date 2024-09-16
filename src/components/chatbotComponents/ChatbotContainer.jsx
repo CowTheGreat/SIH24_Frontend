@@ -3,6 +3,10 @@ import Classes from "./ChatbotContainer.module.css";
 import UserMsg from "./UserMsg";
 import BotMsg from "./BotMsg";
 import chatbotpin from "../../assets/chatbotpin.png";
+import chatbotpindark from "../../assets/chatbotpindark.png";
+import chatbotpinorange from "../../assets/chatbotpinorange.svg";
+import Markdown from "./Markdown";
+import msgiconw from "../../assets/msgiconpng.jpg";
 import msgicon from "../../assets/msgicon.png";
 
 const ChatbotContainer = () => {
@@ -244,8 +248,9 @@ const ChatbotContainer = () => {
                 >
                   <div className={Classes.sessionContent}>
                     <div className={Classes.iconWrapper}>
-                      <i className="fas fa-comment"></i>{" "}
-                      <img src={msgicon} className={Classes.msgicon} />
+                      <i className="fas fa-comment"></i>
+                      <span className={Classes.msgicon}>&#x2709;</span>
+                      {/* <img src={msgiconw} className={Classes.msgicon} /> */}
                     </div>
                     <div className={Classes.textWrapper}>
                       <p className={Classes.sessionTitle}>
@@ -294,7 +299,7 @@ const ChatbotContainer = () => {
 
       <div
         className={Classes.centerpanel}
-        style={{ overflowY: "auto", maxHeight: "80vh", padding: "10px" }}
+        style={{ overflowY: "auto", maxHeight: "88vh", padding: "10px" }}
       >
         <div className={Classes.titlecontainer}>
           {isEditing ? (
@@ -334,7 +339,8 @@ const ChatbotContainer = () => {
                   justifyContent: "flex-start", // Aligns bot messages to the left
                 }}
               >
-                <BotMsg message={msg.text} />
+                <Markdown text={msg.text} />
+                {/* <BotMsg message={msg.text} /> */}
               </div>
             )}
           </div>
@@ -349,7 +355,11 @@ const ChatbotContainer = () => {
               className={Classes.attachmentButton}
               onClick={toggleOptions}
             >
-              <img src={chatbotpin} className={Classes.hairpin} alt="Attach" />
+              <img
+                className={Classes.hairpin}
+                src={chatbotpindark}
+                alt="Attach"
+              />
             </button>
 
             {/* Text Input */}
