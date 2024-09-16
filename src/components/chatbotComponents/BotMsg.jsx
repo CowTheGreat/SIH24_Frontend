@@ -1,6 +1,7 @@
 import React from "react";
 import Classes from "./BotMsg.module.css";
 import botIcon from "../../assets/botIcon.png";
+import Markdown from "./Markdown";
 
 const BotMsg = (props) => {
   return (

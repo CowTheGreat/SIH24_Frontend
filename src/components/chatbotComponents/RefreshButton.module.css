@@ -1,9 +1,7 @@
 .refreshButton {
   display: flex;
   align-items: center;
-  color: #000; /* Text color */
-  /* padding: 10px 20px; */
-  border: none;
+  color: #000;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
@@ -15,7 +13,8 @@
     rgb(253, 144, 79),
     rgb(255, 157, 82)
   );
-  padding: auto;
+  width: 14.4vw;
+  border-radius: 8px;
 }
 
 .refreshButton:hover {
