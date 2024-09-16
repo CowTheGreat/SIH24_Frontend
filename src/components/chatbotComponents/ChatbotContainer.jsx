@@ -248,7 +248,6 @@ const ChatbotContainer = () => {
                 >
                   <div className={Classes.sessionContent}>
                     <div className={Classes.iconWrapper}>
-                      <i className="fas fa-comment"></i>
                       <span className={Classes.msgicon}>&#x2709;</span>
                       {/* <img src={msgiconw} className={Classes.msgicon} /> */}
                     </div>
@@ -256,14 +255,6 @@ const ChatbotContainer = () => {
                       <p className={Classes.sessionTitle}>
                         {session.session_title}
                       </p>
-                      {/* <p className={Classes.sessionPreview}>
-                        {session.session_preview || "No preview available"}{" "}
-                        Add preview text
-                      </p> */}
-                    </div>
-                    <div className={Classes.menuWrapper}>
-                      <i className="fas fa-ellipsis-h"></i>{" "}
-                      {/* For the dots menu */}
                     </div>
                   </div>
                 </button>

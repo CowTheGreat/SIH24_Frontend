@@ -62,7 +62,7 @@ button:hover {
   margin-right: 50px;
   background-color: #202020;
   height: 74vh;
-  width: 14vw;
+  width: 15vw;
   margin: 20px;
   padding: 30px;
   border-radius: 3px;
@@ -223,8 +223,8 @@ button:hover {
 
 .chatCard {
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  justify-content: flex-start;
+  padding: 10px 45px;
   /* border: 1px solid #ccc; */
   border-radius: 8px;
   background-color: #424242;
@@ -240,15 +240,16 @@ button:hover {
 .sessionButton {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
-  border: none;
+  /* border: none; */
   background: none;
   text-align: left;
 }
 
 .sessionContent {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
 }
@@ -279,7 +280,7 @@ button:hover {
 }
 
 .msgicon {
-  /* width: 20px; */
+  width: 30px;
   margin-top: 7px;
 }
 
