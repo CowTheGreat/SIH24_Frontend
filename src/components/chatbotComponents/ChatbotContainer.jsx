@@ -381,7 +381,7 @@ const ChatbotContainer = () => {
                   justifyContent: "flex-start", // Aligns bot messages to the left
                 }}
               >
-                <Markdown text={msg.text} />
+                <Markdown text={msg.text} image={msg.image} />
                 {/* <BotMsg message={msg.text} /> */}
               </div>
             )}
