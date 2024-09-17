@@ -26,6 +26,7 @@ const ChatbotContainer = () => {
   const [youtubeURL, setYoutubeURL] = useState("");
   const [query, setQuery] = useState(""); // State to store the search query
   const [results, setResults] = useState([]); // State to store search results
+  const [searchClicked, setSearchClicked] = useState(false);
 
   // Fetch the session ID when the component mounts
   useEffect(() => {
@@ -89,8 +90,11 @@ const ChatbotContainer = () => {
     }
   };
 
+  //to display hest query output
+
   const fetchMessagesByTitle = async (title) => {
     try {
+      setSearchClicked(true);
       // Fetch messages by the session title
       const response = await fetch(
         `http://localhost:8080/messages/title/${encodeURIComponent(title)}`
@@ -201,6 +205,21 @@ const ChatbotContainer = () => {
         formData.append("video", videoFile);
       }
 
+      // Send the user message to SQL backend
+      await fetch("http://localhost:8080/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          session_id: sessionId,
+          sender: "user",
+          message: input,
+        }),
+      });
+
+      setInput("");
+
       try {
         // Send message to AI backend
         const response = await fetch("http://localhost:8080/query", {
@@ -249,21 +268,6 @@ const ChatbotContainer = () => {
 
         // Start reading the stream
         await stream.getReader().read();
-
-        // Send the user message to SQL backend
-        await fetch("http://localhost:8080/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            session_id: sessionId,
-            sender: "user",
-            message: input,
-          }),
-        });
-
-        setInput("");
 
         // Send the bot response to SQL backend
         await fetch("http://localhost:8080/submit", {
@@ -379,27 +383,25 @@ const ChatbotContainer = () => {
           </div>
 
           <div className={Classes.historycard}>
-            {
-              results.length > 0
-                ? results.map((session, index) => (
-                    <div className={Classes.chatCard} key={index}>
-                      <button
-                        className={Classes.sessionButton}
-                        onClick={() => fetchMessagesByTitle(session)}
-                      >
-                        <div className={Classes.sessionContent}>
-                          <div className={Classes.iconWrapper}>
-                            <span className={Classes.msgicon}>&#x2709;</span>
-                          </div>
-                          <div className={Classes.textWrapper}>
-                            <p className={Classes.sessionTitle}>{session}</p>
-                          </div>
+            {results.length > 0
+              ? results.map((session, index) => (
+                  <div className={Classes.chatCard} key={index}>
+                    <button
+                      className={Classes.sessionButton}
+                      onClick={() => fetchMessagesByTitle(session)}
+                    >
+                      <div className={Classes.sessionContent}>
+                        <div className={Classes.iconWrapper}>
+                          <span className={Classes.msgicon}>&#x2709;</span>
                         </div>
-                      </button>
-                    </div>
-                  ))
-                : query && <p>No results found for "{query}"</p> //
-            }
+                        <div className={Classes.textWrapper}>
+                          <p className={Classes.sessionTitle}>{session}</p>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                ))
+              : searchClicked && query && <p>No results found for "{query}"</p>}
           </div>
         </div>
         <hr className={Classes.searchline} />
