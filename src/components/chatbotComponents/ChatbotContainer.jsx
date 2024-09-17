@@ -2,9 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Classes from "./ChatbotContainer.module.css";
 import UserMsg from "./UserMsg";
 import BotMsg from "./BotMsg";
-<<<<<<< HEAD
 import { FaFileUpload } from "react-icons/fa";
-=======
 import chatbotpin from "../../assets/chatbotpin.png";
 import chatbotpindark from "../../assets/chatbotpindark.png";
 import chatbotpinorange from "../../assets/chatbotpinorange.svg";
@@ -18,9 +16,7 @@ const ChatbotContainer = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const chatBoxRef = useRef(null);
-<<<<<<< HEAD
   const fileInputRef = useRef(null);
-=======
   const [sessionId, setSessionId] = useState(null);
   const [currentTitle, setCurrentTitle] = useState("");
   const [isEditing, setIsEditing] = useState(false);
