@@ -57,11 +57,11 @@ button:hover {
 
 .topright {
   position: fixed;
-  top: 9.5%;
+  top: 12%;
   left: 0;
   margin-right: 50px;
   background-color: #202020;
-  height: 74vh;
+  height: 67vh;
   width: 15vw;
   margin: 20px;
   padding: 30px;

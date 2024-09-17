@@ -1,6 +1,6 @@
 import React from "react";
 import Classes from "./LeftPanel.module.css";
-import UserInfo from "./userInfo";
+import UserInfo from "./UserInfo";
 import Dropdown from "./Dropdown";
 import { useNavigate } from "react-router-dom";
 import RefreshButton from "./RefreshButton";

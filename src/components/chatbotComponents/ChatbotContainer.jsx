@@ -103,6 +103,84 @@ const ChatbotContainer = () => {
     }
   };
 
+  // const sendMessage = async () => {
+  //   if (input.trim() && sessionId) {
+  //     const newMessage = { text: input, sender: "user" };
+
+  //     // Update the state with the new user message
+  //     setMessages((prevMessages) => [...prevMessages, newMessage]);
+
+  //     // Send the user message to the backend
+  //     const formData = new FormData();
+  //     formData.append("user_id", "user3");
+  //     formData.append("question", input);
+  //     if (pdfFile) {
+  //       formData.append("pdf", pdfFile);
+  //     }
+  //     if (videoFile) {
+  //       formData.append("video", videoFile);
+  //     }
+
+  //     await fetch("http://localhost:8080/submit", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         session_id: sessionId,
+  //         sender: "user",
+  //         message: input,
+  //       }),
+  //     });
+
+  //     setInput(""); // Clear the input field
+
+  //     try {
+  //       // Send message to AI backend
+  //       const response = await fetch("http://localhost:8080/query", {
+  //         method: "POST",
+  //         body: formData,
+  //       });
+
+  //       const data = await response.json();
+  //       const botMessage = { text: data.answer, sender: "bot" };
+
+  //       // Update the state with the bot message
+  //       setMessages((prevMessages) => [...prevMessages, botMessage]);
+
+  //       // Send the user message to SQL backend
+  //       // await fetch("http://localhost:8080/submit", {
+  //       //   method: "POST",
+  //       //   headers: {
+  //       //     "Content-Type": "application/json",
+  //       //   },
+  //       //   body: JSON.stringify({
+  //       //     session_id: sessionId,
+  //       //     sender: "user",
+  //       //     message: input,
+  //       //   }),
+  //       // });
+
+  //       // setInput("");
+
+  //       // Send the bot response to SQL backend
+  //       await fetch("http://localhost:8080/submit", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           session_id: sessionId,
+  //           sender: "bot",
+  //           message: data.answer,
+  //         }),
+  //       });
+  //     } catch (error) {
+  //       console.error("Error sending message:", error);
+  //     }
+  //   }
+  // };
+
   const sendMessage = async () => {
     if (input.trim() && sessionId) {
       const newMessage = { text: input, sender: "user" };
@@ -120,6 +198,7 @@ const ChatbotContainer = () => {
       if (videoFile) {
         formData.append("video", videoFile);
       }
+
       try {
         // Send message to AI backend
         const response = await fetch("http://localhost:8080/query", {
@@ -127,11 +206,47 @@ const ChatbotContainer = () => {
           body: formData,
         });
 
-        const data = await response.json();
-        const botMessage = { text: data.answer, sender: "bot" };
+        // Create a reader to handle the streaming response
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let botMessage = { text: "", sender: "bot" };
 
-        // Update the state with the bot message
+        // Add the bot message placeholder immediately (empty for now)
         setMessages((prevMessages) => [...prevMessages, botMessage]);
+        let botMessageIndex = null;
+
+        // Read the data in chunks as it streams in
+        const stream = new ReadableStream({
+          async start(controller) {
+            while (true) {
+              const { done, value } = await reader.read();
+
+              if (done) {
+                // Streaming is done, so we can stop the stream
+                controller.close();
+                break;
+              }
+
+              // Decode the chunk and append it to botMessage
+              const chunk = decoder.decode(value, { stream: true });
+              botMessage.text += chunk;
+
+              // Find the bot message that was added earlier
+              setMessages((prevMessages) => {
+                if (botMessageIndex === null) {
+                  botMessageIndex = prevMessages.length - 1; // The last added message is the bot's
+                }
+                // Update the bot's message text progressively
+                const updatedMessages = [...prevMessages];
+                updatedMessages[botMessageIndex].text = botMessage.text;
+                return updatedMessages;
+              });
+            }
+          },
+        });
+
+        // Start reading the stream
+        await stream.getReader().read();
 
         // Send the user message to SQL backend
         await fetch("http://localhost:8080/submit", {
@@ -157,7 +272,7 @@ const ChatbotContainer = () => {
           body: JSON.stringify({
             session_id: sessionId,
             sender: "bot",
-            message: data.answer,
+            message: botMessage.text,
           }),
         });
       } catch (error) {
@@ -165,10 +280,6 @@ const ChatbotContainer = () => {
       }
     }
   };
-
-  useEffect(() => {
-    chatBoxRef.current?.scrollTo(0, chatBoxRef.current.scrollHeight);
-  }, [messages]);
 
   //Hairpin
   //Hairpin
