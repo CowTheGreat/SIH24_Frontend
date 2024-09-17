@@ -223,18 +223,23 @@ button:hover {
 
 .chatCard {
   display: flex;
-  justify-content: flex-start;
-  padding: 10px 45px;
+  /* justify-content: flex-start; */
+  padding: 10px 5px;
   /* border: 1px solid #ccc; */
   border-radius: 8px;
-  background-color: #424242;
+  background-color: #313131;
   margin-bottom: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-left: 0;
 }
 
 .chatCard:hover {
-  background-color: #111;
+  background-color: #5e5e5e;
+}
+
+.historycard {
+  margin-left: 0px;
 }
 
 .sessionButton {

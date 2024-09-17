@@ -8,6 +8,7 @@ import chatbotpinorange from "../../assets/chatbotpinorange.svg";
 import Markdown from "./Markdown";
 import msgiconw from "../../assets/msgiconpng.jpg";
 import msgicon from "../../assets/msgicon.png";
+import SearchBar from "./SearchBar"; // Import the SearchBar component
 
 const ChatbotContainer = () => {
   const [sessions, setSessions] = useState([]);
@@ -85,18 +86,6 @@ const ChatbotContainer = () => {
       console.error("Error updating session title:", error);
     }
   };
-
-  // const fetchMessagesByTitle = async (title) => {
-  //   try {
-  //     const response = await fetch(
-  //       `http://localhost:8080/messages/title/${encodeURIComponent(title)}`
-  //     );
-  //     const data = await response.json();
-  //     setMessages(data.messages);
-  //   } catch (error) {
-  //     console.error("Error fetching messages by title:", error);
-  //   }
-  // };
 
   const fetchMessagesByTitle = async (title) => {
     try {
@@ -237,8 +226,10 @@ const ChatbotContainer = () => {
   return (
     <div className={Classes.chatcontainer}>
       <div className={Classes.topright}>
-        <h1 className={Classes.chathistory}>Chats</h1>
-        <div>
+        <h1 className={Classes.chathistory}>Chat History</h1>
+        <SearchBar />
+        <br />
+        <div className={Classes.historycard}>
           {sessions.length > 0 ? (
             sessions.map((session, index) => (
               <div className={Classes.chatCard} key={index}>
@@ -249,7 +240,6 @@ const ChatbotContainer = () => {
                   <div className={Classes.sessionContent}>
                     <div className={Classes.iconWrapper}>
                       <span className={Classes.msgicon}>&#x2709;</span>
-                      {/* <img src={msgiconw} className={Classes.msgicon} /> */}
                     </div>
                     <div className={Classes.textWrapper}>
                       <p className={Classes.sessionTitle}>
