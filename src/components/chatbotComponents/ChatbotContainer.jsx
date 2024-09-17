@@ -22,8 +22,8 @@ const ChatbotContainer = () => {
   const [pdfFile, setPdfFile] = useState(null);
   const [videoFile, setVideoFile] = useState(null);
   const [youtubeURL, setYoutubeURL] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [query, setQuery] = useState(""); // State to store the search query
+  const [results, setResults] = useState([]); // State to store search results
 
   // Fetch the session ID when the component mounts
   useEffect(() => {
@@ -214,6 +214,24 @@ const ChatbotContainer = () => {
     }
   };
 
+  // Function to handle search submissions
+  const handleSearch = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    try {
+      // Send GET request to the FastAPI backend with the search query
+      const response = await fetch(
+        `http://localhost:8080/search/?query=${query}`
+      );
+      const data = await response.json(); // Parse the JSON response
+
+      // Set the results to be displayed
+      setResults(data.sessions || []); // Default to an empty array if no sessions found
+    } catch (error) {
+      console.error("Error fetching search results:", error); // Log any errors
+    }
+  };
+
   const messagesEndRef = useRef(null); // Reference to the end of the messages
 
   // Scroll to bottom when messages are loaded or updated
@@ -227,8 +245,47 @@ const ChatbotContainer = () => {
     <div className={Classes.chatcontainer}>
       <div className={Classes.topright}>
         <h1 className={Classes.chathistory}>Chat History</h1>
-        <SearchBar />
-        <br />
+        {/* <SearchBar /> */}
+        <div>
+          <div className={Classes.searchContainer}>
+            <form onSubmit={handleSearch}>
+              <input
+                type="text"
+                placeholder="Search sessions..." // Placeholder for the input field
+                value={query} // Value is controlled by the query state
+                onChange={(e) => setQuery(e.target.value)} // Update the query state on input change
+              />
+            </form>
+            <button type="submit" onClick={handleSearch}>
+              <span>&#x1F50D;</span>
+            </button>
+          </div>
+
+          <div className={Classes.historycard}>
+            {
+              results.length > 0
+                ? results.map((session, index) => (
+                    <div className={Classes.chatCard} key={index}>
+                      <button
+                        className={Classes.sessionButton}
+                        onClick={() => fetchMessagesByTitle(session)}
+                      >
+                        <div className={Classes.sessionContent}>
+                          <div className={Classes.iconWrapper}>
+                            <span className={Classes.msgicon}>&#x2709;</span>
+                          </div>
+                          <div className={Classes.textWrapper}>
+                            <p className={Classes.sessionTitle}>{session}</p>
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  ))
+                : query && <p>No results found for "{query}"</p> //
+            }
+          </div>
+        </div>
+        <hr className={Classes.searchline} />
         <div className={Classes.historycard}>
           {sessions.length > 0 ? (
             sessions.map((session, index) => (
