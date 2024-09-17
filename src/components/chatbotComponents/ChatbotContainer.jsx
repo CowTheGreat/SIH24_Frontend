@@ -263,7 +263,7 @@ const ChatbotContainer = () => {
           }),
         });
 
-        setInput(""); // Clear the input field
+        setInput("");
 
         // Send the bot response to SQL backend
         await fetch("http://localhost:8080/submit", {
