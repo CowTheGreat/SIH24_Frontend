@@ -43,23 +43,15 @@ function LoginPage() {
                 </div>
                 <div className={Classes.inputbox}>
                   <FaUser className={Classes.icon} />
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
+                  <input type="text" placeholder="Email" required></input>
                 </div>
                 <div className={Classes.inputbox}>
                   <FaLock className={Classes.icon} />
                   <input
                     type="password"
                     placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                     required
-                  />
+                  ></input>
                 </div>
                 <div className={Classes.rememberforgot}>
                   <label>
@@ -68,8 +60,8 @@ function LoginPage() {
                   </label>
                   <a href="#">Forgot Password?</a>
                 </div>
-                <button type="submit">Login Now</button>
-              </form>
+                <button type="submit">Login Now </button>
+             </form>
             </div>
           </div>
         </div>
