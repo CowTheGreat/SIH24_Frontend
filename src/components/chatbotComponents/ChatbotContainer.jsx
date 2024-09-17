@@ -256,7 +256,11 @@ const ChatbotContainer = () => {
                 onChange={(e) => setQuery(e.target.value)} // Update the query state on input change
               />
             </form>
-            <button type="submit" onClick={handleSearch}>
+            <button
+              type="submit"
+              onClick={handleSearch}
+              className={Classes.searchiconcont}
+            >
               <span>&#x1F50D;</span>
             </button>
           </div>
