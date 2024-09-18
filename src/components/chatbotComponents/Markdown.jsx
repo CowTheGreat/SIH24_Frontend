@@ -16,6 +16,15 @@ const Markdown = ({ text, image }) => {
         <div dangerouslySetInnerHTML={{ __html: sanitized }}></div>
       </div>
       <div>
+        {/* <div className={Classes.imageContainer}>
+          <img
+            src={
+              "https://storage.googleapis.com/store-graph.appspot.com/graphs/b1cd3bd40b07432488634402d5a2b797.png"
+            }
+            alt="Content Image"
+            className={Classes.contentImage}
+          />
+        </div> */}
         {image && (
           <div className={Classes.imageContainer}>
             <img

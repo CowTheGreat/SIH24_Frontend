@@ -12,8 +12,8 @@ const UserInfo1 = () => {
   const [qrCode, setQrCode] = useState(""); // For storing QR code image
   const [pin, setPin] = useState(""); // TOTP pin input
   const [resultMessage, setResultMessage] = useState(""); // To display verification result
-  const [is2faEnabled,setIs2faEnabled]=useState(false);// check if 2fa is enabled
-  const navigate=useNavigate();
+  const [is2faEnabled, setIs2faEnabled] = useState(false); // check if 2fa is enabled
+  const navigate = useNavigate();
 
   const togglePopup = () => {
     setIsPopupVisible(isPopupVisible);
@@ -59,63 +59,60 @@ const UserInfo1 = () => {
       </div> */}
 
       {/* User Information Popup */}
-      
-        <div className={Classes.popupOverlay}>
-          <div className={Classes.popCont}>
-            <div className={Classes.popupContent}>
-              <h2>User Profile</h2>
-              <div className={Classes.infoline}>
-                <p>User Information</p>
-                <div className={Classes.line}></div>
+
+      <div className={Classes.popupOverlay}>
+        <div className={Classes.popCont}>
+          <div className={Classes.popupContent}>
+            <h2>User Profile</h2>
+            <div className={Classes.line}></div>
+            <div className={Classes.infoCont}>
+              <div className={Classes.infoItem}>
+                <h3>E-Mail Address</h3>
+                <p>gowsrini2004@gmail.com</p>
               </div>
-              <div className={Classes.infoCont}>
-                <div className={Classes.infoItem}>
-                  <h3>E-Mail Address</h3>
-                  <p>gowsrini2004@gmail.com</p>
-                </div>
-              </div>
-              <div className={Classes.actionCont}>
-                <div className={Classes.actionInfo}>
-                  <h3>Enable Google Auth</h3>
-                  <p>
-                    To enable 2 Factor Authentication using Google
-                    Authenticator App, please click the enable 2FA button
-                  </p>
-                </div>
-                <button
-                  className={Classes.actionBtn}
-                  onClick={handleEnable2FA}
-                  disabled={is2faEnabled}
-                >
-                  {is2faEnabled ? "2FA Enabled" : "Enable 2FA"}
-                </button>
-              </div>
-              <div className={Classes.actionCont}>
-                <div className={Classes.actionInfo1}>
-                  <h3>Enable Google Auth</h3>
-                  <p>
-                    To enable 2 Factor Authentication using Google
-                    Authenticator App, please click the enable 2FA button
-                  </p>
-                </div>
-                <button className={Classes.actionBtn1}>Retrieve Email</button>
-              </div>
-              <div className={Classes.actionCont}>
-                <div className={Classes.actionInfo2}>
-                  <h3>Change Password</h3>
-                  <p>To reset your password, please click the reset password button</p>
-                 
-                </div>
-                <button className={Classes.actionBtn2}>Reset Password</button>
-              </div>
-              <span className={Classes.closeBtn} onClick={togglePopup}>
-                &times;
-              </span>
             </div>
-            <button className={Classes.offBtn}>Sign Out</button>
+            <div className={Classes.actionCont}>
+              <div className={Classes.actionInfo}>
+                <h3>Enable Google Auth</h3>
+                <p>
+                  To enable 2 Factor Authentication using Google Authenticator
+                  App, please click the enable 2FA button
+                </p>
+              </div>
+              <button
+                onClick={handleEnable2FA}
+                disabled={is2faEnabled}
+                className={Classes.actionBtn}
+              >
+                {is2faEnabled ? "2FA Enabled" : "Enable 2FA"}
+              </button>
+            </div>
+            <div className={Classes.actionCont}>
+              <div className={Classes.actionInfo}>
+                <h3>Email Retrieval</h3>
+                <p>
+                  To retrieve your emails and store in database,please click
+                  email retrieval button
+                </p>
+              </div>
+              <button className={Classes.actionBtn1}>Retrieve Email</button>
+            </div>
+            <div className={Classes.actionCont}>
+              <div className={Classes.actionInfo}>
+                <h3>Change Password</h3>
+                <p>
+                  To reset your password, please click the reset password button
+                </p>
+              </div>
+              <button className={Classes.actionBtn2}>Reset Password</button>
+            </div>
+            <span className={Classes.closeBtn} onClick={togglePopup}>
+              &times;
+            </span>
           </div>
+          <button className={Classes.offBtn}>Sign Out</button>
         </div>
-    
+      </div>
 
       {/* QR Code Popup with TOTP Form */}
       {showQrCodePopup && (

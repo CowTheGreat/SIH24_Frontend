@@ -36,7 +36,7 @@
 .popCont {
   width: 800px; /* Increase the size of the container */
   height: 700px;
-  background: rgba(51, 53, 71, 1);
+  background: #202020;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -49,24 +49,23 @@
 }
 
 .popupContent h2 {
-  position: absolute;
   top: 20px;
   left: 20px;
   font-size: 24px;
   margin: 0;
   color: white; /* Ensure the text is visible */
+  margin-left: 300px;
+  margin-top: 20px;
 }
-.popupContent p{
+.popupContent p {
   margin-top: 50px;
 }
- .line{
-    width:70%;
-    height: 2px;
-    background-color: rgb(98, 98, 99);
-    margin: 20px 0;
-    margin-left: 10px;
-    margin-top: 60px;
-  
+.line {
+  width: 75%;
+  height: 2px;
+  background-color: rgb(98, 98, 99);
+  margin: 20px 0;
+  margin-left: 100px;
 }
 
 .popupContent .closeBtn {
@@ -83,17 +82,17 @@
 .popupContent p {
   margin-bottom: 10px;
 }
-.infoline{
-  display:flex;
+.infoline {
+  display: flex;
   flex-direction: row;
 }
 .infoCont {
   display: flex;
   flex-direction: row; /* Ensure each item is stacked vertically */
   gap: 20px; /* Adds space between each block */
-  margin-top: 30px;
-  justify-content:space-between;
-  margin-left:10px;
+  margin-top: 20px;
+  justify-content: space-between;
+  margin-left: 10px;
 }
 
 .infoItem {
@@ -111,106 +110,109 @@
   margin-bottom: 20px; /* Adjusts the spacing under each p */
   color: white;
   font-size: 15px;
-
 }
-.actionCont{
-  width:750px;
-  height:100px;
-  border:2px solid rgb(253, 144, 79);
+.actionCont {
+  width: 750px;
+  height: 100px;
+  border: 2px solid rgb(253, 144, 79);
   margin-top: 15px;
-  border-radius:20px;
+  border-radius: 20px;
   display: flex; /* Use flexbox to align items horizontally */
   align-items: center; /* Align items vertically centered */
   justify-content: space-between;
 }
-.actionInfo h3{
+.actionInfo {
+  padding: 20px;
+}
+.actionInfo h3 {
   font-weight: 0;
   font-size: 20px;
-  margin-top:0;
+  margin-top: 0;
+  margin-bottom: 0;
   margin-left: 10px;
 }
-.actionInfo p{
-  margin:0;
- margin-left:10px;
+.actionInfo p {
+  margin: 0;
+  margin-left: 10px;
 }
-.actionInfo1 h3{
-  font-weight:0;
-  font-size:20px;
-  margin-top:40px;
-  margin-left:10px;
+.actionInfo1 {
+  padding: 10px;
+}
+.actionInfo1 h3 {
+  font-weight: 0;
+  font-size: 20px;
+  margin-top: 40px;
+  margin-left: 10px;
 }
 .actionInfo1 p {
   margin-left: 10px;
   margin-top: 20px;
-  margin-bottom: 40px; 
+  margin-bottom: 40px;
   font-size: 15px;
- 
 }
 .actionBtn {
   background-color: rgba(255, 95, 0, 1);
   color: white;
-  padding: 10px 20px;
+  padding: 10px 0;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
-  margin:0px 10px 10px 0;
-  width:150px;
+  margin: 0px 10px 10px 0;
+  width: 190px;
 }
-.actionBtn1{
+.actionBtn1 {
   background-color: rgba(255, 95, 0, 1);
-  color:white;
-  padding:10px 0px;
-  margin:0 10px 10px 0;
-  cursor:pointer;
-  border:none;
-  border-radius:5px;
-  width:150px;
+  color: white;
+  padding: 10px 0px;
+  margin: 0 10px 10px 0;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  width: 150px;
   text-align: center;
 }
 
-.offBtn{
-  background-color:rgba(237, 31, 36, 1);
-  color:white;
-  padding:8px 16px;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-  width:150px;
-  margin-left:25px;
-  margin-top:10px;
-  margin-right:10px;
-  margin-bottom:0px;
+.offBtn {
+  background-color: rgba(237, 31, 36, 1);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  margin-left: 25px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 0px;
 }
 
-.actionInfo2 h3{
+.actionInfo2 h3 {
   font-weight: 0;
-  font-size: 20px;;
+  font-size: 20px;
   margin-top: 0;
   margin-left: 10px;
 }
 
 .actionInfo2 p {
-  margin: 0;       
+  margin: 0;
   margin-left: 10px;
-  font-size: 15px;  
+  font-size: 15px;
   margin-bottom: 30px;
-  margin-top:-10px;
+  margin-top: -10px;
 }
 
 .actionBtn2 {
-  background-color: rgba(255, 95, 0, 1); 
+  background-color: rgba(255, 95, 0, 1);
   color: white;
-  padding: 10px 0px; 
+  padding: 10px 0px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   width: 150px;
   text-align: center;
   margin-left: 100px;
-  margin-right:10px ;
-
-
+  margin-right: 10px;
 }
 
 .qrPopupOverlay {
@@ -227,12 +229,12 @@
 }
 
 .qrPopupContent {
-  background:rgb(41, 41, 41);
+  background: rgb(41, 41, 41);
   padding: 20px;
   border-radius: 8px;
   text-align: center;
   box-shadow: 0px 0px 10px rgba(12, 12, 12, 0.1);
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -252,40 +254,37 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  
 }
-.submitButton{
-
-    background-color: #ff6b47;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    width:150px;
-    margin-left: 150px;
-    margin-top: 15px;
-    margin-bottom: 10px;
+.submitButton {
+  background-color: #ff6b47;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  margin-left: 150px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
-
 
 .pinInput {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  color:orange;
+  color: orange;
 }
 
-.closeButton{
+.closeButton {
   background-color: rgb(237, 31, 36, 1);
-  padding:5px 10px;
+  padding: 5px 10px;
 }
 
-.actionBtn:disabled{
-   background-color: gray;
-   cursor: not-allowed;
-   opacity:0.6;
+.actionBtn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
-.actionBtn{
+.actionBtn {
   cursor: pointer;
 }
