@@ -303,7 +303,6 @@ button:hover {
 .searchContainer {
   display: flex;
   align-items: center; /* Aligns items vertically centered */
-  gap: 10px; /* Adds space between the input and button */
   margin: 10px 0;
 }
 
@@ -317,7 +316,6 @@ button:hover {
 .searchContainer button {
   padding: 8px 12px;
   border: none;
-
   background-color: #ff6b47;
   border-radius: 4px;
   cursor: pointer;
@@ -356,9 +354,9 @@ button:hover {
   );
 }
 
-.upload{
-font-size: 24px; /* Adjust icon size */
+.upload {
+  font-size: 24px; /* Adjust icon size */
   color: #007bff; /* Change icon color */
   cursor: pointer; /* Change cursor to pointer when hovering */
-  transition: color 0.3s ease; 
+  transition: color 0.3s ease;
 }
