@@ -3,6 +3,11 @@
 .pageContainer {
   color: white;
   background-color: #1e1e1e;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .mainContainer {
@@ -28,10 +33,10 @@
 }
 .botimg {
   width: 150px;
-  margin-left:150px;
+  margin-left: 150px;
   margin-bottom: 20px;
-  
-    margin-top:150px;
+
+  margin-top: 150px;
 }
 .leftContainer {
   width: 30vw;
@@ -66,9 +71,8 @@
   height: 2px;
   background-color: rgb(253, 144, 79);
   margin: 20px 0;
-  margin-top:10px;
+  margin-top: 10px;
   margin-bottom: 10px;
-
 }
 
 .authContainer {
@@ -77,11 +81,11 @@
   align-items: center;
   justify-content: center;
 }
-.authContainer h1{
-  color:rgb(255, 107, 71);
+.authContainer h1 {
+  color: rgb(255, 107, 71);
   font-size: 25px;
 }
-.authh1{
+.authh1 {
   margin-left: 0px;
 }
 .buttonBox {
@@ -89,7 +93,7 @@
   flex-direction: column;
   gap: 30px;
   width: 325px;
-  height:96px;
+  height: 96px;
   align-items: center;
 }
 
@@ -109,15 +113,13 @@
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease;
-  margin-top:20px;
+  margin-top: 20px;
   display: flex;
 
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
-
 
 .leftContainer h1 {
   font-family: Poppins;
@@ -136,23 +138,23 @@
   text-align: center;
   color: rgb(0, 0, 0);
 }
-.icon{
+.icon {
   /* display:flex; */
   /* margin-left:130px; */
   /* margin-bottom: 20px; */
   /* margin-top: 10px; */
-  width: 30px;  /* Set the width */
-  height:30px;
+  width: 30px; /* Set the width */
+  height: 30px;
 }
 
 .leftSide {
   width: 50%;
   background: linear-gradient(
-  to right,
-  rgb(255, 107, 71),
-  rgb(253, 144, 79),
-  rgb(255, 157, 82)
-);
+    to right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  );
   padding: 40px;
 }
 
@@ -164,8 +166,8 @@
   height: 100%;
   text-align: center;
 }
-.authContent h1{
-  color:rgb(0, 0, 0);
+.authContent h1 {
+  color: rgb(0, 0, 0);
 }
 
 .authBot {

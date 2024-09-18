@@ -26,7 +26,6 @@ function LoginPage() {
   return (
     <>
       <div className={Classes.pageContainer}>
-        <h1>Cletocite</h1>
         <div className={Classes.mainContainer}>
           <div className={Classes.loginCircle}>Login</div>
           <div className={Classes.leftContainer}>
@@ -38,8 +37,8 @@ function LoginPage() {
             <div className={Classes.loginContainer}>
               <form onSubmit={handleSubmit}>
                 <div className={Classes.uplogin}>
-                <h1>Login</h1>
-                <div className={Classes.line}></div>
+                  <h1>Login</h1>
+                  <div className={Classes.line}></div>
                 </div>
                 <div className={Classes.inputbox}>
                   <FaUser className={Classes.icon} />

@@ -71,7 +71,6 @@ function MultiFactor() {
 
   return (
     <div className={Classes.pageContainer}>
-      <h1>CLETOCITE</h1>
       <div className={Classes.mainContainer}>
         <div className={Classes.loginCircle}>Authenticate</div>
         <div className={Classes.leftContainer}>
