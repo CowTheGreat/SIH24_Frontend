@@ -16,15 +16,22 @@ def extract_audio_from_video(video_path, output_audio_path):
     video_clip.close()
 
 # Example usage
-video_path = "testVIdeo.mp4"  # Replace with the path to your video file
+# video_path = "C:/Users/cowar/Downloads/transcribe_meet.mp4" 
+video_path = "C:/Users/cowar/Downloads/tra.mp4"  # Replace with the path to your video file
 output_audio_path = "output_audio.mp3"  # The output audio file path (can also be .wav, .ogg, etc.)
 
 extract_audio_from_video(video_path, output_audio_path)
 
 print(f"Audio extracted and saved to {output_audio_path}")
 
+import torch
 import whisper
 
-model = whisper.load_model("base")
-result = model.transcribe("output_audio.mp3")
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"Using device: {device}")
+
+# Load Whisper model and move to GPU if available
+model = whisper.load_model("base").to(device)
+
+result = model.transcribe("output_audio.mp3", fp16=False)  # Ensure `fp16=False` if using CPU
 print(result["text"])
