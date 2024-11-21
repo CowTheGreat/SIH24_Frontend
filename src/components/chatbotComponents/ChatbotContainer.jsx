@@ -33,7 +33,11 @@ const ChatbotContainer = () => {
     const fetchSessionId = async () => {
       let storedSessionId = localStorage.getItem("session_id");
       if (!storedSessionId) {
-        const response = await fetch("http://localhost:8080/session");
+        const response = await fetch("http://localhost:8080/session", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
+          },
+        });
         const data = await response.json();
         storedSessionId = data.session_id;
         localStorage.setItem("session_id", storedSessionId);
@@ -47,7 +51,11 @@ const ChatbotContainer = () => {
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/sessions`);
+        const response = await fetch(`http://localhost:8080/sessions`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
+          },
+        });
         const data = await response.json();
         setSessions(data.sessions);
       } catch (error) {
@@ -70,6 +78,7 @@ const ChatbotContainer = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
           },
           body: JSON.stringify({
             session_id: sessionId, // You need to make sure `sessionId` is available here
@@ -109,84 +118,6 @@ const ChatbotContainer = () => {
     }
   };
 
-  // const sendMessage = async () => {
-  //   if (input.trim() && sessionId) {
-  //     const newMessage = { text: input, sender: "user" };
-
-  //     // Update the state with the new user message
-  //     setMessages((prevMessages) => [...prevMessages, newMessage]);
-
-  //     // Send the user message to the backend
-  //     const formData = new FormData();
-  //     formData.append("user_id", "user3");
-  //     formData.append("question", input);
-  //     if (pdfFile) {
-  //       formData.append("pdf", pdfFile);
-  //     }
-  //     if (videoFile) {
-  //       formData.append("video", videoFile);
-  //     }
-
-  //     await fetch("http://localhost:8080/submit", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         session_id: sessionId,
-  //         sender: "user",
-  //         message: input,
-  //       }),
-  //     });
-
-  //     setInput(""); // Clear the input field
-
-  //     try {
-  //       // Send message to AI backend
-  //       const response = await fetch("http://localhost:8080/query", {
-  //         method: "POST",
-  //         body: formData,
-  //       });
-
-  //       const data = await response.json();
-  //       const botMessage = { text: data.answer, sender: "bot" };
-
-  //       // Update the state with the bot message
-  //       setMessages((prevMessages) => [...prevMessages, botMessage]);
-
-  //       // Send the user message to SQL backend
-  //       // await fetch("http://localhost:8080/submit", {
-  //       //   method: "POST",
-  //       //   headers: {
-  //       //     "Content-Type": "application/json",
-  //       //   },
-  //       //   body: JSON.stringify({
-  //       //     session_id: sessionId,
-  //       //     sender: "user",
-  //       //     message: input,
-  //       //   }),
-  //       // });
-
-  //       // setInput("");
-
-  //       // Send the bot response to SQL backend
-  //       await fetch("http://localhost:8080/submit", {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           session_id: sessionId,
-  //           sender: "bot",
-  //           message: data.answer,
-  //         }),
-  //       });
-  //     } catch (error) {
-  //       console.error("Error sending message:", error);
-  //     }
-  //   }
-  // };
-
   const sendMessage = async () => {
     if (input.trim() && sessionId) {
       const newMessage = { text: input, sender: "user" };
@@ -196,7 +127,7 @@ const ChatbotContainer = () => {
 
       // Send the user message to the backend
       const formData = new FormData();
-      formData.append("user_id", "user3");
+      formData.append("user_id", "user3"); // Use the actual user ID
       formData.append("question", input);
       if (pdfFile) {
         formData.append("pdf", pdfFile);
@@ -205,59 +136,56 @@ const ChatbotContainer = () => {
         formData.append("video", videoFile);
       }
 
-      // Send the user message to SQL backend
-      await fetch("http://localhost:8080/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          session_id: sessionId,
-          sender: "user",
-          message: input,
-        }),
-      });
-
-      setInput("");
-
       try {
-        // Send message to AI backend
-        const response = await fetch("http://localhost:8080/query", {
+        // First POST to submit user message
+        await fetch("http://localhost:8080/submit", {
           method: "POST",
-          body: formData,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+          },
+          body: JSON.stringify({
+            session_id: sessionId,
+            sender: "user",
+            message: input,
+          }),
         });
 
-        // Create a reader to handle the streaming response
+        setInput("");
+
+        // Second POST to send message to AI backend (including files)
+        const response = await fetch("http://localhost:8080/query", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+          },
+          body: formData, // FormData will automatically set the correct content type
+        });
+
+        // Handle the streaming response
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let botMessage = { text: "", sender: "bot" };
 
-        // Add the bot message placeholder immediately (empty for now)
+        // Add bot message placeholder
         setMessages((prevMessages) => [...prevMessages, botMessage]);
         let botMessageIndex = null;
 
-        // Read the data in chunks as it streams in
+        // Read in chunks and update the bot message
         const stream = new ReadableStream({
           async start(controller) {
             while (true) {
               const { done, value } = await reader.read();
-
               if (done) {
-                // Streaming is done, so we can stop the stream
                 controller.close();
                 break;
               }
-
-              // Decode the chunk and append it to botMessage
               const chunk = decoder.decode(value, { stream: true });
               botMessage.text += chunk;
-
-              // Find the bot message that was added earlier
               setMessages((prevMessages) => {
                 if (botMessageIndex === null) {
-                  botMessageIndex = prevMessages.length - 1; // The last added message is the bot's
+                  botMessageIndex = prevMessages.length - 1;
                 }
-                // Update the bot's message text progressively
                 const updatedMessages = [...prevMessages];
                 updatedMessages[botMessageIndex].text = botMessage.text;
                 return updatedMessages;
@@ -266,14 +194,14 @@ const ChatbotContainer = () => {
           },
         });
 
-        // Start reading the stream
-        await stream.getReader().read();
+        await stream.getReader().read(); // Start reading the stream
 
         // Send the bot response to SQL backend
         await fetch("http://localhost:8080/submit", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
           },
           body: JSON.stringify({
             session_id: sessionId,
