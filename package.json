@@ -32,7 +32,8 @@
     "remark-gfm": "^4.0.0",
     "shiki": "^1.16.3",
     "sih24-frontend": "file:",
-    "speakeasy": "^2.0.0"
+    "speakeasy": "^2.0.0",
+    "ui-markdown": "^0.1.12"
   },
   "devDependencies": {
     "@types/react": "^18.2.64",
