@@ -103,71 +103,173 @@ button:hover {
   background-color: #0a0909;
 } */
 
-.optionsContainer {
-  background-color: #131313;
-  padding: 20px;
-  position: absolute;
-  bottom: 70px;
-  width: 200px;
-  right: -10;
-  border-radius: 5px;
-  margin-bottom: 30px;
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15),
+                0 0 8px rgba(255, 165, 0, 0.2),
+                0 0 14px rgba(255, 165, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25),
+                0 0 14px rgba(255, 165, 0, 0.4),
+                0 0 18px rgba(255, 165, 0, 0.2);
+  }
 }
 
-.file-input {
-  opacity: 0; /* Hide the default file input */
+.optionsContainer {
+  background-color: #2d2d2d;
+  padding: 20px;
   position: absolute;
-  z-index: -1;
-  cursor: pointer;
-  width: 100%;
-  height: 100%;
+  bottom: 100%;
+  left: 41%; /* Center horizontally */
+  transform: translateX(-50%);
+  width: 400px; /* Slightly wider */
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
+              0 0 8px rgba(255, 165, 0, 0.2);
+  z-index: 1000;
+  animation: pulseGlow 2s infinite;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
 }
 
 .optionsContainer label {
-  color: white;
-  margin: 10px 0;
+  color: #eaeaea;
+  margin: 15px 0;
   display: block;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center; /* Center label text */
 }
 
-.optionsContainer input[type="file"],
+.optionsContainer input[type="file"] {
+  width: calc(100% - 40px); /* Adjusted for wider container */
+  margin: 12px 0; /* Centered margin */
+  padding: 10px 14px;
+  border: none; /* Remove border */
+  border-radius: 20px; /* Rounded edges */
+  background-color: #2d2d2d; /* Match container background */
+  color: #eaeaea; /* Harmonize with container text */
+  font-size: 14px;
+  outline: none;
+  cursor: pointer; /* Pointer for interaction hint */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5); /* Slight inner shadow */
+  text-align: center;
+}
+
+.optionsContainer input[type="file"]::file-selector-button {
+  display: none; /* Hide the default file selector button */
+}
+
+.optionsContainer input[type="file"]::before {
+  content: "Choose a file"; /* Placeholder text */
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  color: #eaeaea;
+  padding: 10px 0;
+  background-color: #2d2d2d; /* Match container background */
+  border: 1px solid #2d2d2d; /* Remove visible borders */
+  border-radius: 20px; /* Same rounded style */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%; /* Expand to fit the container width */
+  box-sizing: border-box;
+}
+
+.optionsContainer input[type="file"]:hover::before {
+  background-color: #3a3a3a; /* Slight hover effect */
+}
+
+.optionsContainer input[type="file"]:focus::before {
+  background-color: #2d2d2d; /* Keep focus consistent */
+  box-shadow: 0 0 6px rgba(255, 165, 0, 0.4); /* Add glowing focus effect */
+}
+
 .optionsContainer input[type="text"] {
-  width: 90%;
-  margin-top: 5px;
+  width: calc(100% - 40px); /* Adjusted for wider container */
+  margin: 12px 0; /* Centered margin */
+  padding: 10px 14px; /* Slight padding for a softer look */
+  border: 1px solid #2d2d2d; /* Match the container border color */
+  border-radius: 20px; /* Increased radius for a rounded shape */
+  background-color: #2d2d2d; /* Match the container background */
+  color: #eaeaea; /* Harmonize with container text */
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-align: center; /* Center text */
 }
 
-.optionsContainer button {
-  margin-top: 10px;
-  background-color: #007bff;
-  color: white;
+.optionsContainer input[type="text"]:focus {
+  border: 1px solid #ffa500;
+  box-shadow: 0 0 6px rgba(255, 165, 0, 0.4), inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.optionsContainer .inputWithButton {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the content horizontally */
+  margin-top: 8px;
+  gap: 10px;
+}
+
+.optionsContainer button,
+.optionsContainer .submitButton {
+  background-color: #fff;
+  color: #2d2d2d;
   border: none;
-  padding: 5px;
-  border-radius: 3px;
+  padding: 10px 16px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.optionsContainer button:hover,
+.optionsContainer .submitButton:hover {
+  background-color: #eaeaea;
+  transform: scale(1.03);
+}
+
+.optionsContainer button:active,
+.optionsContainer .submitButton:active {
+  transform: scale(0.98);
 }
 
 .inputContainer {
-  padding: 10px;
+  padding: 12px;
   display: flex;
   align-items: center;
-  background-color: #fdfdfd; /* Dark background color */
-  padding: 10px;
+  background-color: #ffffff;
   border-radius: 25px;
-  /* margin: 10px; */
   width: 50vw;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   margin-bottom: 20px;
-  position: sticky; /* Stays at the bottom when scrolling */
-  bottom: 0; /* Attach it to the bottom of the window */
+  position: sticky;
+  bottom: 0;
 }
 
 .attachmentButton {
   border: none;
   cursor: pointer;
-  padding: 0;
   background-color: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
+  color: #ffa500;
+  font-size: 16px;
+  margin-left: auto;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.attachmentButton:hover {
+  color: #ff8800;
+  transform: scale(1.1);
+}
+
+.attachmentButton:active {
+  transform: scale(0.95);
 }
 
 .hairpin {

@@ -361,26 +361,40 @@ const ChatbotContainer = () => {
       </div>
 
       {showOptions && (
-        <div className={Classes.optionsContainer}>
-          <label>
-            Submit PDF:
-            <input type="file" name="pdf" onChange={handleFileChange} />
-          </label>
-          <label>
-            Submit Video:
-            <input type="file" name="video" onChange={handleFileChange} />
-          </label>
-          <label>
-            Submit YouTube URL:
-            <input
-              type="text"
-              placeholder="Enter YouTube URL"
-              onChange={handleUrlChange}
-            />
-          </label>
-          {/* <button onClick={handleSubmit}>Submit</button> */}
-        </div>
-      )}
+<div className={Classes.optionsContainer}>
+<label>
+  Upload PDF:
+  <input
+    type="file"
+    name="pdf"
+    onChange={handleFileChange}
+    placeholder="Select a PDF file..."
+  />
+</label>
+<label>
+  Upload Video File:
+  <input
+    type="file"
+    name="video"
+    onChange={handleFileChange}
+    placeholder="Select a video file..."
+  />
+</label>
+<label>
+  YouTube Video Link:
+  <div className={Classes.inputWithButton}>
+    <input
+      type="text"
+      placeholder="Paste YouTube URL here..."
+      onChange={handleUrlChange}
+    />
+    <button onClick={handleSubmit} className={Classes.submitButton}>
+          Add
+        </button> 
+  </div>
+</label>
+</div>
+)}
 
       <div
         className={Classes.centerpanel}
