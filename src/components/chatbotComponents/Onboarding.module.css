@@ -1,0 +1,60 @@
+.onboardingContainer {
+  width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.stepsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.step.completed {
+  background-color: #eafaf1; /* Light green background */
+  border-color: #28a745; /* Green border */
+  color: #28a745; /* Green text */
+}
+
+.stepIcon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.step.completed .stepIcon {
+  background-color: #28a745; /* Green for completed steps */
+}
+
+.stepContent {
+  font-size: 14px;
+  color: #555;
+}

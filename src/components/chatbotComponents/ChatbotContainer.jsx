@@ -10,6 +10,7 @@ import Markdown from "./Markdown";
 import msgiconw from "../../assets/msgiconpng.jpg";
 import msgicon from "../../assets/msgicon.png";
 import SearchBar from "./SearchBar"; // Import the SearchBar component
+import Onboarding from "./Onboarding"; // Import Onboarding
 
 const ChatbotContainer = () => {
   const [sessions, setSessions] = useState([]);
@@ -291,6 +292,7 @@ const ChatbotContainer = () => {
       <div className={Classes.topright}>
         <h1 className={Classes.chathistory}>Chat History</h1>
         {/* <SearchBar /> */}
+
         <div>
           <div className={Classes.searchContainer}>
             <form onSubmit={handleSearch}>
@@ -358,6 +360,11 @@ const ChatbotContainer = () => {
             <p>No sessions found</p>
           )}
         </div>
+      </div>
+
+      <div className={Classes.onboardingleft}>
+        {/* Onboarding Component */}
+        <Onboarding setInput={setInput} />
       </div>
 
       {showOptions && (
