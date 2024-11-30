@@ -43,6 +43,7 @@
   margin-bottom: 40px;
   width: 100%;
   max-width: 800px;
+  flex-direction: row; /* Default: row layout */
 }
 
 .timelineContent {
@@ -99,5 +100,65 @@
   }
   to {
     text-shadow: 0 0 20px rgba(255, 123, 0, 0.6);
+  }
+}
+
+/* Responsive styles for medium screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .itSupportHeading {
+    font-size: 32px;
+  }
+
+  .timelineContent {
+    padding: 15px;
+  }
+
+  .timelineDescription {
+    font-size: 15px;
+  }
+}
+
+/* Responsive styles for small screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .timelineItem {
+    flex-direction: column; /* Switch to column layout */
+    align-items: center;
+  }
+
+  .timelineContent {
+    width: 100%; /* Full width for mobile */
+    margin-bottom: 20px;
+  }
+
+  .timelineConnector {
+    display: none; /* Hide connectors on small screens */
+  }
+
+  .timelineTitle {
+    font-size: 22px;
+  }
+
+  .timelineDescription {
+    font-size: 14px;
+  }
+}
+
+/* Responsive styles for extra small screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .itSupportHeading {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .timelineTitle {
+    font-size: 20px;
+  }
+
+  .timelineDescription {
+    font-size: 12px;
+  }
+
+  .timelineContent {
+    padding: 10px;
   }
 }

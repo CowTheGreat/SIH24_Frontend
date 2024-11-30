@@ -1,3 +1,4 @@
+/* Base styles */
 .featuresSection {
   margin: 40px auto;
   padding: 40px;
@@ -20,7 +21,7 @@
 
 .featuresGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* Default: 3 columns */
   gap: 20px;
 }
 
@@ -54,5 +55,73 @@
   }
   to {
     text-shadow: 0 0 20px rgba(255, 123, 0, 0.6);
+  }
+}
+
+/* Responsive styles for medium screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .featuresGrid {
+    grid-template-columns: repeat(2, 1fr); /* Switch to 2 columns */
+    gap: 20px;
+  }
+
+  .featuresHeading {
+    font-size: 32px;
+  }
+
+  .featureTitle {
+    font-size: 22px;
+  }
+
+  .featureDescription {
+    font-size: 15px;
+  }
+}
+
+/* Responsive styles for small screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .featuresGrid {
+    grid-template-columns: 1fr; /* Single column layout */
+    gap: 15px;
+  }
+
+  .featuresSection {
+    padding: 20px;
+  }
+
+  .featuresHeading {
+    font-size: 28px;
+  }
+
+  .featureBox {
+    padding: 15px;
+  }
+
+  .featureTitle {
+    font-size: 20px;
+  }
+
+  .featureDescription {
+    font-size: 14px;
+  }
+}
+
+/* Responsive styles for extra small screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .featuresHeading {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .featureBox {
+    padding: 10px;
+  }
+
+  .featureTitle {
+    font-size: 18px;
+  }
+
+  .featureDescription {
+    font-size: 12px;
   }
 }

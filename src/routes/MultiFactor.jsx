@@ -1,9 +1,7 @@
-import MultiFactorAuth from '../components/loginComponents/MultiFactorAuth';
+import MultiFactorAuth from "../components/loginComponents/MultiFactorAuth";
 
 function Multifactor() {
-  return (
-    <MultiFactorAuth />
-  );
+  return <MultiFactorAuth />;
 }
 
 export default Multifactor;
