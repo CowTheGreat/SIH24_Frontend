@@ -10,7 +10,9 @@ import Markdown from "./Markdown";
 import msgiconw from "../../assets/msgiconpng.jpg";
 import msgicon from "../../assets/msgicon.png";
 import SearchBar from "./SearchBar"; // Import the SearchBar component
-
+import pdf from "../../assets/pdf-icon.png";
+import vid from "../../assets/video-icon.png";
+import yt from "../../assets/youtube-icon.png";
 const ChatbotContainer = () => {
   const [sessions, setSessions] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -361,40 +363,40 @@ const ChatbotContainer = () => {
       </div>
 
       {showOptions && (
-<div className={Classes.optionsContainer}>
-<label>
-  Upload PDF:
-  <input
-    type="file"
-    name="pdf"
-    onChange={handleFileChange}
-    placeholder="Select a PDF file..."
-  />
-</label>
-<label>
-  Upload Video File:
-  <input
-    type="file"
-    name="video"
-    onChange={handleFileChange}
-    placeholder="Select a video file..."
-  />
-</label>
-<label>
-  YouTube Video Link:
-  <div className={Classes.inputWithButton}>
-    <input
-      type="text"
-      placeholder="Paste YouTube URL here..."
-      onChange={handleUrlChange}
-    />
-    <button onClick={handleSubmit} className={Classes.submitButton}>
-          Add
-        </button> 
+  <div className={Classes.optionsContainer}>
+    <label className={Classes.optionLabel}>
+      <img src={pdf} alt="PDF Icon" className={Classes.iconImage} />
+      <span>Upload PDF</span>
+      <input
+        type="file"
+        name="pdf"
+        onChange={handleFileChange}
+        placeholder="Select a PDF file..."
+      />
+    </label>
+    <label className={Classes.optionLabel}>
+      <img src={vid} alt="Video Icon" className={Classes.iconImage} />
+      <span>Upload Video File</span>
+      <input
+        type="file"
+        name="video"
+        onChange={handleFileChange}
+        placeholder="Select a video file..."
+      />
+    </label>
+    <label className={Classes.youtubeContainer}>
+      <img src={yt} alt="YouTube Icon" className={Classes.iconImage} />
+      <input
+        type="text"
+        placeholder="Upload YouTube Link"
+        onChange={handleUrlChange}
+      />
+    </label>
   </div>
-</label>
-</div>
 )}
+
+
+
 
       <div
         className={Classes.centerpanel}

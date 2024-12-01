@@ -103,46 +103,85 @@ button:hover {
   background-color: #0a0909;
 } */
 
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15),
-                0 0 8px rgba(255, 165, 0, 0.2),
-                0 0 14px rgba(255, 165, 0, 0.1);
-  }
-  50% {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25),
-                0 0 14px rgba(255, 165, 0, 0.4),
-                0 0 18px rgba(255, 165, 0, 0.2);
-  }
-}
-
 .optionsContainer {
   background-color: #2d2d2d;
   padding: 20px;
   position: absolute;
-  bottom: 100%;
-  left: 41%; /* Center horizontally */
+  bottom: 80%;
+  left: 40%;
   transform: translateX(-50%);
-  width: 400px; /* Slightly wider */
+  width: 350px;
   border-radius: 12px;
   margin-bottom: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 
               0 0 8px rgba(255, 165, 0, 0.2);
   z-index: 1000;
-  animation: pulseGlow 2s infinite;
-  box-sizing: border-box;
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  align-items: center; /* Center children horizontally */
+  flex-direction: column;
+  gap: 16px;
 }
 
-.optionsContainer label {
+.optionLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   color: #eaeaea;
-  margin: 15px 0;
-  display: block;
   font-size: 16px;
   font-weight: 600;
-  text-align: center; /* Center label text */
+  cursor: pointer;
+  position: relative;
+  padding: 10px;
+  border-radius: 6px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.iconImage {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.optionLabel span {
+  flex: 1;
+}
+
+
+.optionLabel input[type="file"] {
+  display: none;
+}
+
+.optionLabel:hover {
+  transform: scale(1.05); /* Slightly enlarges on hover */
+  background-color: #414141; /* Darker background on hover */
+}
+
+.youtubeContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #2d2d2d; /* Normal background */
+  border-radius: 6px;
+  padding: 10px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.youtubeContainer input[type="text"] {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #eaeaea;
+  font-size: 14px;
+  padding: 6px 10px;
+  outline: none;
+}
+
+.youtubeContainer input::placeholder {
+  color: #aaa;
+}
+
+.youtubeContainer:hover {
+  transform: scale(1.05); /* Slightly enlarges on hover */
+  background-color: #414141; /* Darker background on hover */
 }
 
 .optionsContainer input[type="file"] {
