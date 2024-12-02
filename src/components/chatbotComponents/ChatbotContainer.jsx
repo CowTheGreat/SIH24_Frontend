@@ -455,7 +455,7 @@ const ChatbotContainer = () => {
             </button>
 
             {/* Text Input */}
-            <input
+            {/* <textarea
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -465,6 +465,31 @@ const ChatbotContainer = () => {
                 if (e.key === "Enter") {
                   sendMessage();
                 }
+              }}
+            /> */}
+            <textarea
+              type="text"
+              value={input}
+              onChange={(e) => {
+                setInput(e.target.value);
+                e.target.style.height = "20px";
+                e.target.style.height = `${e.target.scrollHeight}px`;
+              }}
+              placeholder="Type a message..."
+              className={Classes.textInput}
+              rows={1} // Start with a single row
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault(); // Prevent newline on Enter
+                  sendMessage();
+                  setInput(""); // Clear the input
+
+                  e.target.style.height = "20px"; // Reset height to the original value
+                }
+              }}
+              style={{
+                overflow: "hidden", // Prevent scrollbars
+                resize: "none", // Disable manual resizing
               }}
             />
 
