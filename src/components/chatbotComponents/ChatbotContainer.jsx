@@ -11,6 +11,10 @@ import msgiconw from "../../assets/msgiconpng.jpg";
 import msgicon from "../../assets/msgicon.png";
 import SearchBar from "./SearchBar"; // Import the SearchBar component
 import Onboarding from "./Onboarding"; // Import Onboarding
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+
 import pdf from "../../assets/pdf-icon.png";
 import vid from "../../assets/video-icon.png";
 import yt from "../../assets/youtube-icon.png";
@@ -290,6 +294,30 @@ const ChatbotContainer = () => {
     }
   }, [messages]); // Runs every time the messages array changes
 
+  const handleDownload = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/download_chat/cow`,
+        {
+          responseType: "blob", // Important for handling binary files
+        }
+      );
+
+      // Create a blob from the PDF data
+      const url = window.URL.createObjectURL(
+        new Blob([response.data], { type: "application/pdf" })
+      );
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "chat.pdf"); // File name
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.error("Error downloading the chat:", error);
+    }
+  };
+
   return (
     <div className={Classes.chatcontainer}>
       <div className={Classes.topright}>
@@ -510,6 +538,9 @@ const ChatbotContainer = () => {
             {/* Send Button */}
             <button className={Classes.sendButton} onClick={sendMessage}>
               <span className={Classes.sendArrow}>&#x27A4;</span>
+            </button>
+            <button className={Classes.downButton} onClick={handleDownload}>
+              <FontAwesomeIcon icon={faDownload} />
             </button>
           </div>
         }

@@ -516,6 +516,16 @@ button:hover {
   transition: color 0.3s ease;
 }
 
+.downButton {
+  color: rgb(255, 107, 71);
+  background-color: white;
+}
+
+.downButton svg {
+  width: 20px;
+  height: 20px;
+}
+
 .onboardingleft {
   position: fixed;
   top: 5%;

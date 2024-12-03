@@ -1,26 +1,5 @@
-.userCont {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.icon {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
-}
-
-.name {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.pos {
-  font-size: 14px;
-  color: gray;
-}
-
-.popupOverlay {
+/* General Popup Overlay Styles */
+.popupOverlay, .qrPopupOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -33,45 +12,161 @@
   z-index: 1000;
 }
 
-.popCont {
-  width: 800px; /* Increase the size of the container */
-  height: 700px;
+.popCont, .qrPopupContent {
   background: #202020;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  position: relative; /* Make it relative to position child elements */
-}
-
-.popupContent {
+  align-items: center;
   padding: 20px;
-  position: relative;
+  width: 850px;
+  height: auto;
+
 }
 
+/* Popup Header Styles */
 .popupContent h2 {
-  top: 20px;
-  left: 20px;
   font-size: 24px;
-  margin: 0;
-  color: white; /* Ensure the text is visible */
-  margin-left: 300px;
-  margin-top: 20px;
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
 }
-.popupContent p {
-  margin-top: 50px;
-}
+
 .line {
   width: 75%;
   height: 2px;
-  background-color: rgb(98, 98, 99);
-  margin: 20px 0;
-  margin-left: 100px;
+  background-color: #626263;
+  margin: 20px auto;
+}
+.actionContWrapper{
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  gap:5px;
 }
 
-.popupContent .closeBtn {
+/* User Info Section */
+.infoCont {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.infoItem h3, .actionInfo h3 {
+  font-size: 20px;
+  color: white;
+}
+
+.infoItem p, .actionInfo p {
+  font-size: 15px;
+  color: white;
+}
+
+/* Action Container Styles */
+.actionCont {
+  border: 2px solid #fd904f;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin-top: 15px;
+  width: 100%;
+  justify-content: space-between;
+  background-color: #2a2a2a;
+}
+
+.actionCont:first-child {
+  margin-top: 20px; /* Add extra space for the first container */
+}
+
+.actionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.actionInfo h3 {
+  margin-bottom: 10px;
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-flex;
+  width: 60px;
+  height: 24px;
+  align-self: flex-end;
+  margin-top: -10px; /* Move toggle slightly upwards */
+}
+
+.toggleSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #555351;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border-radius: 50%;
+  bottom: 2px;
+  left: 2px;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #ff5f00;
+}
+
+input:checked + .slider:before {
+  transform: translateX(36px);
+}
+
+/* Button Styles */
+.actionBtn, .actionBtn2, .submitButton, .offBtn, .closeButton {
+  background-color: #ff5f00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.offBtn {
+  background-color: #ed1f24;
+  margin-top: 10px;
+  align-self: center;
+}
+
+/* QR Code Popup */
+.qrCodeImage {
+  width: 200px;
+  height: 200px;
+  margin: 10px 0;
+}
+
+/* Close Button Styles */
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
   font-size: 24px;
   color: white;
   cursor: pointer;
@@ -79,212 +174,11 @@
   border: none;
 }
 
-.popupContent p {
-  margin-bottom: 10px;
-}
-.infoline {
-  display: flex;
-  flex-direction: row;
-}
-.infoCont {
-  display: flex;
-  flex-direction: row; /* Ensure each item is stacked vertically */
-  gap: 20px; /* Adds space between each block */
-  margin-top: 20px;
-  justify-content: space-between;
-  margin-left: 10px;
+/* Responsive Alignments */
+.actionInfo, .qrPopupContent {
+  text-align: left;
 }
 
-.infoItem {
-  display: flex;
-  flex-direction: column; /* Makes h3 and p stack on top of each other */
-}
-
-.infoItem h3 {
-  margin-bottom: 5px;
-  font-size: 20px; /* Adds some space between h3 and p */
-}
-
-.infoItem p {
-  margin-top: 0;
-  margin-bottom: 20px; /* Adjusts the spacing under each p */
-  color: white;
-  font-size: 15px;
-}
-.actionCont {
-  width: 750px;
-  height: 100px;
-  border: 2px solid rgb(253, 144, 79);
-  margin-top: 15px;
-  border-radius: 20px;
-  display: flex; /* Use flexbox to align items horizontally */
-  align-items: center; /* Align items vertically centered */
-  justify-content: space-between;
-}
-.actionInfo {
-  padding: 20px;
-}
-.actionInfo h3 {
-  font-weight: 0;
-  font-size: 20px;
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: 10px;
-}
-.actionInfo p {
-  margin: 0;
-  margin-left: 10px;
-}
-.actionInfo1 {
-  padding: 10px;
-}
-.actionInfo1 h3 {
-  font-weight: 0;
-  font-size: 20px;
-  margin-top: 40px;
-  margin-left: 10px;
-}
-.actionInfo1 p {
-  margin-left: 10px;
-  margin-top: 20px;
-  margin-bottom: 40px;
-  font-size: 15px;
-}
-.actionBtn {
-  background-color: rgba(255, 95, 0, 1);
-  color: white;
-  padding: 10px 0;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-  margin: 0px 10px 10px 0;
-  width: 190px;
-}
-.actionBtn1 {
-  background-color: rgba(255, 95, 0, 1);
-  color: white;
-  padding: 10px 0px;
-  margin: 0 10px 10px 0;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  width: 150px;
-  text-align: center;
-}
-
-.offBtn {
-  background-color: rgba(237, 31, 36, 1);
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 150px;
-  margin-left: 25px;
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-bottom: 0px;
-}
-
-.actionInfo2 h3 {
-  font-weight: 0;
-  font-size: 20px;
-  margin-top: 0;
-  margin-left: 10px;
-}
-
-.actionInfo2 p {
-  margin: 0;
-  margin-left: 10px;
-  font-size: 15px;
-  margin-bottom: 30px;
-  margin-top: -10px;
-}
-
-.actionBtn2 {
-  background-color: rgba(255, 95, 0, 1);
-  color: white;
-  padding: 10px 0px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 150px;
-  text-align: center;
-  margin-left: 100px;
-  margin-right: 10px;
-}
-
-.qrPopupOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.qrPopupContent {
-  background: rgb(41, 41, 41);
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0px 0px 10px rgba(12, 12, 12, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.qrCodeImage {
-  width: 200px;
-  height: 200px;
-  margin-top: 10px;
-}
-
-.closeQrBtn {
-  margin-top: 30px;
-  padding: 10px 20px;
-  background-color: #ff0000;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.submitButton {
-  background-color: #ff6b47;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 150px;
-  margin-left: 150px;
-  margin-top: 15px;
-  margin-bottom: 10px;
-}
-
-.pinInput {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  color: orange;
-}
-
-.closeButton {
-  background-color: rgb(237, 31, 36, 1);
-  padding: 5px 10px;
-}
-
-.actionBtn:disabled {
-  background-color: gray;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-.actionBtn {
-  cursor: pointer;
+.actionInfo p, .qrPopupContent p {
+  margin: 10px 0;
 }
