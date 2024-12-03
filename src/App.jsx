@@ -7,7 +7,7 @@ import Home from "./routes/home.jsx";
 import Login from "./routes/login.jsx";
 import Multifactor from "./routes/MultiFactor.jsx";
 import MultiFactorG from "./routes/MultiFactorG.jsx";
-import AuthEmail from "./components/loginComponents/authemail.jsx";
+import AuthEmail from "./components/loginComponents/AuthEmail.jsx";
 import Steps_google from "./components/loginComponents/Steps_for_google_auth.jsx";
 import Profile from "./components/common/Profile.jsx";
 import PrivateRoute from "./routes/PrivateRoute";

@@ -115,12 +115,7 @@
 .stepLine {
   width: 3px;
   height: 40px;
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-  ); /* Lighter line connecting steps */
+  background-color: rgba(255, 255, 255, 0.2);
   margin: 0 auto;
 }
 

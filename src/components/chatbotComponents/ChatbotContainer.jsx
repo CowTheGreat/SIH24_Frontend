@@ -509,7 +509,7 @@ const ChatbotContainer = () => {
                 }
               }}
             /> */}
-            <textarea
+            <input
               type="text"
               value={input}
               onChange={(e) => {
