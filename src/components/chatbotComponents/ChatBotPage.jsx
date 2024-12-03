@@ -1,7 +1,7 @@
 import React from "react";
 import RightPanel from "./RightPanel";
 import LeftPanel from "./LeftPanel";
-import Classes from "./ChatbotPage.module.css";
+import Classes from "./ChatBotPage.module.css";
 
 const ChatBotPage = () => {
   return (
