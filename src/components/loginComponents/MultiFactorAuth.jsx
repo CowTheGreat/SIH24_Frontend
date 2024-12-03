@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { useLocation } from "react-router-dom"; // Import useNavigate
 import LoginBot from "../../assets/loginbot.png";
 import Classes from "./MultiFactorAuth.module.css";
-import AuthEmail from "./authemail";
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { MdEmail } from "react-icons/md";
