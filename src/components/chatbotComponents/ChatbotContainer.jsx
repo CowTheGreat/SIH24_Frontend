@@ -13,6 +13,8 @@ import SearchBar from "./SearchBar"; // Import the SearchBar component
 import pdf from "../../assets/pdf-icon.png";
 import vid from "../../assets/video-icon.png";
 import yt from "../../assets/youtube-icon.png";
+import Onboarding from "./Onboarding"; // Import Onboarding
+
 const ChatbotContainer = () => {
   const [sessions, setSessions] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -361,6 +363,13 @@ const ChatbotContainer = () => {
           )}
         </div>
       </div>
+
+      <div className={Classes.onboardingleft}>
+        {/* Onboarding Component */}
+        <Onboarding setInput={setInput} />
+      </div>
+
+
 
       {showOptions && (
   <div className={Classes.optionsContainer}>
