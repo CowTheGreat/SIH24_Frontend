@@ -1,4 +1,4 @@
-.onboardingContainer {
+/* .onboardingContainer {
   width: 400px;
   background-color: #fff;
   padding: 20px;
@@ -31,9 +31,9 @@
 }
 
 .step.completed {
-  background-color: #eafaf1; /* Light green background */
-  border-color: #28a745; /* Green border */
-  color: #28a745; /* Green text */
+  background-color: #eafaf1; 
+  border-color: #28a745; 
+  color: #28a745;
 }
 
 .stepIcon {
@@ -51,10 +51,118 @@
 }
 
 .step.completed .stepIcon {
-  background-color: #28a745; /* Green for completed steps */
+  background-color: #28a745; 
 }
 
 .stepContent {
   font-size: 14px;
   color: #555;
+} */
+
+.onboardingContainer {
+  width: 400px;
+  background-color: #000000; /* Matches the left panel background */
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid azure; /* Adds a white (azure) border */
+  box-shadow: 0 4px 12px rgba(255, 107, 71, 0.3); /* Subtle glow with your gradient's main color */
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: azure; /* Text color to match your theme */
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: azure; /* Matches the text style in the left panel */
+}
+
+.stepperContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stepItem {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.step {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle background for steps */
+  color: azure;
+  font-weight: bold;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.stepContent {
+  font-size: 14px;
+  color: azure; /* Matches text color */
+}
+
+.stepLine {
+  width: 3px;
+  height: 40px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Lighter line connecting steps */
+  margin: 0 auto;
+}
+
+.complete .step {
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  ); /* Highlighted gradient matching your theme */
+}
+
+.completedLine {
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  ); /* Highlighted gradient for completed steps */
+}
+
+.completeContainer {
+  text-align: center;
+}
+
+.completeButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  ); /* Matches your gradient button style */
+  color: azure;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.completeButton:hover {
+  background-color: rgb(255, 107, 71); /* Subtle darkening on hover */
+  transform: scale(1.05); /* Slight enlargement for feedback */
 }

@@ -20,6 +20,17 @@ textarea[type="text"] {
   background-color: #fdfdfd;
 }
 
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  outline: none;
+  width: 80%;
+  height: 20px;
+  background-color: #fdfdfd;
+}
+
 button {
   border: none;
   color: white;
@@ -110,70 +121,209 @@ button:hover {
 } */
 
 .optionsContainer {
-  background-color: #131313;
+  background-color: #2d2d2d;
   padding: 20px;
   position: absolute;
-  bottom: 70px;
-  width: 200px;
-  right: -10;
-  border-radius: 5px;
-  margin-bottom: 30px;
+  bottom: 80%;
+  left: 40%;
+  transform: translateX(-50%);
+  width: 350px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 8px rgba(255, 165, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.file-input {
-  opacity: 0; /* Hide the default file input */
-  position: absolute;
-  z-index: -1;
+.optionLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #eaeaea;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  width: 100%;
-  height: 100%;
+  position: relative;
+  padding: 10px;
+  border-radius: 6px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.optionsContainer label {
-  color: white;
-  margin: 10px 0;
-  display: block;
+.iconImage {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
-.optionsContainer textarea[type="file"],
-.optionsContainer textarea[type="text"] {
-  width: 90%;
-  margin-top: 5px;
+.optionLabel span {
+  flex: 1;
 }
 
-.optionsContainer button {
-  margin-top: 10px;
-  background-color: #007bff;
-  color: white;
+.optionLabel input[type="file"] {
+  display: none;
+}
+
+.optionLabel:hover {
+  transform: scale(1.05); /* Slightly enlarges on hover */
+  background-color: #414141; /* Darker background on hover */
+}
+
+.youtubeContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #2d2d2d; /* Normal background */
+  border-radius: 6px;
+  padding: 10px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.youtubeContainer input[type="text"] {
+  flex: 1;
+  background: transparent;
   border: none;
-  padding: 5px;
-  border-radius: 3px;
+  color: #eaeaea;
+  font-size: 14px;
+  padding: 6px 10px;
+  outline: none;
+}
+
+.youtubeContainer input::placeholder {
+  color: #aaa;
+}
+
+.youtubeContainer:hover {
+  transform: scale(1.05); /* Slightly enlarges on hover */
+  background-color: #414141; /* Darker background on hover */
+}
+
+.optionsContainer input[type="file"] {
+  width: calc(100% - 40px); /* Adjusted for wider container */
+  margin: 12px 0; /* Centered margin */
+  padding: 10px 14px;
+  border: none; /* Remove border */
+  border-radius: 20px; /* Rounded edges */
+  background-color: #2d2d2d; /* Match container background */
+  color: #eaeaea; /* Harmonize with container text */
+  font-size: 14px;
+  outline: none;
+  cursor: pointer; /* Pointer for interaction hint */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5); /* Slight inner shadow */
+  text-align: center;
+}
+
+.optionsContainer input[type="file"]::file-selector-button {
+  display: none; /* Hide the default file selector button */
+}
+
+.optionsContainer input[type="file"]::before {
+  content: "Choose a file"; /* Placeholder text */
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  color: #eaeaea;
+  padding: 10px 0;
+  background-color: #2d2d2d; /* Match container background */
+  border: 1px solid #2d2d2d; /* Remove visible borders */
+  border-radius: 20px; /* Same rounded style */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%; /* Expand to fit the container width */
+  box-sizing: border-box;
+}
+
+.optionsContainer input[type="file"]:hover::before {
+  background-color: #3a3a3a; /* Slight hover effect */
+}
+
+.optionsContainer input[type="file"]:focus::before {
+  background-color: #2d2d2d; /* Keep focus consistent */
+  box-shadow: 0 0 6px rgba(255, 165, 0, 0.4); /* Add glowing focus effect */
+}
+
+.optionsContainer input[type="text"] {
+  width: calc(100% - 40px); /* Adjusted for wider container */
+  margin: 12px 0; /* Centered margin */
+  padding: 10px 14px; /* Slight padding for a softer look */
+  border: 1px solid #2d2d2d; /* Match the container border color */
+  border-radius: 20px; /* Increased radius for a rounded shape */
+  background-color: #2d2d2d; /* Match the container background */
+  color: #eaeaea; /* Harmonize with container text */
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-align: center; /* Center text */
+}
+
+.optionsContainer input[type="text"]:focus {
+  border: 1px solid #ffa500;
+  box-shadow: 0 0 6px rgba(255, 165, 0, 0.4), inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.optionsContainer .inputWithButton {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the content horizontally */
+  margin-top: 8px;
+  gap: 10px;
+}
+
+.optionsContainer button,
+.optionsContainer .submitButton {
+  background-color: #fff;
+  color: #2d2d2d;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.optionsContainer button:hover,
+.optionsContainer .submitButton:hover {
+  background-color: #eaeaea;
+  transform: scale(1.03);
+}
+
+.optionsContainer button:active,
+.optionsContainer .submitButton:active {
+  transform: scale(0.98);
 }
 
 .inputContainer {
-  padding: 10px;
+  padding: 12px;
   display: flex;
   align-items: center;
-  background-color: #fdfdfd; /* Dark background color */
-  padding: 10px;
+  background-color: #ffffff;
   border-radius: 25px;
-  /* margin: 10px; */
   width: 50vw;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   margin-bottom: 20px;
-  position: sticky; /* Stays at the bottom when scrolling */
-  bottom: 0; /* Attach it to the bottom of the window */
+  position: sticky;
+  bottom: 0;
 }
 
 .attachmentButton {
   border: none;
   cursor: pointer;
-  padding: 0;
   background-color: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
+  color: #ffa500;
+  font-size: 16px;
+  margin-left: auto;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.attachmentButton:hover {
+  color: #ff8800;
+  transform: scale(1.1);
+}
+
+.attachmentButton:active {
+  transform: scale(0.95);
 }
 
 .hairpin {
@@ -305,14 +455,13 @@ button:hover {
 .centerpanel {
   margin-left: 200px;
 }
-
 .searchContainer {
   display: flex;
   align-items: center; /* Aligns items vertically centered */
   margin: 10px 0;
 }
 
-.searchContainer textarea {
+.searchContainer input {
   flex: 1; /* Allows input to take up remaining space */
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -365,4 +514,10 @@ button:hover {
   color: #007bff; /* Change icon color */
   cursor: pointer; /* Change cursor to pointer when hovering */
   transition: color 0.3s ease;
+}
+
+.onboardingleft {
+  position: fixed;
+  top: 5%;
+  right: 0;
 }

@@ -11,6 +11,9 @@ import msgiconw from "../../assets/msgiconpng.jpg";
 import msgicon from "../../assets/msgicon.png";
 import SearchBar from "./SearchBar"; // Import the SearchBar component
 import Onboarding from "./Onboarding"; // Import Onboarding
+import pdf from "../../assets/pdf-icon.png";
+import vid from "../../assets/video-icon.png";
+import yt from "../../assets/youtube-icon.png";
 
 const ChatbotContainer = () => {
   const [sessions, setSessions] = useState([]);
@@ -369,23 +372,34 @@ const ChatbotContainer = () => {
 
       {showOptions && (
         <div className={Classes.optionsContainer}>
-          <label>
-            Submit PDF:
-            <input type="file" name="pdf" onChange={handleFileChange} />
+          <label className={Classes.optionLabel}>
+            <img src={pdf} alt="PDF Icon" className={Classes.iconImage} />
+            <span>Upload PDF</span>
+            <input
+              type="file"
+              name="pdf"
+              onChange={handleFileChange}
+              placeholder="Select a PDF file..."
+            />
           </label>
-          <label>
-            Submit Video:
-            <input type="file" name="video" onChange={handleFileChange} />
+          <label className={Classes.optionLabel}>
+            <img src={vid} alt="Video Icon" className={Classes.iconImage} />
+            <span>Upload Video File</span>
+            <input
+              type="file"
+              name="video"
+              onChange={handleFileChange}
+              placeholder="Select a video file..."
+            />
           </label>
-          <label>
-            Submit YouTube URL:
+          <label className={Classes.youtubeContainer}>
+            <img src={yt} alt="YouTube Icon" className={Classes.iconImage} />
             <input
               type="text"
-              placeholder="Enter YouTube URL"
+              placeholder="Upload YouTube Link"
               onChange={handleUrlChange}
             />
           </label>
-          {/* <button onClick={handleSubmit}>Submit</button> */}
         </div>
       )}
 
