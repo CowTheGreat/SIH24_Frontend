@@ -7,9 +7,6 @@ import chatbotpin from "../../assets/chatbotpin.png";
 import chatbotpindark from "../../assets/chatbotpindark.png";
 import chatbotpinorange from "../../assets/chatbotpinorange.svg";
 import Markdown from "./Markdown";
-import msgiconw from "../../assets/msgiconpng.jpg";
-import msgicon from "../../assets/msgicon.png";
-import SearchBar from "./SearchBar"; // Import the SearchBar component
 import Onboarding from "./Onboarding"; // Import Onboarding
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
