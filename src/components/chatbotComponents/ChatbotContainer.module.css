@@ -9,7 +9,7 @@
   padding: 10px;
 }
 
-input[type="text"] {
+textarea[type="text"] {
   flex: 1;
   padding: 10px;
   /* border: 1px solid #ccc; */
@@ -71,6 +71,12 @@ button:hover {
   border-radius: 6px;
 }
 
+.onboardingleft {
+  position: fixed;
+  top: 12%;
+  right: 0;
+}
+
 .sessionTitles {
   display: flex;
   flex-direction: column;
@@ -129,8 +135,8 @@ button:hover {
   display: block;
 }
 
-.optionsContainer input[type="file"],
-.optionsContainer input[type="text"] {
+.optionsContainer textarea[type="file"],
+.optionsContainer textarea[type="text"] {
   width: 90%;
   margin-top: 5px;
 }
@@ -306,7 +312,7 @@ button:hover {
   margin: 10px 0;
 }
 
-.searchContainer input {
+.searchContainer textarea {
   flex: 1; /* Allows input to take up remaining space */
   border: 1px solid #ccc;
   border-radius: 4px;

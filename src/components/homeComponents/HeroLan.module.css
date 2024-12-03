@@ -1,3 +1,4 @@
+/* Base styles */
 .heroSection {
   display: flex;
   justify-content: space-between;
@@ -7,10 +8,11 @@
   padding: 40px;
   border-radius: 20px;
   height: 70vh;
-  min-width: 800px;
-  max-width: 80vw;
+  min-width: 300px;
+  max-width: 90vw;
   background-size: 200% 200%;
   animation: gradientAnimation 15s ease infinite;
+  flex-wrap: wrap; /* Enable wrapping for smaller screens */
 }
 
 .heroContent {
@@ -48,4 +50,104 @@
   width: 450px;
   max-width: 100%;
   height: auto;
+}
+
+/* Animation */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Responsive styles for medium screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .heroSection {
+    flex-wrap: wrap;
+    padding: 30px;
+    height: auto; /* Allow height to adjust */
+  }
+
+  .heroContent {
+    max-width: 60%;
+    padding-right: 10px;
+  }
+
+  .heroTitle {
+    font-size: 32px;
+  }
+
+  .heroSubtitle {
+    font-size: 16px;
+  }
+
+  .ctaButton {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .heroImage img {
+    width: 350px;
+  }
+}
+
+/* Responsive styles for small screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .heroSection {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .heroContent {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .heroTitle {
+    font-size: 28px;
+  }
+
+  .heroSubtitle {
+    font-size: 14px;
+  }
+
+  .ctaButton {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .heroImage img {
+    width: 300px;
+  }
+}
+
+/* Responsive styles for extra small screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .heroSection {
+    padding: 15px;
+  }
+
+  .heroTitle {
+    font-size: 24px;
+  }
+
+  .heroSubtitle {
+    font-size: 12px;
+  }
+
+  .ctaButton {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .heroImage img {
+    width: 250px;
+  }
 }

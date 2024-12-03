@@ -1,3 +1,4 @@
+/* Base styles */
 .aboutUsSection {
   display: flex;
   align-items: flex-start;
@@ -69,4 +70,48 @@
 .aboutUsImage img {
   max-width: 100%;
   border-radius: 10px;
+}
+
+/* Responsive styles for medium screens (max-width: 800px) */
+@media (max-width: 800px) {
+  .aboutUsSection {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    padding: 20px;
+  }
+
+  .aboutUsImage {
+    order: 0; /* Move the image to the top */
+    margin-bottom: 20px; /* Add spacing below the image */
+    width: 100%; /* Ensure it spans full width */
+  }
+
+  .aboutUsContent {
+    margin: 0;
+    width: 100%;
+    text-align: center; /* Center-align the content */
+  }
+
+  .aboutUsBox {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 15px;
+  }
+
+  .aboutUsHeading {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .aboutUsBoxTitle {
+    font-size: 20px;
+  }
+
+  .aboutUsBoxDescription {
+    font-size: 14px;
+  }
+
+  .aboutUsImage img {
+    width: 90%; /* Scale the image */
+  }
 }

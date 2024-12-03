@@ -10,6 +10,7 @@ import Markdown from "./Markdown";
 import msgiconw from "../../assets/msgiconpng.jpg";
 import msgicon from "../../assets/msgicon.png";
 import SearchBar from "./SearchBar"; // Import the SearchBar component
+import Onboarding from "./Onboarding"; // Import Onboarding
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
@@ -314,6 +315,7 @@ const ChatbotContainer = () => {
       <div className={Classes.topright}>
         <h1 className={Classes.chathistory}>Chat History</h1>
         {/* <SearchBar /> */}
+
         <div>
           <div className={Classes.searchContainer}>
             <form onSubmit={handleSearch}>
@@ -381,6 +383,11 @@ const ChatbotContainer = () => {
             <p>No sessions found</p>
           )}
         </div>
+      </div>
+
+      <div className={Classes.onboardingleft}>
+        {/* Onboarding Component */}
+        <Onboarding setInput={setInput} />
       </div>
 
       {showOptions && (
@@ -471,7 +478,7 @@ const ChatbotContainer = () => {
             </button>
 
             {/* Text Input */}
-            <input
+            {/* <textarea
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -481,6 +488,31 @@ const ChatbotContainer = () => {
                 if (e.key === "Enter") {
                   sendMessage();
                 }
+              }}
+            /> */}
+            <textarea
+              type="text"
+              value={input}
+              onChange={(e) => {
+                setInput(e.target.value);
+                e.target.style.height = "20px";
+                e.target.style.height = `${e.target.scrollHeight}px`;
+              }}
+              placeholder="Type a message..."
+              className={Classes.textInput}
+              rows={1} // Start with a single row
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault(); // Prevent newline on Enter
+                  sendMessage();
+                  setInput(""); // Clear the input
+
+                  e.target.style.height = "20px"; // Reset height to the original value
+                }
+              }}
+              style={{
+                overflow: "hidden", // Prevent scrollbars
+                resize: "none", // Disable manual resizing
               }}
             />
 

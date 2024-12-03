@@ -1,10 +1,14 @@
+/* Base styles */
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 10px 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #444;
-  background-color: #1c1c1c; /* Added background for better contrast */
+  background-color: #1c1c1c;
+  flex-wrap: wrap;
+  position: relative;
 }
 
 .logo {
@@ -14,41 +18,31 @@
 
 .logoImage {
   width: 130px;
-  margin-right: 15px; /* Increased margin for more space */
+  margin-right: 15px;
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: 20px; /* Increased gap between nav items for better spacing */
-  margin-left: 30vw;
+  gap: 20px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .navItem {
   color: white;
   text-decoration: none;
   font-size: 16px;
-  padding: 8px 12px; /* Added padding for better click area and spacing */
-  border-radius: 4px; /* Added subtle rounded corners */
+  padding: 8px 12px;
+  border-radius: 4px;
   transition: background-color 0.3s ease;
 }
 
 .navItem:hover {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.1
-  ); /* Hover effect for better interaction feedback */
-}
-
-.navItem:last-child {
-  margin-right: 0;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .loginButton {
   text-decoration: none;
-  margin-left: 30px; /* Increased space between nav and button */
   background-color: #f77d29;
   color: white;
   padding: 10px 20px;
@@ -63,21 +57,93 @@
   background-color: #d96b23;
 }
 
+/* Burger Menu */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.line {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+/* Burger Menu Animation */
+.line1 {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.line2 {
+  opacity: 0;
+}
+
+.line3 {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.closeButton {
+  display: none;
+}
+
+/* Responsive styles for small screens (max-width: 768px) */
 @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
+  .burger {
+    display: flex;
   }
 
   .nav {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 10px; /* Reduced gap for smaller screens */
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(28, 28, 28); /* Slight transparency */
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 999; /* Ensure it's above other elements */
+  }
+
+  .navOpen {
+    transform: translateY(0);
+  }
+
+  /* Close Button */
+  .closeButton {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.2s ease;
+  }
+
+  .closeButton:hover {
+    transform: scale(1.1);
+  }
+
+  .navItem {
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
   }
 
   .loginButton {
-    margin-left: 0;
-    margin-top: 10px;
-    align-self: flex-start; /* Button aligns better on smaller screens */
+    width: 100%;
+    text-align: center;
   }
 }
