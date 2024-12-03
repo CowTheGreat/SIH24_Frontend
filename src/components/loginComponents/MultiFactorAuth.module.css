@@ -192,3 +192,63 @@
   background-color: #1e1e1e;
   box-shadow: 0 4px 20px rgba(108, 107, 107, 0.2);
 }
+
+
+/* Responsive Styles for Multifactor Page */
+@media screen and (max-width: 768px) {
+  .mainContainer {
+    flex-direction: column; /* Stack containers vertically */
+  }
+
+  .loginCircle {
+    display: none; /* Hide the circle on smaller screens */
+  }
+
+  .leftContainer,
+  .rightContainer {
+    width: 100%; /* Make both containers take the full width */
+    height: auto; /* Adjust height for content */
+    border-radius: 0; /* Remove border radius for smaller screens */
+  }
+
+  .leftContainer h1 {
+    font-size: 2rem; /* Adjust heading size */
+    line-height: 2.5rem;
+  }
+
+  .leftContainer p {
+    font-size: 1rem; /* Adjust paragraph size */
+    line-height: 1.5rem;
+  }
+
+  .authContainer h1 {
+    font-size: 1.5rem; /* Adjust title size */
+  }
+
+  .botimg {
+    width: 120px; /* Resize image */
+    margin: 10px auto; /* Center and add spacing */
+  }
+
+  .authButton {
+    width: 90%; /* Make buttons responsive */
+    height: 50px; /* Adjust button height */
+    font-size: 0.9rem; /* Adjust font size */
+    margin: 10px 0; /* Reduce margin */
+  }
+
+  .line {
+    display: none; /* Hide horizontal line */
+  }
+
+  .authBox {
+    width: 90%; /* Adjust box width */
+    height: auto; /* Allow height to fit content */
+    flex-direction: column; /* Stack contents vertically */
+  }
+
+  .authContent {
+    padding: 20px; /* Add padding for smaller screens */
+  }
+}
+
