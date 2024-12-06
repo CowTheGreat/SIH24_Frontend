@@ -38,20 +38,26 @@ const UserInfo1 = () => {
     e.preventDefault();
     try {
       // Verify the 6-digit code
-      const verifyResponse = await axios.post("http://localhost:3000/verify", {
-        token: pin,
-      });
-  
+      const verifyResponse = await axios.post(
+        "https://sih24-node-backend.onrender.com/verify",
+        {
+          token: pin,
+        }
+      );
+
       if (verifyResponse.data.verified) {
         setResultMessage("Code verified successfully!");
         console.log("true");
         // Update g_2fa status to 1 in the database
         try {
-          const updateResponse = await axios.post("http://localhost:8080/update-2fa-status", {
-            email: "gowsrini2004@gmail.com", // Replace with dynamic email if needed
-            g_2fa_status:true,
-          });
-  
+          const updateResponse = await axios.post(
+            `${import.meta.env.VITE_API_BASE_URL}update-2fa-status`,
+            {
+              email: "gowsrini2004@gmail.com", // Replace with dynamic email if needed
+              g_2fa_status: true,
+            }
+          );
+
           if (updateResponse.status === 200) {
             console.log("2FA status updated successfully.");
             setIs2faEnabled(true); // Update UI toggle state
@@ -81,17 +87,20 @@ const UserInfo1 = () => {
 
   const handleAppPasswordSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (appPassword) {
       try {
         // Send the app password to the backend to update em_retrieval_status
-        const response = await axios.post("http://localhost:8080/update-email-retrieval-status", {
-          email: "gowsrini2004@gmail.com", 
-          em_retrieval_status: true, // Set em_retrieval_status to 1
-          app_password:appPassword,
-          // Send the app password for validation (if necessary)
-        });
-  
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_BASE_URL}update-email-retrieval-status`,
+          {
+            email: "gowsrini2004@gmail.com",
+            em_retrieval_status: true, // Set em_retrieval_status to 1
+            app_password: appPassword,
+            // Send the app password for validation (if necessary)
+          }
+        );
+
         if (response.status === 200) {
           console.log("Email retrieval status updated successfully.");
           setShowAppPasswordPopup(false); // Close the app password popup
@@ -109,7 +118,6 @@ const UserInfo1 = () => {
       setIsEmailRetrievalEnabled(false); // Disable email retrieval toggle
     }
   };
-  
 
   return (
     <div>
@@ -125,59 +133,62 @@ const UserInfo1 = () => {
               </div>
             </div>
             <div className={Classes.actionContWrapper}>
-            <div className={Classes.actionCont}>
-              <div className={Classes.actionInfo}>
-                <h3>Enable Google Auth</h3>
-                <p>
-                  To enable 2 Factor Authentication using Google Authenticator
-                  App, please click the enable 2FA button
-                </p>
-              <label className={Classes.toggleSwitch}>
-                <input type="checkbox" checked={is2faEnabled}
-                disabled={is2faEnabled}
-                onChange={()=> {
-                  if(!is2faEnabled){
-                    handleEnable2FA();
-                  }
-                  else{
-                    setIs2faEnabled(false);
-                  }
-                }}></input>
-                <span className={Classes.slider}></span>
-              </label>
-           </div>
-            </div>
-            <div className={Classes.actionCont}>
-              <div className={Classes.actionInfo}>
-                <h3>Email Retrieval</h3>
-                <p>
-                  To retrieve your emails and store them in the database, toggle
-                  the switch below.
-                </p>
-                <label className={Classes.toggleSwitch}>
-                  <input
-                    type="checkbox"
-                    checked={isEmailRetrievalEnabled}
-                    disabled={isEmailRetrievalEnabled}
-                    onChange={toggleEmailRetrieval}
-                  />
-                  <span className={Classes.slider}></span>
-                </label>
+              <div className={Classes.actionCont}>
+                <div className={Classes.actionInfo}>
+                  <h3>Enable Google Auth</h3>
+                  <p>
+                    To enable 2 Factor Authentication using Google Authenticator
+                    App, please click the enable 2FA button
+                  </p>
+                  <label className={Classes.toggleSwitch}>
+                    <input
+                      type="checkbox"
+                      checked={is2faEnabled}
+                      disabled={is2faEnabled}
+                      onChange={() => {
+                        if (!is2faEnabled) {
+                          handleEnable2FA();
+                        } else {
+                          setIs2faEnabled(false);
+                        }
+                      }}
+                    ></input>
+                    <span className={Classes.slider}></span>
+                  </label>
+                </div>
               </div>
-            </div>
-            <div className={Classes.actionCont}>
-              <div className={Classes.actionInfo}>
-                <h3>Change Password</h3>
-                <p>
-                  To reset your password, please click the reset password button
-                </p>
+              <div className={Classes.actionCont}>
+                <div className={Classes.actionInfo}>
+                  <h3>Email Retrieval</h3>
+                  <p>
+                    To retrieve your emails and store them in the database,
+                    toggle the switch below.
+                  </p>
+                  <label className={Classes.toggleSwitch}>
+                    <input
+                      type="checkbox"
+                      checked={isEmailRetrievalEnabled}
+                      disabled={isEmailRetrievalEnabled}
+                      onChange={toggleEmailRetrieval}
+                    />
+                    <span className={Classes.slider}></span>
+                  </label>
+                </div>
               </div>
-              <button className={Classes.actionBtn2}>Reset Password</button>
+              <div className={Classes.actionCont}>
+                <div className={Classes.actionInfo}>
+                  <h3>Change Password</h3>
+                  <p>
+                    To reset your password, please click the reset password
+                    button
+                  </p>
+                </div>
+                <button className={Classes.actionBtn2}>Reset Password</button>
+              </div>
+              <span className={Classes.closeBtn} onClick={togglePopup}>
+                &times;
+              </span>
             </div>
-            <span className={Classes.closeBtn} onClick={togglePopup}>
-              &times;
-            </span>
-          </div>
           </div>
           <button className={Classes.offBtn}>Sign Out</button>
         </div>

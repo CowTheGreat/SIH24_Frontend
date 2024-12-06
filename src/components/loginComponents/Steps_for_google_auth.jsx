@@ -13,9 +13,12 @@ const MultiFactorGoogle = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/verify", {
-        token: pin,
-      });
+      const response = await axios.post(
+        "https://sih24-node-backend.onrender.com/verify",
+        {
+          token: pin,
+        }
+      );
       if (response.data.verified) {
         setResultMessage("Code verified successfully!");
         // Redirect to another page after successful verification

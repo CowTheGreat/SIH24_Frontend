@@ -42,11 +42,14 @@ const ChatbotContainer = () => {
     const fetchSessionId = async () => {
       let storedSessionId = localStorage.getItem("session_id");
       if (!storedSessionId) {
-        const response = await fetch(`http://localhost:8080/session`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
-          },
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}session`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
+            },
+          }
+        );
         const data = await response.json();
         storedSessionId = data.session_id;
         localStorage.setItem("session_id", storedSessionId);
@@ -60,11 +63,14 @@ const ChatbotContainer = () => {
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/sessions`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
-          },
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}sessions`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
+            },
+          }
+        );
         const data = await response.json();
         setSessions(data.sessions);
       } catch (error) {
@@ -82,7 +88,7 @@ const ChatbotContainer = () => {
   const updateSessionTitle = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/update-session-title`,
+        `${import.meta.env.VITE_API_BASE_URL}update-session-title`,
         {
           method: "PUT",
           headers: {
@@ -115,7 +121,9 @@ const ChatbotContainer = () => {
       setSearchClicked(true);
       // Fetch messages by the session title
       const response = await fetch(
-        `http://localhost:8080/messages/title/${encodeURIComponent(title)}`
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }messages/title/${encodeURIComponent(title)}`
       );
       const data = await response.json();
 
@@ -147,7 +155,7 @@ const ChatbotContainer = () => {
 
       try {
         // First POST to submit user message
-        await fetch("http://localhost:8080/submit", {
+        await fetch(`${import.meta.env.VITE_API_BASE_URL}submit`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -163,13 +171,16 @@ const ChatbotContainer = () => {
         setInput("");
 
         // Second POST to send message to AI backend (including files)
-        const response = await fetch("http://localhost:8080/query", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-          },
-          body: formData, // FormData will automatically set the correct content type
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}query`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+            },
+            body: formData, // FormData will automatically set the correct content type
+          }
+        );
 
         // Handle the streaming response
         const reader = response.body.getReader();
@@ -206,7 +217,7 @@ const ChatbotContainer = () => {
         await stream.getReader().read(); // Start reading the stream
 
         // Send the bot response to SQL backend
-        await fetch("http://localhost:8080/submit", {
+        await fetch(`${import.meta.env.VITE_API_BASE_URL}submit`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -270,7 +281,9 @@ const ChatbotContainer = () => {
 
   const fetchSessions = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/sessions`);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}sessions`
+      );
       const data = await response.json();
       setSessions(data.sessions); // Update the session list in the state
     } catch (error) {
@@ -285,7 +298,7 @@ const ChatbotContainer = () => {
     try {
       // Send GET request to the FastAPI backend with the search query
       const response = await fetch(
-        `http://localhost:8080/search/?query=${query}`
+        `${import.meta.env.VITE_API_BASE_URL}search/?query=${query}`
       );
       const data = await response.json(); // Parse the JSON response
 
@@ -308,7 +321,7 @@ const ChatbotContainer = () => {
   const handleDownload = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/download_chat/cow`,
+        `${import.meta.env.VITE_API_BASE_URL}download_chat/cow`,
         {
           responseType: "blob", // Important for handling binary files
         }

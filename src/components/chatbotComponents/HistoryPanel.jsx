@@ -12,7 +12,9 @@ const HistoryPanel = () => {
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/sessions`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}sessions`
+        );
         const data = await response.json();
         setSessions(data.sessions);
       } catch (error) {
@@ -30,7 +32,7 @@ const HistoryPanel = () => {
   const updateSessionTitle = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/update-session-title`,
+        `${import.meta.env.VITE_API_BASE_URL}update-session-title`,
         {
           method: "PUT",
           headers: {
@@ -58,7 +60,9 @@ const HistoryPanel = () => {
   const fetchMessagesByTitle = async (title) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/messages/title/${encodeURIComponent(title)}`
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }messages/title/${encodeURIComponent(title)}`
       );
       const data = await response.json();
       setMessages(data.messages);
