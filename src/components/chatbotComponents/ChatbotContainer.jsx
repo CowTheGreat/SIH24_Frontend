@@ -33,6 +33,10 @@ const ChatbotContainer = () => {
   const [results, setResults] = useState([]); // State to store search results
   const [searchClicked, setSearchClicked] = useState(false);
 
+  const [uploadedPDF, setUploadedPDF] = useState(null);
+  const [uploadedVideo, setUploadedVideo] = useState(null);
+  const [uploadedURL, setUploadedURL] = useState("");
+
   // Fetch the session ID when the component mounts
   useEffect(() => {
     const fetchSessionId = async () => {
@@ -228,11 +232,21 @@ const ChatbotContainer = () => {
   const toggleOptions = () => setShowOptions(!showOptions);
 
   const handleFileChange = (e) => {
-    if (e.target.name === "pdf") setPdfFile(e.target.files[0]);
-    if (e.target.name === "video") setVideoFile(e.target.files[0]);
+    const { name, files } = e.target;
+    if (files && files.length > 0) {
+      const fileName = files[0].name;
+      if (name === "pdf") setUploadedPDF(fileName);
+      if (name === "video") setUploadedVideo(fileName);
+      toggleOptions(); // Automatically close options after uploading
+    }
   };
 
-  const handleUrlChange = (e) => setYoutubeURL(e.target.value);
+  const handleUrlChange = (e) => {
+    setYoutubeURL(e.target.value);
+    if (e.target.value) {
+      toggleOptions(); // Automatically close options after entering a URL
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -398,33 +412,58 @@ const ChatbotContainer = () => {
       {showOptions && (
         <div className={Classes.optionsContainer}>
           <label className={Classes.optionLabel}>
-            <img src={pdf} alt="PDF Icon" className={Classes.iconImage} />
-            <span>Upload PDF</span>
-            <input
-              type="file"
-              name="pdf"
-              onChange={handleFileChange}
-              placeholder="Select a PDF file..."
-            />
+            {uploadedPDF ? (
+              <div className={Classes.uploadedFile}>
+                <img src={pdf} alt="PDF Icon" className={Classes.iconImage} />
+                <span>{uploadedPDF}</span>
+              </div>
+            ) : (
+              <label className={Classes.optionLabel}>
+                <img src={pdf} alt="PDF Icon" className={Classes.iconImage} />
+                <span>Upload PDF</span>
+                <input
+                  type="file"
+                  name="pdf"
+                  onChange={handleFileChange}
+                  placeholder="Select a PDF file..."
+                />
+              </label>
+            )}
           </label>
           <label className={Classes.optionLabel}>
-            <img src={vid} alt="Video Icon" className={Classes.iconImage} />
-            <span>Upload Video File</span>
-            <input
-              type="file"
-              name="video"
-              onChange={handleFileChange}
-              placeholder="Select a video file..."
-            />
+            {uploadedVideo ? (
+              <div className={Classes.uploadedFile}>
+                <img src={vid} alt="Video Icon" className={Classes.iconImage} />
+                <span>{uploadedVideo}</span>
+              </div>
+            ) : (
+              <label className={Classes.optionLabel}>
+                <img src={vid} alt="Video Icon" className={Classes.iconImage} />
+                <span>Upload Video File</span>
+                <input
+                  type="file"
+                  name="video"
+                  onChange={handleFileChange}
+                  placeholder="Select a video file..."
+                />
+              </label>
+            )}
           </label>
-          <label className={Classes.youtubeContainer}>
-            <img src={yt} alt="YouTube Icon" className={Classes.iconImage} />
-            <input
-              type="text"
-              placeholder="Upload YouTube Link"
-              onChange={handleUrlChange}
-            />
-          </label>
+          {uploadedURL ? (
+            <div className={Classes.uploadedFile}>
+              <img src={yt} alt="YouTube Icon" className={Classes.iconImage} />
+              <span>{uploadedURL}</span>
+            </div>
+          ) : (
+            <label className={Classes.youtubeContainer}>
+              <img src={yt} alt="YouTube Icon" className={Classes.iconImage} />
+              <input
+                type="text"
+                placeholder="Upload YouTube Link"
+                onChange={handleUrlChange}
+              />
+            </label>
+          )}
         </div>
       )}
 

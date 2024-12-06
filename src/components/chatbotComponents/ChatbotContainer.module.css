@@ -128,8 +128,8 @@ button:hover {
 .optionsContainer {
   background-color: #2d2d2d;
   padding: 20px;
-  position: absolute;
-  bottom: 80%;
+  position: fixed;
+  bottom: 50px;
   left: 40%;
   transform: translateX(-50%);
   width: 350px;
