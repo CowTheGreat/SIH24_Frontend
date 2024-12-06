@@ -1,3 +1,9 @@
+html,
+body {
+  max-height: 100%;
+  overflow-x: hidden;
+}
+
 .chatcontainer {
   display: flex;
   flex-direction: column;
@@ -72,10 +78,9 @@ button:hover {
   left: 0;
   margin-right: 50px;
   background-color: #202020;
-  height: 67vh;
+  height: 72.5vh;
   width: 15vw;
   margin: 20px;
-  padding: 30px;
   border-radius: 3px;
   padding: 20px;
   overflow-y: auto;
@@ -453,7 +458,7 @@ button:hover {
 }
 
 .centerpanel {
-  margin-left: 200px;
+  margin-left: 150px;
 }
 .searchContainer {
   display: flex;

@@ -1,163 +1,103 @@
-/* .onboardingContainer {
-  width: 400px;
-  background-color: #fff;
+.onboardingContainer {
+  width: 20vw;
+  background-color: #1f1f1f; /* Darker for contrast */
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  font-family: "Poppins", sans-serif;
+  color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .title {
   font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
+  font-weight: 600;
+}
+
+.skipButton {
+  background: transparent;
+  border: 1px solid #ff6b6b;
+  color: #ff6b6b;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.skipButton:hover {
+  background-color: #ff6b6b;
+  color: white;
 }
 
 .stepsContainer {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
 }
 
 .step {
   display: flex;
   align-items: center;
-  padding: 10px;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
+  padding: 15px;
+  background-color: #292929;
+  border-radius: 8px;
+  transition: 0.3s;
   cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.step:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .step.completed {
-  background-color: #eafaf1; 
-  border-color: #28a745; 
-  color: #28a745;
+  background-color: #4caf50;
+  color: white;
 }
 
 .stepIcon {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  font-weight: bold;
+  background-color: #ff6b6b;
   color: white;
-  background-color: #007bff;
   border-radius: 50%;
-  margin-right: 10px;
+  font-weight: bold;
+  margin-right: 15px;
+  transition: 0.3s;
 }
 
 .step.completed .stepIcon {
-  background-color: #28a745; 
+  background-color: white;
+  color: #4caf50;
 }
 
-.stepContent {
-  font-size: 14px;
-  color: #555;
-} */
-
-.onboardingContainer {
-  width: 400px;
-  background-color: #000000; /* Matches the left panel background */
-  padding: 20px;
-  border-radius: 8px;
-  border: 2px solid azure; /* Adds a white (azure) border */
-  box-shadow: 0 4px 12px rgba(255, 107, 71, 0.3); /* Subtle glow with your gradient's main color */
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: azure; /* Text color to match your theme */
-}
-
-.title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: azure; /* Matches the text style in the left panel */
-}
-
-.stepperContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.stepItem {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  gap: 10px;
-}
-
-.step {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1); /* Subtle background for steps */
-  color: azure;
-  font-weight: bold;
-  border-radius: 50%;
-  transition: background-color 0.3s;
-}
-
-.stepContent {
-  font-size: 14px;
-  color: azure; /* Matches text color */
-}
-
-.stepLine {
-  width: 3px;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.2);
-  margin: 0 auto;
-}
-
-.complete .step {
-  background: linear-gradient(
-    to bottom right,
-    rgb(255, 107, 71),
-    rgb(253, 144, 79),
-    rgb(255, 157, 82)
-  ); /* Highlighted gradient matching your theme */
-}
-
-.completedLine {
-  background: linear-gradient(
-    to bottom right,
-    rgb(255, 107, 71),
-    rgb(253, 144, 79),
-    rgb(255, 157, 82)
-  ); /* Highlighted gradient for completed steps */
-}
-
-.completeContainer {
-  text-align: center;
-}
-
-.completeButton {
-  padding: 10px 20px;
+.stepContent h3 {
   font-size: 16px;
-  background: linear-gradient(
-    to bottom right,
-    rgb(255, 107, 71),
-    rgb(253, 144, 79),
-    rgb(255, 157, 82)
-  ); /* Matches your gradient button style */
-  color: azure;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
-.completeButton:hover {
-  background-color: rgb(255, 107, 71); /* Subtle darkening on hover */
-  transform: scale(1.05); /* Slight enlargement for feedback */
+.stepContent p {
+  font-size: 13px;
+  color: #b3b3b3;
+  margin: 0;
+}
+
+.step.completed p {
+  color: white;
 }

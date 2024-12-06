@@ -38,14 +38,11 @@ const ChatbotContainer = () => {
     const fetchSessionId = async () => {
       let storedSessionId = localStorage.getItem("session_id");
       if (!storedSessionId) {
-        const response = await fetch(
-          "${process.env.REACT_APP_API_BASE_URL}session",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
-            },
-          }
-        );
+        const response = await fetch(`http://localhost:8080/session`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
+          },
+        });
         const data = await response.json();
         storedSessionId = data.session_id;
         localStorage.setItem("session_id", storedSessionId);
@@ -433,7 +430,7 @@ const ChatbotContainer = () => {
 
       <div
         className={Classes.centerpanel}
-        style={{ overflowY: "auto", maxHeight: "88vh", padding: "10px" }}
+        style={{ overflowY: "auto", maxHeight: "80vh", padding: "10px" }}
       >
         <div className={Classes.titlecontainer}>
           {isEditing ? (

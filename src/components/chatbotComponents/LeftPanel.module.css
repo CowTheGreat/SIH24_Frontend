@@ -1,6 +1,5 @@
 .leftPanelCont {
   width: 12.5vw;
-  height: 100vh;
   background-color: #000000;
   margin-bottom: 10px;
 }
@@ -28,7 +27,8 @@
     rgb(255, 157, 82)
   );
   border-radius: 8px;
-  padding: 1vw;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
 }
 
 .refreshContainer {
