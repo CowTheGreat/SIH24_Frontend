@@ -60,17 +60,16 @@ const ChatbotContainer = () => {
     fetchSessionId();
   }, []);
 
+  const API_BASE_URL = "https://61f4-27-5-196-177.ngrok-free.app";
+
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_BASE_URL}sessions`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
-            },
-          }
-        );
+        const response = await fetch(`${API_BASE_URL}/sessions`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
+          },
+        });
         const data = await response.json();
         setSessions(data.sessions);
       } catch (error) {
