@@ -60,17 +60,54 @@ const ChatbotContainer = () => {
     fetchSessionId();
   }, []);
 
-  const API_BASE_URL = "https://61f4-27-5-196-177.ngrok-free.app";
+  // useEffect(() => {
+  //   const fetchSessions = async () => {
+  //     // Retrieve user data from local storage
+  //     const storedUserData = localStorage.getItem("user_data");
+  //     const user = storedUserData ? JSON.parse(storedUserData) : null;
+  //     try {
+  //       const response = await fetch(
+  //         `${import.meta.env.VITE_API_BASE_URL}sessions`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
+  //           },
+  //         }
+  //       );
+
+  //       const data = await response.json();
+
+  //       setSessions(data.sessions);
+  //     } catch (error) {
+  //       console.error("Error fetching session titles:", error);
+  //     }
+  //   };
+
+  //   fetchSessions();
+  // }, []);
 
   useEffect(() => {
     const fetchSessions = async () => {
+      // Retrieve user data from local storage
+      const storedUserData = localStorage.getItem("user_data");
+      const user = storedUserData ? JSON.parse(storedUserData) : null;
+
       try {
-        const response = await fetch(`${API_BASE_URL}/sessions`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
-          },
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}sessions`,
+          {
+            method: "POST", // Change method to POST
+            headers: {
+              "Content-Type": "application/json", // Set content type
+              Authorization: `Bearer ${localStorage.getItem("jwt_token")}`, // Include JWT token
+            },
+            body: JSON.stringify({ user }), // Send user data in the body
+          }
+        );
+
         const data = await response.json();
+
         setSessions(data.sessions);
       } catch (error) {
         console.error("Error fetching session titles:", error);
@@ -141,10 +178,16 @@ const ChatbotContainer = () => {
       // Update the state with the new user message
       setMessages((prevMessages) => [...prevMessages, newMessage]);
 
-      // Send the user message to the backend
+      // Retrieve user data from localStorage
+      const storedUserData = localStorage.getItem("user_data");
+      const userData = storedUserData
+        ? JSON.parse(storedUserData)
+        : { name: "Guest" };
+
       const formData = new FormData();
       formData.append("user_id", "user3"); // Use the actual user ID
       formData.append("question", input);
+      formData.append("name", userData.name); // Add the user's name
       if (pdfFile) {
         formData.append("pdf", pdfFile);
       }
@@ -153,23 +196,6 @@ const ChatbotContainer = () => {
       }
 
       try {
-        // First POST to submit user message
-        await fetch(`${import.meta.env.VITE_API_BASE_URL}submit`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-          },
-          body: JSON.stringify({
-            session_id: sessionId,
-            sender: "user",
-            message: input,
-          }),
-        });
-
-        setInput("");
-
-        // Second POST to send message to AI backend (including files)
         const response = await fetch(
           `${import.meta.env.VITE_API_BASE_URL}query`,
           {
@@ -177,11 +203,10 @@ const ChatbotContainer = () => {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
             },
-            body: formData, // FormData will automatically set the correct content type
+            body: formData,
           }
         );
 
-        // Handle the streaming response
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let botMessage = { text: "", sender: "bot" };
@@ -190,7 +215,6 @@ const ChatbotContainer = () => {
         setMessages((prevMessages) => [...prevMessages, botMessage]);
         let botMessageIndex = null;
 
-        // Read in chunks and update the bot message
         const stream = new ReadableStream({
           async start(controller) {
             while (true) {
@@ -213,31 +237,12 @@ const ChatbotContainer = () => {
           },
         });
 
-        await stream.getReader().read(); // Start reading the stream
-
-        // Send the bot response to SQL backend
-        await fetch(`${import.meta.env.VITE_API_BASE_URL}submit`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-          },
-          body: JSON.stringify({
-            session_id: sessionId,
-            sender: "bot",
-            message: botMessage.text,
-          }),
-        });
+        await stream.getReader().read();
       } catch (error) {
         console.error("Error sending message:", error);
       }
     }
   };
-
-  //Hairpin
-  //Hairpin
-  //Hairpin
-  //Hairpin
 
   const toggleOptions = () => setShowOptions(!showOptions);
 
@@ -278,17 +283,17 @@ const ChatbotContainer = () => {
     }
   };
 
-  const fetchSessions = async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}sessions`
-      );
-      const data = await response.json();
-      setSessions(data.sessions); // Update the session list in the state
-    } catch (error) {
-      console.error("Error fetching session titles:", error);
-    }
-  };
+  // const fetchSessions = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_API_BASE_URL}sessions`
+  //     );
+  //     const data = await response.json();
+  //     setSessions(data.sessions); // Update the session list in the state
+  //   } catch (error) {
+  //     console.error("Error fetching session titles:", error);
+  //   }
+  // };
 
   // Function to handle search submissions
   const handleSearch = async (e) => {
