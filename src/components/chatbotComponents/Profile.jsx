@@ -1,107 +1,222 @@
+import React, { useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 import PinInput from "react-pin-input"; // For the input of 6-digit codes
-import QrCode from "../../assets/qr.png";
-import userIcon from "../../assets/userIcon.png";
 import Classes from "./Profile.module.css";
+import userIcon from "../../assets/userIcon.png";
+import qrImage from "../../assets/qr.png";
+import { useNavigate } from "react-router-dom";
 
-function Profile() {
-  const [qrCode, setQrCode] = useState(""); // State to store QR code data
-  const [showPopup, setShowPopup] = useState(false); // State for popup visibility
-  const [pin, setPin] = useState(""); // State to store TOTP pin
-  const [resultMessage, setResultMessage] = useState(""); // State for verification message
+const storedUserData = localStorage.getItem("user_data");
+const user = storedUserData ? JSON.parse(storedUserData) : null;
+
+const UserInfo1 = () => {
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [showQrCodePopup, setShowQrCodePopup] = useState(false); // For QR code popup
+  const [showAppPasswordPopup, setShowAppPasswordPopup] = useState(false); // For App Password popup
+  const [qrCode, setQrCode] = useState(""); // For storing QR code image
+  const [pin, setPin] = useState(""); // TOTP pin input
+  const [resultMessage, setResultMessage] = useState(""); // To display verification result
+  const [appPassword, setAppPassword] = useState(""); // App password input field
+  const [is2faEnabled, setIs2faEnabled] = useState(false); // Check if 2FA is enabled
+  const [isEmailRetrievalEnabled, setIsEmailRetrievalEnabled] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+  const [isAppPasswordVerified, setIsAppPasswordVerified] = useState(false); // Toggle state for email retrieval
+  const navigate = useNavigate();
+
+  const togglePopup = () => {
+    setIsPopupVisible(isPopupVisible);
+    navigate("/chatbot");
+  };
 
   const handleEnable2FA = async () => {
-    setQrCode(QrCode); // Set the QR code to the state
-    setShowPopup(true); // Show the popup
+    setQrCode(qrImage); // Set the imported image as QR code
+    setShowQrCodePopup(true); // Show the QR code popup
+    setIs2faEnabled(true);
+    setIsVerified(false); 
   };
 
-  const handleClosePopup = () => {
-    setShowPopup(false); // Close the popup
-    setResultMessage(""); // Reset any previous messages
+  const refreshPage = () => {
+    window.location.reload(); // This will refresh the current page
   };
-
+  
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://sih24-node-backend.onrender.com/verify",
-        {
-          token: pin,
-        }
-      );
-      if (response.data.verified) {
+      // Verify the 6-digit code
+      const verifyResponse = await axios.post("http://localhost:3000/verify", {
+        token: pin,
+      });
+  
+      if (verifyResponse.data.verified) {
         setResultMessage("Code verified successfully!");
-        // Redirect to another page or perform any action after successful verification
+        setIsVerified(true); // Mark as verified
+        setIs2faEnabled(true);
+        console.log("true");
+        // Update g_2fa status to 1 in the database
+        try {
+          const updateResponse = await axios.post("http://localhost:8080/update-2fa-status", {
+            email: "gowsrini2004@gmail.com", // Replace with dynamic email if needed
+            g_2fa_status: true,
+          });
+  
+          if (updateResponse.status === 200) {
+            console.log("2FA status updated successfully.");
+          } else {
+            console.error("Failed to update 2FA status. Please try again.");
+          }
+        } catch (updateError) {
+          console.error("Error updating 2FA status:", updateError);
+        }
       } else {
         setResultMessage("Invalid code! Please try again.");
+        setIsVerified(false); 
       }
     } catch (error) {
       console.error("Error verifying code:", error);
       setResultMessage("An error occurred during verification.");
+      setIsVerified(false); 
     }
   };
 
+  const toggleEmailRetrieval = () => {
+    setIsEmailRetrievalEnabled(!isEmailRetrievalEnabled);
+    if (!isEmailRetrievalEnabled) {
+      setShowAppPasswordPopup(true); 
+      setIsAppPasswordVerified(false); // Show app password input popup
+    } else {
+      console.log("Email retrieval disabled");
+    }
+  };
+
+
+  const handleAppPasswordSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (appPassword) {
+      try {
+        // Send the app password to the backend to update em_retrieval_status
+        const response = await axios.post("http://localhost:8080/update-email-retrieval-status", {
+          email: "gowsrini2004@gmail.com", 
+          em_retrieval_status: true, // Set em_retrieval_status to 1
+          app_password: appPassword,
+        });
+  
+        if (response.status === 200) {
+          console.log("Email retrieval status updated successfully.");
+          setIsAppPasswordVerified(true);
+          setShowAppPasswordPopup(false); // Close the app password popup
+          setIsEmailRetrievalEnabled(true); // Enable email retrieval toggle
+        } else {
+          console.error("Failed to update email retrieval status.");
+          setIsAppPasswordVerified(false);
+        }
+      } catch (error) {
+        console.error("Error updating email retrieval status:", error);
+        setIsAppPasswordVerified(false);
+      }
+    } else {
+      // If no password is entered, keep the em_retrieval_status as 0
+      console.log("No app password entered. Status remains 0.");
+      setShowAppPasswordPopup(false); // Close the app password popup
+      setIsEmailRetrievalEnabled(false); // Disable email retrieval toggle
+    }
+  };
+
+  const handleSignOut = () => {
+    // Clear JWT token and other related data
+    localStorage.removeItem("jwt_token");
+    localStorage.removeItem("session_id");
+    localStorage.removeItem("user_data");
+
+    // Navigate to the login page
+    navigate("/login");
+  };
+
   return (
-    <div className={Classes.profileContainer}>
-      <h1>User Profile</h1>
-      <div className={Classes.userInfo}>
-        <div className={Classes.avatarContainer}>
-          <img src={userIcon} className={Classes.avatar} alt="User avatar" />
-          <div className={Classes.userName}>
-            <h2>Akeel</h2>
-            <p>akeel@gmail.com</p>
-          </div>
-        </div>
-      </div>
-
-      <div className={Classes.details}>
-        <p>Full Name</p>
-        <p>Akeel Ahamed R S</p>
-      </div>
-      <div className={Classes.details}>
-        <p>E-Mail Address</p>
-        <p>akeel@gmail.com</p>
-      </div>
-      <div className={Classes.details}>
-        <p>Phone Number</p>
-        <p>(656) 587 6589</p>
-      </div>
-
-      {/* Action Section */}
-      <div className={Classes.actionSection}>
-        <div className={Classes.actionBox1}>
-          <div>
-            <h3>Change Password</h3>
-            <p>
-              To reset your password, please click the reset Password button
-            </p>
-          </div>
-          <button className={Classes.actionButton}>Reset Password</button>
-        </div>
-        <div className={Classes.actionBox2}>
-          <h3>Enable Google Auth</h3>
-          <p>
-            To enable 2 Factor Authentication using Google Authenticator App,
-            please click the Enable 2FA button
-          </p>
-          <button className={Classes.actionButton} onClick={handleEnable2FA}>
-            Enable 2FA
-          </button>
-        </div>
-      </div>
-
-      {/* QR Code Popup with Validation */}
-      {showPopup && (
-        <div className={Classes.popup}>
+    <div>
+      <div className={Classes.popupOverlay}>
+        <div className={Classes.popCont}>
           <div className={Classes.popupContent}>
+            <h2>User Profile</h2>
+            <div className={Classes.line}></div>
+            <div className={Classes.infoCont}>
+              <div className={Classes.infoItem}>
+                <h3>E-Mail Address</h3>
+                <p>{user?.email}</p>
+              </div>
+            </div>
+            <div className={Classes.actionContWrapper}>
+              <div className={Classes.actionCont}>
+                <div className={Classes.actionInfo}>
+                  <h3>Enable Google Auth</h3>
+                  <p>
+                    To enable 2 Factor Authentication using Google Authenticator
+                    App, please click the enable 2FA button
+                  </p>
+                  <label className={Classes.toggleSwitch}>
+                    <input
+                      type="checkbox"
+                      checked={is2faEnabled}
+                      disabled={is2faEnabled}
+                      onChange={() => {
+                        if (!is2faEnabled) {
+                          handleEnable2FA();
+                        } else {
+                          setIs2faEnabled(false);
+                        }
+                      }}
+                    ></input>
+                    <span className={Classes.slider}></span>
+                  </label>
+                </div>
+              </div>
+              <div className={Classes.actionCont}>
+                <div className={Classes.actionInfo}>
+                  <h3>Email Retrieval</h3>
+                  <p>
+                    To retrieve your emails and store them in the database, toggle
+                    the switch below.
+                  </p>
+                  <label className={Classes.toggleSwitch}>
+                    <input
+                      type="checkbox"
+                      checked={isEmailRetrievalEnabled}
+                      disabled={isEmailRetrievalEnabled}
+                      onChange={toggleEmailRetrieval}
+                    />
+                    <span className={Classes.slider}></span>
+                  </label>
+                </div>
+              </div>
+              <div className={Classes.actionCont}>
+                <div className={Classes.actionInfo}>
+                  <h3>Change Password</h3>
+                  <p>
+                    To reset your password, please click the reset password button
+                  </p>
+                </div>
+                <button className={Classes.actionBtn2}>Reset Password</button>
+              </div>
+              <span className={Classes.closeBtn} onClick={togglePopup}>
+                &times;
+              </span>
+            </div>
+          </div>
+          <button onClick={handleSignOut} className={Classes.offBtn}>Sign Out</button>
+        </div>
+      </div>
+
+      {/* QR Code Popup */}
+      {showQrCodePopup && (
+        <div className={Classes.qrPopupOverlay}>
+          <div className={Classes.qrPopupContent}>
             <h3>Scan the QR Code with Google Authenticator</h3>
             <img
               src={qrCode}
               alt="Google Authenticator QR Code"
-              className={Classes.qrImage}
+              className={Classes.qrCodeImage}
             />
-
             <form onSubmit={handleSubmit}>
               <label htmlFor="authCode">
                 Enter the 6-digit authentication code generated by your app:
@@ -113,26 +228,60 @@ function Profile() {
                 inputMode="number"
                 onChange={(value) => setPin(value)}
                 className={Classes.pinInput}
+                inputStyle={{
+                  borderColor: "#ff9d52",
+                  borderRadius: "8px",
+                  backgroundColor: "#1e1e1e",
+                  color: "#fff",
+                }}
+                inputFocusStyle={{ borderColor: "#ff632d" }}
               />
               <button type="submit" className={Classes.submitButton}>
                 Verify Code
               </button>
             </form>
-
-            {/* Display verification message */}
             {resultMessage && (
               <p className={Classes.resultMessage}>{resultMessage}</p>
             )}
-
-            <button onClick={handleClosePopup} className={Classes.closeButton}>
+            <button
+               onClick={refreshPage}
+              className={Classes.closeButton}
+            >
               Close
             </button>
           </div>
         </div>
       )}
 
-      {/* Sign Out Button */}
-      <button className={Classes.signOutButton}>Sign out</button>
+      {/* App Password Popup */}
+      {showAppPasswordPopup && (
+        <div className={Classes.qrPopupOverlay}>
+          <div className={Classes.qrPopupContent}>
+            <h3>Enter your App Password</h3>
+            <form onSubmit={handleAppPasswordSubmit}>
+              <label htmlFor="appPassword"></label>
+              <input
+                type="password"
+                id="appPassword"
+                value={appPassword}
+                onChange={(e) => setAppPassword(e.target.value)}
+                className={Classes.inputField}
+              />
+              <button type="submit" className={Classes.submitButton}>
+                Submit
+              </button>
+            </form>
+            <button
+               onClick={refreshPage}
+              className={Classes.closeButton}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default UserInfo1;
