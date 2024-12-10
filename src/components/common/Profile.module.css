@@ -20,7 +20,8 @@
   align-items: center;
   padding: 20px;
   width: 850px;
-  height: auto;
+  height:auto;
+  overflow-y: visible;
 
 }
 
@@ -183,6 +184,7 @@ input:checked + .slider:before {
   cursor: pointer;
   background: none;
   border: none;
+  
 }
 
 /* Responsive Alignments */

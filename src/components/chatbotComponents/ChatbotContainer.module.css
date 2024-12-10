@@ -144,26 +144,33 @@ button:hover {
 
 .optionLabel {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: row;
+  align-items: center; /* Ensures icons and text are vertically aligned */
+  gap: 12px; /* Consistent spacing between icon and text */
   color: #eaeaea;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  position: relative;
-  padding: 10px;
+  padding: 10px 12px; /* Padding for better click area */
   border-radius: 6px;
   transition: transform 0.2s ease, background-color 0.2s ease;
+  background-color: transparent; /* Keeps background consistent */
+  width: 100%; /* Ensures the container is full width */
+  box-sizing: border-box; /* Includes padding in width/height calculation */
 }
 
+
 .iconImage {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
+  width: 36px; /* Slightly larger size for uniformity */
+  height: 36px; /* Matches width for square shape */
+  display: inline-block; /* Ensures proper spacing with text */
 }
 
 .optionLabel span {
-  flex: 1;
+  flex-grow: 1; /* Text takes up remaining space */
+  text-align: left; /* Aligns text to the left */
+  display: inline-block;
+  line-height: 1.5; /* Improves readability */
 }
 
 .optionLabel input[type="file"] {
@@ -177,35 +184,39 @@ button:hover {
 
 .youtubeContainer {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 12px;
-  background-color: #2d2d2d; /* Normal background */
+  background-color: #2d2d2d;
   border-radius: 6px;
-  padding: 10px;
+  padding: 10px 12px;
+  width: 100%; /* Full width for consistency */
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .youtubeContainer input[type="text"] {
-  flex: 1;
+  flex-grow: 1;
   background: transparent;
   border: none;
   color: #eaeaea;
   font-size: 14px;
   padding: 6px 10px;
   outline: none;
+  text-align: left;
 }
 
 .youtubeContainer input::placeholder {
   color: #aaa;
 }
 
+
 .youtubeContainer:hover {
-  transform: scale(1.05); /* Slightly enlarges on hover */
-  background-color: #414141; /* Darker background on hover */
+  transform: scale(1.05); /* Adds hover animation */
+  background-color: #414141; /* Darker hover color */
 }
 
 .optionsContainer input[type="file"] {
-  width: calc(100% - 40px); /* Adjusted for wider container */
+  width: 90%; /* Adjusted for wider container */
   margin: 12px 0; /* Centered margin */
   padding: 10px 14px;
   border: none; /* Remove border */
@@ -248,7 +259,7 @@ button:hover {
 }
 
 .optionsContainer input[type="text"] {
-  width: calc(100% - 40px); /* Adjusted for wider container */
+  width: 90%; /* Adjusted for wider container */
   margin: 12px 0; /* Centered margin */
   padding: 10px 14px; /* Slight padding for a softer look */
   border: 1px solid #2d2d2d; /* Match the container border color */
@@ -260,6 +271,7 @@ button:hover {
   transition: border 0.2s ease, box-shadow 0.2s ease;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
   text-align: center; /* Center text */
+  flex:1;
 }
 
 .optionsContainer input[type="text"]:focus {

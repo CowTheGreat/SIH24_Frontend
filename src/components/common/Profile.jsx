@@ -87,6 +87,16 @@ const UserInfo1 = () => {
       console.log("Email retrieval disabled");
     }
   };
+  const handleSignOut = () => {
+    // Clear JWT token and other related data
+    localStorage.removeItem("jwt_token");
+    localStorage.removeItem("session_id");
+    localStorage.removeItem("user_data");
+  
+
+    // Navigate to the login page
+    navigate("/login");
+  };
 
   const handleAppPasswordSubmit = async (e) => {
     e.preventDefault();
@@ -180,6 +190,17 @@ const UserInfo1 = () => {
               </div>
               <div className={Classes.actionCont}>
                 <div className={Classes.actionInfo}>
+                  <h3>Authorise Confluence</h3>
+                  <p>
+                  To reset your password, please click the reset password
+                  button
+                  </p>
+                  
+                </div>
+                <button className={Classes.actionBtn2}>Confluence</button>
+                </div>
+              <div className={Classes.actionCont}>
+                <div className={Classes.actionInfo}>
                   <h3>Change Password</h3>
                   <p>
                     To reset your password, please click the reset password
@@ -193,7 +214,7 @@ const UserInfo1 = () => {
               </span>
             </div>
           </div>
-          <button className={Classes.offBtn}>Sign Out</button>
+          <button className={Classes.offBtn}  onClick={handleSignOut} >Sign Out</button>
         </div>
       </div>
 
