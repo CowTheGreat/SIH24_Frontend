@@ -1,0 +1,538 @@
+html,
+body {
+  max-height: 100%;
+  overflow-x: hidden;
+}
+
+.chatcontainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatbox {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+textarea[type="text"] {
+  flex: 1;
+  padding: 10px;
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  outline: none;
+  width: 80%;
+  height: 20px;
+  background-color: #fdfdfd;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  outline: none;
+  width: 80%;
+  height: 20px;
+  background-color: #fdfdfd;
+}
+
+button {
+  border: none;
+  color: white;
+  padding: 0px 10px;
+  margin-left: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* 
+button:hover {
+  background-color: #111111;
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  );
+} */
+
+.message {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.chatbox {
+  overflow-y: scroll;
+  max-height: 80vh;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  width: 0.1px;
+}
+
+.topright {
+  position: fixed;
+  top: 12%;
+  left: 0;
+  margin-right: 50px;
+  background-color: #202020;
+  height: 72.5vh;
+  width: 15vw;
+  margin: 20px;
+  border-radius: 3px;
+  padding: 20px;
+  overflow-y: auto;
+  border-radius: 6px;
+}
+
+.onboardingleft {
+  position: fixed;
+  top: 12%;
+  right: 0;
+}
+
+.sessionTitles {
+  display: flex;
+  flex-direction: column;
+  background-color: #111111;
+  font-size: 24px;
+  margin-top: 12px;
+}
+
+/* ChatbotContainer.module.css */
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 90vh;
+  background-color: #111111;
+}
+
+.submitButton {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* .submitButton:hover {
+  background-color: #0a0909;
+} */
+
+.optionsContainer {
+  background-color: #2d2d2d;
+  padding: 20px;
+  position: fixed;
+  bottom: 90px;
+  left: 40%;
+  transform: translateX(-50%);
+  width: 350px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 8px rgba(255, 165, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.optionLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #eaeaea;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  padding: 10px;
+  border-radius: 6px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.iconImage {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.optionLabel span {
+  flex: 1;
+}
+
+.optionLabel input[type="file"] {
+  display: none;
+}
+
+.optionLabel:hover {
+  transform: scale(1.05); /* Slightly enlarges on hover */
+  background-color: #414141; /* Darker background on hover */
+}
+
+.youtubeContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #2d2d2d; /* Normal background */
+  border-radius: 6px;
+  padding: 10px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.youtubeContainer input[type="text"] {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #eaeaea;
+  font-size: 14px;
+  padding: 6px 10px;
+  outline: none;
+}
+
+.youtubeContainer input::placeholder {
+  color: #aaa;
+}
+
+.youtubeContainer:hover {
+  transform: scale(1.05); /* Slightly enlarges on hover */
+  background-color: #414141; /* Darker background on hover */
+}
+
+.optionsContainer input[type="file"] {
+  width: calc(100% - 40px); /* Adjusted for wider container */
+  margin: 12px 0; /* Centered margin */
+  padding: 10px 14px;
+  border: none; /* Remove border */
+  border-radius: 20px; /* Rounded edges */
+  background-color: #2d2d2d; /* Match container background */
+  color: #eaeaea; /* Harmonize with container text */
+  font-size: 14px;
+  outline: none;
+  cursor: pointer; /* Pointer for interaction hint */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5); /* Slight inner shadow */
+  text-align: center;
+}
+
+.optionsContainer input[type="file"]::file-selector-button {
+  display: none; /* Hide the default file selector button */
+}
+
+.optionsContainer input[type="file"]::before {
+  content: "Choose a file"; /* Placeholder text */
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  color: #eaeaea;
+  padding: 10px 0;
+  background-color: #2d2d2d; /* Match container background */
+  border: 1px solid #2d2d2d; /* Remove visible borders */
+  border-radius: 20px; /* Same rounded style */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%; /* Expand to fit the container width */
+  box-sizing: border-box;
+}
+
+.optionsContainer input[type="file"]:hover::before {
+  background-color: #3a3a3a; /* Slight hover effect */
+}
+
+.optionsContainer input[type="file"]:focus::before {
+  background-color: #2d2d2d; /* Keep focus consistent */
+  box-shadow: 0 0 6px rgba(255, 165, 0, 0.4); /* Add glowing focus effect */
+}
+
+.optionsContainer input[type="text"] {
+  width: calc(100% - 40px); /* Adjusted for wider container */
+  margin: 12px 0; /* Centered margin */
+  padding: 10px 14px; /* Slight padding for a softer look */
+  border: 1px solid #2d2d2d; /* Match the container border color */
+  border-radius: 20px; /* Increased radius for a rounded shape */
+  background-color: #2d2d2d; /* Match the container background */
+  color: #eaeaea; /* Harmonize with container text */
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-align: center; /* Center text */
+}
+
+.optionsContainer input[type="text"]:focus {
+  border: 1px solid #ffa500;
+  box-shadow: 0 0 6px rgba(255, 165, 0, 0.4), inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.optionsContainer .inputWithButton {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the content horizontally */
+  margin-top: 8px;
+  gap: 10px;
+}
+
+.optionsContainer button,
+.optionsContainer .submitButton {
+  background-color: #fff;
+  color: #2d2d2d;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.optionsContainer button:hover,
+.optionsContainer .submitButton:hover {
+  background-color: #eaeaea;
+  transform: scale(1.03);
+}
+
+.optionsContainer button:active,
+.optionsContainer .submitButton:active {
+  transform: scale(0.98);
+}
+
+.inputContainer {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 25px;
+  width: 50vw;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  margin-bottom: 20px;
+  position: sticky;
+  bottom: 0;
+}
+
+.attachmentButton {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: #ffa500;
+  font-size: 16px;
+  margin-left: auto;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.attachmentButton:hover {
+  color: #ff8800;
+  transform: scale(1.1);
+}
+
+.attachmentButton:active {
+  transform: scale(0.95);
+}
+
+.hairpin {
+  width: 36px;
+  margin-top: 4px;
+  margin-right: 0px;
+}
+
+.textInput {
+  flex: 1;
+  background-color: #1e1e1e; /* Slightly darker for input */
+  border: none;
+  color: #1e1e1e;
+  padding: 10px;
+  border-radius: 25px;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.textInput::placeholder {
+  /* color: #777; */
+  padding-left: 10px;
+}
+
+.textInput:focus {
+  outline: none;
+}
+
+.sendButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sendArrow {
+  color: rgb(255, 107, 71);
+  font-size: 24px;
+  /* color: linear-gradient(
+    to bottom right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  ); */
+}
+
+.chathistory {
+  color: #d4d4d4;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.chatCard {
+  display: flex;
+  /* justify-content: flex-start; */
+  padding: 10px 5px;
+  /* border: 1px solid #ccc; */
+  border-radius: 8px;
+  background-color: #313131;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 0;
+}
+
+.chatCard:hover {
+  background-color: #5e5e5e;
+}
+
+.historycard {
+  margin-left: 0px;
+}
+
+.sessionButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  /* border: none; */
+  background: none;
+  text-align: left;
+}
+
+.sessionContent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.iconWrapper {
+  margin-right: 10px;
+}
+
+.textWrapper {
+  flex-grow: 1;
+}
+
+.sessionTitle {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.sessionPreview {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.menuWrapper {
+  margin-left: auto;
+  color: #888;
+}
+
+.msgicon {
+  width: 30px;
+  margin-top: 7px;
+}
+
+.currentSessionTitle {
+  font-size: 28px;
+  position: fixed;
+  top: 0;
+  margin-top: 30px;
+}
+
+.centerpanel {
+  margin-left: 150px;
+}
+.searchContainer {
+  display: flex;
+  align-items: center; /* Aligns items vertically centered */
+  margin: 10px 0;
+}
+
+.searchContainer input {
+  flex: 1; /* Allows input to take up remaining space */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.searchContainer button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #ff6b47;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 0;
+}
+
+.searchContainer button span {
+  font-size: 18px; /* Adjusts the size of the search icon */
+}
+
+.sessionButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  /* border: none; */
+  background: none;
+  text-align: left;
+}
+
+.sessionContent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.searchline {
+  margin: 20px 0;
+  color: linear-gradient(
+    to bottom right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  );
+}
+
+.upload {
+  font-size: 24px; /* Adjust icon size */
+  color: #007bff; /* Change icon color */
+  cursor: pointer; /* Change cursor to pointer when hovering */
+  transition: color 0.3s ease;
+}
+
+.downButton {
+  color: rgb(255, 107, 71);
+  background-color: white;
+}
+
+.downButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.onboardingleft {
+  position: fixed;
+  top: 5%;
+  right: 0;
+}

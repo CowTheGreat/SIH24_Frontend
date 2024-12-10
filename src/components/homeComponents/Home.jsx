@@ -7,10 +7,14 @@ import HeroLan from "./HeroLan";
 import styles from "./Home.module.css";
 import HrPolicyLan from "./HrPolicyLan"; // Importing HrPolicyLan
 import ItSupportLan from "./ItSupportLan";
+import SideChatbotContainer from "../chatbotComponents/SideChatbot";
 
 const Home = () => {
   return (
     <div className={styles.homeContainer}>
+      {/* <div className={styles.left}>
+        <SideChatbotContainer />
+      </div> */}
       <HeaderLan />
       <HeroLan />
 

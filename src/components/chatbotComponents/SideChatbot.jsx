@@ -16,7 +16,7 @@ import pdf from "../../assets/pdf-icon.png";
 import vid from "../../assets/video-icon.png";
 import yt from "../../assets/youtube-icon.png";
 
-const ChatbotContainer = () => {
+const SideChatbotContainer = () => {
   const [sessions, setSessions] = useState([]);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -245,13 +245,10 @@ const ChatbotContainer = () => {
     if (youtubeURL) formData.append("url", youtubeURL);
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}submit`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch("http://127.0.0.1:8080/submit", {
+        method: "POST",
+        body: formData,
+      });
       const data = await response.json();
       console.log(data.message); // Log the response message
     } catch (error) {
@@ -577,4 +574,4 @@ const ChatbotContainer = () => {
     </div>
   );
 };
-export default ChatbotContainer;
+export default SideChatbotContainer;
