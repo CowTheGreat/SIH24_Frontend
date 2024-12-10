@@ -176,8 +176,9 @@
   background-color: #ff6b47;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 5px 15px; /* Reduce padding for smaller size */
   border-radius: 5px;
+  font-size: 14px; /* Decrease font size */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -193,7 +194,7 @@
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 40px; /* Move the button further down */
   transition: background-color 0.3s ease;
 }
 

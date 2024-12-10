@@ -140,13 +140,24 @@ input:checked + .slider:before {
 }
 
 /* Button Styles */
-.actionBtn, .actionBtn2, .submitButton, .offBtn, .closeButton {
+.actionBtn, .actionBtn2,  .offBtn, .closeButton {
   background-color: #ff5f00;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   padding: 10px 20px;
+}
+
+.submitButton{
+  background-color: #ff6b47;
+  color: white;
+  border: none;
+  padding: 5px 15px; /* Reduce padding for smaller size */
+  border-radius: 5px;
+  font-size: 14px; /* Decrease font size */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .offBtn {
@@ -181,4 +192,10 @@ input:checked + .slider:before {
 
 .actionInfo p, .qrPopupContent p {
   margin: 10px 0;
+}
+
+.pininputdiv{
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }

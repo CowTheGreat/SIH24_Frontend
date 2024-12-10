@@ -39,10 +39,10 @@ function MultiFactor() {
 
     emailjs
       .sendForm(
-        "service_y10mcfg",
-        "template_q1j9j0a",
+        "service_oqj0r5j",
+        "template_jch6pj2",
         form.current,
-        "IrN5ZpRpHaUSWf83p"
+        "CfdeSbElyv1PiFLKL"
       )
       .then(
         () => {
