@@ -146,19 +146,16 @@ button:hover {
   display: flex;
   flex-direction: row;
   align-items: center; /* Ensures icons and text are vertically aligned */
-  gap: 12px; /* Consistent spacing between icon and text */
   color: #eaeaea;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  padding: 10px 12px; /* Padding for better click area */
   border-radius: 6px;
   transition: transform 0.2s ease, background-color 0.2s ease;
   background-color: transparent; /* Keeps background consistent */
   width: 100%; /* Ensures the container is full width */
   box-sizing: border-box; /* Includes padding in width/height calculation */
 }
-
 
 .iconImage {
   width: 36px; /* Slightly larger size for uniformity */
@@ -171,6 +168,7 @@ button:hover {
   text-align: left; /* Aligns text to the left */
   display: inline-block;
   line-height: 1.5; /* Improves readability */
+  margin-left: 14px;
 }
 
 .optionLabel input[type="file"] {
@@ -189,7 +187,6 @@ button:hover {
   gap: 12px;
   background-color: #2d2d2d;
   border-radius: 6px;
-  padding: 10px 12px;
   width: 100%; /* Full width for consistency */
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
@@ -209,14 +206,13 @@ button:hover {
   color: #aaa;
 }
 
-
 .youtubeContainer:hover {
   transform: scale(1.05); /* Adds hover animation */
   background-color: #414141; /* Darker hover color */
 }
 
 .optionsContainer input[type="file"] {
-  width: 90%; /* Adjusted for wider container */
+  width: 10px; /* Adjusted for wider container */
   margin: 12px 0; /* Centered margin */
   padding: 10px 14px;
   border: none; /* Remove border */
@@ -271,7 +267,7 @@ button:hover {
   transition: border 0.2s ease, box-shadow 0.2s ease;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
   text-align: center; /* Center text */
-  flex:1;
+  flex: 1;
 }
 
 .optionsContainer input[type="text"]:focus {

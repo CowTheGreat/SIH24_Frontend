@@ -1,5 +1,6 @@
 /* General Popup Overlay Styles */
-.popupOverlay, .qrPopupOverlay {
+.popupOverlay,
+.qrPopupOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,7 +13,8 @@
   z-index: 1000;
 }
 
-.popCont, .qrPopupContent {
+.popCont,
+.qrPopupContent {
   background: #202020;
   border-radius: 10px;
   display: flex;
@@ -20,9 +22,8 @@
   align-items: center;
   padding: 20px;
   width: 850px;
-  height:auto;
+  height: auto;
   overflow-y: visible;
-
 }
 
 /* Popup Header Styles */
@@ -39,12 +40,12 @@
   background-color: #626263;
   margin: 20px auto;
 }
-.actionContWrapper{
-  display:flex;
-  flex-direction:column;
+.actionContWrapper {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap:5px;
+  gap: 5px;
 }
 
 /* User Info Section */
@@ -55,12 +56,14 @@
   margin-top: 20px;
 }
 
-.infoItem h3, .actionInfo h3 {
+.infoItem h3,
+.actionInfo h3 {
   font-size: 20px;
   color: white;
 }
 
-.infoItem p, .actionInfo p {
+.infoItem p,
+.actionInfo p {
   font-size: 15px;
   color: white;
 }
@@ -85,12 +88,8 @@
 .actionInfo {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  /* gap: 10px;  */
   flex: 1;
-}
-
-.actionInfo h3 {
-  margin-bottom: 10px;
 }
 
 .toggleSwitch {
@@ -141,7 +140,10 @@ input:checked + .slider:before {
 }
 
 /* Button Styles */
-.actionBtn, .actionBtn2,  .offBtn, .closeButton {
+.actionBtn,
+.actionBtn2,
+.offBtn,
+.closeButton {
   background-color: #ff5f00;
   color: white;
   border: none;
@@ -150,7 +152,7 @@ input:checked + .slider:before {
   padding: 10px 20px;
 }
 
-.submitButton{
+.submitButton {
   background-color: #ff6b47;
   color: white;
   border: none;
@@ -184,20 +186,21 @@ input:checked + .slider:before {
   cursor: pointer;
   background: none;
   border: none;
-  
 }
 
 /* Responsive Alignments */
-.actionInfo, .qrPopupContent {
+.actionInfo,
+.qrPopupContent {
   text-align: left;
 }
 
-.actionInfo p, .qrPopupContent p {
+.actionInfo p,
+.qrPopupContent p {
   margin: 10px 0;
 }
 
-.pininputdiv{
-  display:flex;
+.pininputdiv {
+  display: flex;
   align-items: center;
   justify-content: center;
 }
