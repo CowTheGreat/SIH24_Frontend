@@ -452,7 +452,7 @@ const ChatbotContainer = () => {
               <img src={yt} alt="YouTube Icon" className={Classes.iconImage} />
               <input
                 type="text"
-                placeholder="Upload YouTube Link"
+                placeholder="Paste YouTube Link"
                 onChange={handleUrlChange}
               />
             </label>
