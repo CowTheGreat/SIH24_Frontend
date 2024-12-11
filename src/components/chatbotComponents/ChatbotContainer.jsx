@@ -191,6 +191,7 @@ const ChatbotContainer = () => {
       formData.append("name", userData.name); // Add the user's name
       if (pdfFile) {
         formData.append("pdf", pdfFile);
+        console.log("Pdf got");
       }
       if (videoFile) {
         formData.append("video", videoFile);
@@ -250,13 +251,25 @@ const ChatbotContainer = () => {
 
   const toggleOptions = () => setShowOptions(!showOptions);
 
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    if (files && files.length > 0) {
-      const fileName = files[0].name;
-      if (name === "pdf") setUploadedPDF(fileName);
-      if (name === "video") setUploadedVideo(fileName);
-      toggleOptions(); // Automatically close options after uploading
+  // const handleFileChange = (e) => {
+  //   const { name, files } = e.target;
+  //   if (files && files.length > 0) {
+  //     const fileName = files[0].name;
+  //     if (name === "pdf") setUploadedPDF(fileName);
+  //     if (name === "video") setUploadedVideo(fileName);
+  //     toggleOptions(); // Automatically close options after uploading
+  //   }
+  // };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const fileType = event.target.name; // 'pdf' or 'video'
+      if (fileType === "pdf") {
+        setPdfFile(file);
+      } else if (fileType === "video") {
+        setVideoFile(file);
+      }
     }
   };
 

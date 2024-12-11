@@ -351,7 +351,7 @@ button:hover {
   align-items: center;
   background-color: #ffffff;
   border-radius: 25px;
-  width: 50vw;
+  width: 45vw;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   margin-bottom: 20px;
   position: sticky;
@@ -543,7 +543,7 @@ button:hover {
 }
 
 .centerpanel {
-  margin-left: 20vw;
+  margin-left: 25vw;
 }
 
 .searchContainer {
