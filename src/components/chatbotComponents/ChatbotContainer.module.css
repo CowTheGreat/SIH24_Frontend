@@ -41,7 +41,6 @@ button {
   border: none;
   color: white;
   padding: 0px 10px;
-  margin-left: 10px;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -103,12 +102,6 @@ button:hover {
   top: 0;
   z-index: 1000; /* Ensures it stays above scrollable content */
   padding: 1rem;
-}
-
-.searchContainer {
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
 }
 
 .scrollableContent {
@@ -556,21 +549,63 @@ button:hover {
   flex: 1; /* Allows input to take up remaining space */
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 16px;
-}
-
-.searchContainer button {
-  padding: 8px 12px;
-  border: none;
-  background-color: #ff6b47;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-left: 0;
+  font-size: 12px;
 }
 
 .searchContainer button span {
   font-size: 18px; /* Adjusts the size of the search icon */
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 200px; /* Reduced width */
+  height: 50px; /* Increased height */
+  border: 1px solid #ccc;
+  border-radius: 25px; /* Adjusted to match new height */
+  padding-left: 15px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.searchContainerFocused {
+  border-color: orange;
+}
+
+.searchInput {
+  width: 100%;
+  height: 100%; /* Ensures the input matches the container height */
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+  background: none;
+  margin-left: 0;
+  border: 0;
+}
+
+.searchInput::placeholder {
+  color: #bbb;
+}
+
+.searchIcon {
+  color: #bbb;
+  transition: color 0.3s ease;
+  margin-left: 0;
+}
+
+.searchform {
+  width: 120px;
+  border: none;
+}
+
+.searchform {
+  border: none;
+}
+
+.searchIconFocused {
+  color: orange;
 }
 
 .sessionButton {

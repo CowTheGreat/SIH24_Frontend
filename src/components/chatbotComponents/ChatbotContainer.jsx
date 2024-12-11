@@ -384,13 +384,20 @@ const ChatbotContainer = () => {
 
           <h1 className={Classes.chathistory}>Recent</h1>
 
-          <div className={Classes.searchContainer}>
-            <form onSubmit={handleSearch}>
+          <div
+            className={`${Classes.searchContainer} ${
+              isFocused ? Classes.searchContainerFocused : ""
+            }`}
+          >
+            <form onSubmit={handleSearch} className={Classes.searchform}>
               <input
                 type="text"
                 placeholder="Search sessions..."
                 value={query}
+                className={Classes.searchInput}
                 onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
               />
             </form>
             <button
@@ -398,7 +405,11 @@ const ChatbotContainer = () => {
               onClick={handleSearch}
               className={Classes.searchiconcont}
             >
-              <span>&#x1F50D;</span>
+              <SearchIcon
+                className={`${Classes.searchIcon} ${
+                  isFocused ? Classes.searchIconFocused : ""
+                }`}
+              />{" "}
             </button>
           </div>
         </div>
