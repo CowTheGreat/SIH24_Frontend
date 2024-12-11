@@ -16,6 +16,7 @@ import ActionsComponent from "./ActionsComponent";
 import Loader from "./Loader";
 import RefreshButton from "./RefreshButton";
 import UserInfo from "./UserInfo";
+import SearchIcon from "@mui/icons-material/Search";
 
 import pdf from "../../assets/pdf-icon.png";
 import vid from "../../assets/video-icon.png";
@@ -39,6 +40,7 @@ const ChatbotContainer = () => {
   const [results, setResults] = useState([]); // State to store search results
   const [searchClicked, setSearchClicked] = useState(false);
   const [isActionsPopupOpen, setIsActionsPopupOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const [uploadedPDF, setUploadedPDF] = useState(null);
   const [uploadedVideo, setUploadedVideo] = useState(null);
