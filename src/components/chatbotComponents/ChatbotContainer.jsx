@@ -537,8 +537,9 @@ const ChatbotContainer = () => {
               color: "#555", // Optional color styling
             }}
           >
-            <div className={Classes.welcomemsg}>Welcome!</div>
-            <div className={Classes.welcomemsg}>{user?.name || "Guest"}</div>
+            <div className={Classes.welcomemsg}>
+              Welcome! {user?.name || "Guest"}
+            </div>
           </div>
         ) : (
           <div></div>

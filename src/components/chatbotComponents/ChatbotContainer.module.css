@@ -531,7 +531,6 @@ button:hover {
 
 .welcomemsg {
   font-size: 2em;
-  font-weight: bold;
   background: linear-gradient(
     to bottom right,
     rgb(255, 107, 71),
@@ -540,10 +539,11 @@ button:hover {
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  position: fixed;
 }
 
 .centerpanel {
-  margin-left: 18vw;
+  margin-left: 20vw;
 }
 
 .searchContainer {
