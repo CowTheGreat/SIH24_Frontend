@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Classes from "./ChatbotContainer.module.css";
 import UserMsg from "./UserMsg";
 import BotMsg from "./BotMsg";
+import { useNavigate } from "react-router-dom";
 import { FaFileUpload } from "react-icons/fa";
 import chatbotpin from "../../assets/chatbotpin.png";
 import chatbotpindark from "../../assets/chatbotpindark.png";
@@ -13,6 +14,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faBars } from "@fortawesome/free-solid-svg-icons";
 import ActionsComponent from "./ActionsComponent";
 import Loader from "./Loader";
+import RefreshButton from "./RefreshButton";
+import UserInfo from "./UserInfo";
 
 import pdf from "../../assets/pdf-icon.png";
 import vid from "../../assets/video-icon.png";
@@ -41,12 +44,21 @@ const ChatbotContainer = () => {
   const [uploadedVideo, setUploadedVideo] = useState(null);
   const [uploadedURL, setUploadedURL] = useState("");
 
+  const storedUserData = localStorage.getItem("user_data");
+  const user = storedUserData ? JSON.parse(storedUserData) : null;
+
   const toggleActionsPopup = () => {
     setIsActionsPopupOpen(!isActionsPopupOpen);
   };
 
   const closePopup = () => {
     setIsActionsPopupOpen(false);
+  };
+
+  const navigate = useNavigate(); // Hook for redirection
+
+  const profilepage = () => {
+    navigate("/profile");
   };
 
   // Fetch the session ID when the component mounts
@@ -346,17 +358,24 @@ const ChatbotContainer = () => {
   return (
     <div className={Classes.chatcontainer}>
       <div className={Classes.topright}>
-        <h1 className={Classes.chathistory}>Chat History</h1>
-        {/* <SearchBar /> */}
+        {/* Fixed Header Section */}
+        <div className={Classes.fixedTop}>
+          <div className={Classes.userinfo} onClick={profilepage}>
+            <UserInfo />
+          </div>
+          <div className={Classes.refresh}>
+            <RefreshButton />
+          </div>
 
-        <div>
+          <h1 className={Classes.chathistory}>Recent</h1>
+
           <div className={Classes.searchContainer}>
             <form onSubmit={handleSearch}>
               <input
                 type="text"
-                placeholder="Search sessions..." // Placeholder for the input field
-                value={query} // Value is controlled by the query state
-                onChange={(e) => setQuery(e.target.value)} // Update the query state on input change
+                placeholder="Search sessions..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
               />
             </form>
             <button
@@ -367,7 +386,10 @@ const ChatbotContainer = () => {
               <span>&#x1F50D;</span>
             </button>
           </div>
+        </div>
 
+        {/* Scrollable Content Section */}
+        <div className={Classes.scrollableContent}>
           <div className={Classes.historycard}>
             {results.length > 0
               ? results.map((session, index) => (
@@ -389,32 +411,31 @@ const ChatbotContainer = () => {
                 ))
               : searchClicked && query && <p>No results found for "{query}"</p>}
           </div>
-        </div>
-        <hr className={Classes.searchline} />
-        <div className={Classes.historycard}>
-          {sessions.length > 0 ? (
-            sessions.map((session, index) => (
-              <div className={Classes.chatCard} key={index}>
-                <button
-                  className={Classes.sessionButton}
-                  onClick={() => fetchMessagesByTitle(session.session_title)}
-                >
-                  <div className={Classes.sessionContent}>
-                    <div className={Classes.iconWrapper}>
-                      <span className={Classes.msgicon}>&#x2709;</span>
+          <div className={Classes.historycard}>
+            {sessions.length > 0 ? (
+              sessions.map((session, index) => (
+                <div className={Classes.chatCard} key={index}>
+                  <button
+                    className={Classes.sessionButton}
+                    onClick={() => fetchMessagesByTitle(session.session_title)}
+                  >
+                    <div className={Classes.sessionContent}>
+                      <div className={Classes.iconWrapper}>
+                        <span className={Classes.msgicon}>&#x2709;</span>
+                      </div>
+                      <div className={Classes.textWrapper}>
+                        <p className={Classes.sessionTitle}>
+                          {session.session_title}
+                        </p>
+                      </div>
                     </div>
-                    <div className={Classes.textWrapper}>
-                      <p className={Classes.sessionTitle}>
-                        {session.session_title}
-                      </p>
-                    </div>
-                  </div>
-                </button>
-              </div>
-            ))
-          ) : (
-            <p>No sessions found</p>
-          )}
+                  </button>
+                </div>
+              ))
+            ) : (
+              <p>No sessions found</p>
+            )}
+          </div>
         </div>
       </div>
 
@@ -485,7 +506,6 @@ const ChatbotContainer = () => {
         className={Classes.centerpanel}
         style={{ overflowY: "auto", maxHeight: "80vh", padding: "10px" }}
       >
-        <div className={Classes.loader}>{loading && <Loader />}</div>
         {/* <div className={Classes.titlecontainer}>
           {isEditing ? (
             <input
@@ -506,13 +526,30 @@ const ChatbotContainer = () => {
           )}
         </div> */}
 
+        {messages.length === 0 ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh", // Ensures full-screen height for centering
+              fontSize: "24px", // Optional styling for the welcome message
+              color: "#555", // Optional color styling
+            }}
+          >
+            <div className={Classes.welcomemsg}>Welcome!</div>
+            <div className={Classes.welcomemsg}>{user?.name || "Guest"}</div>
+          </div>
+        ) : (
+          <div></div>
+        )}
         {messages.map((msg, index) => (
           <div key={index} style={{ marginBottom: "15px" }}>
             {msg.sender === "user" ? (
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "flex-end", // Aligns user messages to the right
+                  justifyContent: "flex-end",
                 }}
               >
                 <UserMsg message={msg.text} />
@@ -521,18 +558,15 @@ const ChatbotContainer = () => {
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "flex-start", // Aligns bot messages to the left
+                  justifyContent: "flex-start",
                 }}
               >
                 <Markdown text={msg.text} image={msg.image} />
-                {/* <BotMsg message={msg.text} /> */}
               </div>
             )}
           </div>
         ))}
-
         <div ref={messagesEndRef} />
-
         <div className={Classes.inputContainer}>
           {/* Attachment Button */}
           <button className={Classes.attachmentButton} onClick={toggleOptions}>

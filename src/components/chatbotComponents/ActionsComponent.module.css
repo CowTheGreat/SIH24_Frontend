@@ -1,4 +1,4 @@
-.container {
+/* .container {
   background-color: #2c2c2c;
   color: white;
   padding: 20px;
@@ -42,4 +42,90 @@
 .cancel {
   background-color: #f44336;
   color: white;
+} */
+
+/* Updated ActionsComponent.module.css */
+.container {
+  background-color: #001925;
+  color: white;
+  padding: 30px;
+  border-left: 5px solid #ff7a01;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    0 100%
+  );
+  max-width: 400px;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.container h3 {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 10px;
+  background-color: #002733;
+  color: #87a4b6;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  margin-bottom: 20px;
+  transition: all 0.2s ease-in-out;
+  border-left: 1px solid transparent;
+}
+
+.dropdown:focus {
+  border-left: 5px solid #ff7a01;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.button {
+  flex-grow: 1;
+  padding: 10px;
+  color: #001925;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid transparent;
+}
+
+.create {
+  background-color: #ff7a01;
+}
+
+.create:hover {
+  background: transparent;
+  border: 1px solid #ff7a01;
+  color: #ff7a01;
+}
+
+.cancel {
+  background-color: #001925;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%
+  );
+  color: #ff7a01;
+}
+
+.cancel:hover {
+  background: #ff7a01;
+  color: #001925;
 }

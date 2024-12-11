@@ -74,17 +74,55 @@ button:hover {
 
 .topright {
   position: fixed;
-  top: 12%;
+  top: 0;
   left: 0;
   margin-right: 50px;
-  background-color: #202020;
-  height: 72.5vh;
-  width: 15vw;
-  margin: 20px;
+  background-color: #282a2c;
+  height: 100vh;
+  width: 18vw;
+  margin: 0px;
   border-radius: 3px;
   padding: 20px;
   overflow-y: auto;
   border-radius: 6px;
+}
+
+.topright {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.userinfo {
+  margin-bottom: 20px;
+}
+
+.fixedTop {
+  position: sticky; /* Keeps it at the top when scrolling */
+  top: 0;
+  z-index: 1000; /* Ensures it stays above scrollable content */
+  padding: 1rem;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.scrollableContent {
+  flex-grow: 1; /* Ensures it takes up remaining height */
+  overflow-y: auto; /* Makes it scrollable */
+  padding: 1rem;
+}
+
+.historycard {
+  margin-top: 1rem;
+}
+
+.chatCard {
+  margin-bottom: 1rem;
 }
 
 .onboardingleft {
@@ -341,8 +379,6 @@ button:hover {
 }
 
 .popupContent {
-  background: white;
-  padding: 20px;
   border-radius: 8px;
   max-width: 400px;
   width: 90%;
@@ -376,7 +412,7 @@ button:hover {
 
 .textInput {
   flex: 1;
-  background-color: #1e1e1e; /* Slightly darker for input */
+  background-color: #1e1f20; /* Slightly darker for input */
   border: none;
   color: #1e1e1e;
   padding: 10px;
@@ -413,7 +449,7 @@ button:hover {
 
 .chathistory {
   color: #d4d4d4;
-  font-size: 20px;
+  font-size: 16px;
   margin-bottom: 10px;
   margin-left: 0;
   margin-top: 0;
@@ -466,8 +502,7 @@ button:hover {
 }
 
 .sessionTitle {
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 12px;
   margin: 0;
 }
 
@@ -494,9 +529,23 @@ button:hover {
   margin-top: 30px;
 }
 
-.centerpanel {
-  margin-left: 150px;
+.welcomemsg {
+  font-size: 2em;
+  font-weight: bold;
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+.centerpanel {
+  margin-left: 18vw;
+}
+
 .searchContainer {
   display: flex;
   align-items: center; /* Aligns items vertically centered */
@@ -572,4 +621,8 @@ button:hover {
   position: fixed;
   top: 5%;
   right: 0;
+}
+
+.refresh {
+  position: sticky;
 }

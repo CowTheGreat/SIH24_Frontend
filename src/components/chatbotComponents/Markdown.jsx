@@ -44,4 +44,3 @@ const Markdown = ({ text, image }) => {
 };
 
 export default Markdown;
-

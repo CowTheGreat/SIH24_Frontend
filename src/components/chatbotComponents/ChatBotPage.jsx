@@ -6,7 +6,7 @@ import Classes from "./ChatBotPage.module.css";
 const ChatBotPage = () => {
   return (
     <div className={Classes.ChatBotPageCont}>
-      <LeftPanel />
+      {/* <LeftPanel /> */}
       <RightPanel />
     </div>
   );
