@@ -52,6 +52,8 @@ function MultiFactor() {
         },
         (error) => {
           console.log("FAILED...", error.text);
+            console.error("FAILED to send email. Error:", error); // Log the entire error object
+        
         }
       );
   };
