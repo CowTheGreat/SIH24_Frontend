@@ -19,7 +19,7 @@ import vid from "../../assets/video-icon.png";
 import yt from "../../assets/youtube-icon.png";
 
 const ChatbotContainer = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [sessions, setSessions] = useState([]);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -70,15 +70,6 @@ const ChatbotContainer = () => {
     };
 
     fetchSessionId();
-  }, []);
-
-  useEffect(() => {
-    // Simulate loading (e.g., fetching initial data)
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000); // Adjust delay as needed
-
-    return () => clearTimeout(timer); // Clean up the timer
   }, []);
 
   useEffect(() => {
@@ -172,6 +163,10 @@ const ChatbotContainer = () => {
       // Update the state with the new user message
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setLoading(true);
+      setTimeout(() => {
+        console.log("Message sent");
+        setLoading(false); // Reset loading state
+      }, 1000);
       // Retrieve user data from localStorage
       const storedUserData = localStorage.getItem("user_data");
       const userData = storedUserData
