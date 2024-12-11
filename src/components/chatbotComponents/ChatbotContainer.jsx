@@ -11,14 +11,14 @@ import Onboarding from "./Onboarding"; // Import Onboarding
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
-import Loader from "./Loader";
+
 
 import pdf from "../../assets/pdf-icon.png";
 import vid from "../../assets/video-icon.png";
 import yt from "../../assets/youtube-icon.png";
 
 const ChatbotContainer = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); 
   const [sessions, setSessions] = useState([]);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -62,15 +62,7 @@ const ChatbotContainer = () => {
     fetchSessionId();
   }, []);
 
-  useEffect(() => {
-    // Simulate loading (e.g., fetching initial data)
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000); // Adjust delay as needed
-
-    return () => clearTimeout(timer); // Clean up the timer
-  }, []);
-
+ 
   useEffect(() => {
     const fetchSessions = async () => {
       // Retrieve user data from local storage
@@ -162,6 +154,10 @@ const ChatbotContainer = () => {
       // Update the state with the new user message
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setLoading(true);
+      setTimeout(() => {
+        console.log("Message sent");
+        setLoading(false); // Reset loading state
+    }, 1000);
       // Retrieve user data from localStorage
       const storedUserData = localStorage.getItem("user_data");
       const userData = storedUserData
@@ -225,10 +221,7 @@ const ChatbotContainer = () => {
       } catch (error) {
         console.error("Error sending message:", error);
       }
-      finally {
-        // Hide loader
-        setLoading(false);
-      }
+      
     }
   };
 
@@ -313,6 +306,8 @@ const ChatbotContainer = () => {
     }
   }, [messages]); // Runs every time the messages array changes
 
+
+
   const handleDownload = async () => {
     try {
       const response = await axios.get(
@@ -335,9 +330,7 @@ const ChatbotContainer = () => {
     } catch (error) {
       console.error("Error downloading the chat:", error);
     }
-    finally{
-      setLoading(false);
-    }
+    
   };
 
   return (
@@ -483,9 +476,7 @@ const ChatbotContainer = () => {
         className={Classes.centerpanel}
         style={{ overflowY: "auto", maxHeight: "80vh", padding: "10px" }}
       >
-      <div className={Classes.loader}>
-        {loading&& <Loader/>}
-      </div>
+     
         {/* <div className={Classes.titlecontainer}>
           {isEditing ? (
             <input
@@ -590,6 +581,7 @@ const ChatbotContainer = () => {
             <button className={Classes.sendButton} onClick={sendMessage}>
               <span className={Classes.sendArrow}>&#x27A4;</span>
             </button>
+            {loading && <div>Loading...</div>}
             <button className={Classes.downButton} onClick={handleDownload}>
               <FontAwesomeIcon icon={faDownload} />
             </button>
