@@ -14,8 +14,8 @@ const MultiFactorGoogle = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        // "https://sih24-node-backend.onrender.com/verify",
-        "http://localhost:3000/verify",
+        "https://sih24-node-backend.onrender.com/verify",
+        // "http://localhost:3000/verify",
         {
           token: pin,
         }

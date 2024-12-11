@@ -10,7 +10,8 @@ import Markdown from "./Markdown";
 import Onboarding from "./Onboarding"; // Import Onboarding
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faBars } from "@fortawesome/free-solid-svg-icons";
+import ActionsComponent from "./ActionsComponent";
 
 import pdf from "../../assets/pdf-icon.png";
 import vid from "../../assets/video-icon.png";
@@ -32,10 +33,19 @@ const ChatbotContainer = () => {
   const [query, setQuery] = useState(""); // State to store the search query
   const [results, setResults] = useState([]); // State to store search results
   const [searchClicked, setSearchClicked] = useState(false);
+  const [isActionsPopupOpen, setIsActionsPopupOpen] = useState(false);
 
   const [uploadedPDF, setUploadedPDF] = useState(null);
   const [uploadedVideo, setUploadedVideo] = useState(null);
   const [uploadedURL, setUploadedURL] = useState("");
+
+  const toggleActionsPopup = () => {
+    setIsActionsPopupOpen(!isActionsPopupOpen);
+  };
+
+  const closePopup = () => {
+    setIsActionsPopupOpen(false);
+  };
 
   // Fetch the session ID when the component mounts
   useEffect(() => {
@@ -511,22 +521,18 @@ const ChatbotContainer = () => {
 
         <div ref={messagesEndRef} />
 
-        {
-          <div className={Classes.inputContainer}>
-            {/* Attachment Button */}
-            <button
-              className={Classes.attachmentButton}
-              onClick={toggleOptions}
-            >
-              <img
-                className={Classes.hairpin}
-                src={chatbotpindark}
-                alt="Attach"
-              />
-            </button>
+        <div className={Classes.inputContainer}>
+          {/* Attachment Button */}
+          <button className={Classes.attachmentButton} onClick={toggleOptions}>
+            <img
+              className={Classes.hairpin}
+              src={chatbotpindark}
+              alt="Attach"
+            />
+          </button>
 
-            {/* Text Input */}
-            {/* <textarea
+          {/* Text Input */}
+          {/* <textarea
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -538,41 +544,59 @@ const ChatbotContainer = () => {
                 }
               }}
             /> */}
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
-                e.target.style.height = "20px";
-                e.target.style.height = `${e.target.scrollHeight}px`;
-              }}
-              placeholder="Type a message..."
-              className={Classes.textInput}
-              rows={1} // Start with a single row
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault(); // Prevent newline on Enter
-                  sendMessage();
-                  setInput(""); // Clear the input
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => {
+              setInput(e.target.value);
+              e.target.style.height = "20px";
+              e.target.style.height = `${e.target.scrollHeight}px`;
+            }}
+            placeholder="Type a message..."
+            className={Classes.textInput}
+            rows={1} // Start with a single row
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault(); // Prevent newline on Enter
+                sendMessage();
+                setInput(""); // Clear the input
 
-                  e.target.style.height = "20px"; // Reset height to the original value
-                }
-              }}
-              style={{
-                overflow: "hidden", // Prevent scrollbars
-                resize: "none", // Disable manual resizing
-              }}
-            />
+                e.target.style.height = "20px"; // Reset height to the original value
+              }
+            }}
+            style={{
+              overflow: "hidden", // Prevent scrollbars
+              resize: "none", // Disable manual resizing
+            }}
+          />
 
-            {/* Send Button */}
-            <button className={Classes.sendButton} onClick={sendMessage}>
-              <span className={Classes.sendArrow}>&#x27A4;</span>
-            </button>
-            <button className={Classes.downButton} onClick={handleDownload}>
-              <FontAwesomeIcon icon={faDownload} />
-            </button>
+          {/* Send Button */}
+          <button className={Classes.sendButton} onClick={sendMessage}>
+            <span className={Classes.sendArrow}>&#x27A4;</span>
+          </button>
+          <button className={Classes.downButton} onClick={handleDownload}>
+            <FontAwesomeIcon icon={faDownload} />
+          </button>
+
+          {/* Trigger Button for ActionsComponent */}
+          <button
+            className={Classes.triggerButton}
+            onClick={toggleActionsPopup}
+          >
+            <FontAwesomeIcon icon={faBars} />{" "}
+            {/* Replace with your desired icon */}
+          </button>
+        </div>
+        {isActionsPopupOpen && (
+          <div className={Classes.popupOverlay} onClick={closePopup}>
+            <div
+              className={Classes.popupContent}
+              onClick={(e) => e.stopPropagation()} // Prevent close on content click
+            >
+              <ActionsComponent />
+            </div>
           </div>
-        }
+        )}
       </div>
     </div>
   );

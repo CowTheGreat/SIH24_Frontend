@@ -320,6 +320,35 @@ button:hover {
   bottom: 0;
 }
 
+.triggerButton {
+  background-color: orange;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popupContent {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  z-index: 1001;
+}
+
 .attachmentButton {
   border: none;
   cursor: pointer;
