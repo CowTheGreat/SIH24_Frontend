@@ -12,12 +12,14 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faBars } from "@fortawesome/free-solid-svg-icons";
 import ActionsComponent from "./ActionsComponent";
+import Loader from "./Loader";
 
 import pdf from "../../assets/pdf-icon.png";
 import vid from "../../assets/video-icon.png";
 import yt from "../../assets/youtube-icon.png";
 
 const ChatbotContainer = () => {
+  const [loading, setLoading] = useState(true);
   const [sessions, setSessions] = useState([]);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -68,6 +70,15 @@ const ChatbotContainer = () => {
     };
 
     fetchSessionId();
+  }, []);
+
+  useEffect(() => {
+    // Simulate loading (e.g., fetching initial data)
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Adjust delay as needed
+
+    return () => clearTimeout(timer); // Clean up the timer
   }, []);
 
   useEffect(() => {
@@ -160,7 +171,7 @@ const ChatbotContainer = () => {
 
       // Update the state with the new user message
       setMessages((prevMessages) => [...prevMessages, newMessage]);
-
+      setLoading(true);
       // Retrieve user data from localStorage
       const storedUserData = localStorage.getItem("user_data");
       const userData = storedUserData
@@ -223,6 +234,9 @@ const ChatbotContainer = () => {
         await stream.getReader().read();
       } catch (error) {
         console.error("Error sending message:", error);
+      } finally {
+        // Hide loader
+        setLoading(false);
       }
     }
   };
@@ -329,6 +343,8 @@ const ChatbotContainer = () => {
       link.remove();
     } catch (error) {
       console.error("Error downloading the chat:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -474,7 +490,8 @@ const ChatbotContainer = () => {
         className={Classes.centerpanel}
         style={{ overflowY: "auto", maxHeight: "80vh", padding: "10px" }}
       >
-        <div className={Classes.titlecontainer}>
+        <div className={Classes.loader}>{loading && <Loader />}</div>
+        {/* <div className={Classes.titlecontainer}>
           {isEditing ? (
             <input
               type="text"
@@ -492,7 +509,7 @@ const ChatbotContainer = () => {
               <div className={Classes.currentSessionTitle}> {currentTitle}</div>
             </h4>
           )}
-        </div>
+        </div> */}
 
         {messages.map((msg, index) => (
           <div key={index} style={{ marginBottom: "15px" }}>
