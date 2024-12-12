@@ -1,38 +1,23 @@
-.botMsgCont {
+.loading-dots {
   display: flex;
-  align-items: flex-start;
-  max-width: 50vw;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.botIcon {
-  width: 30px;
-  height: 30px;
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #007bff; /* Blue color */
   border-radius: 50%;
-  margin-right: 10px;
-  margin-top: 20px;
+  margin: 0 5px;
+  animation: blink 1.2s infinite ease-in-out;
 }
 
-.botMsg {
-  color: #e2e2e2; /* Black text */
-  padding: 10px 15px;
-  border-radius: 10px;
-  border-bottom-left-radius: 0px; /* To match ChatGPT style */
-  max-width: 100%;
-  word-wrap: break-word;
-  font-size: 16px;
-}
-
-.imageContainer {
-  margin-top: 10px; /* Adjust spacing as needed */
-}
-
-.contentImage {
-  max-width: 80%; /* Adjust size as needed */
-  height: auto;
-  margin: 0 10%;
-}
-
-.bottext {
-  display: flex;
+@keyframes blink {
+  0%, 80%, 100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
 }

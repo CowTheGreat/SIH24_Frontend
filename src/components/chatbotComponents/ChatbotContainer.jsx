@@ -11,14 +11,19 @@ import Onboarding from "./Onboarding"; // Import Onboarding
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { GrTrigger } from "react-icons/gr";
 
+// import ActionsComponent from "./ActionsComponent";
+import Loader from "./Loader";
+import RefreshButton from "./RefreshButton";
+import Styles from "./Tooltip.module.css";
 
 import pdf from "../../assets/pdf-icon.png";
 import vid from "../../assets/video-icon.png";
 import yt from "../../assets/youtube-icon.png";
 
 const ChatbotContainer = () => {
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const [sessions, setSessions] = useState([]);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -34,10 +39,22 @@ const ChatbotContainer = () => {
   const [query, setQuery] = useState(""); // State to store the search query
   const [results, setResults] = useState([]); // State to store search results
   const [searchClicked, setSearchClicked] = useState(false);
+  const [isActionsPopupOpen, setIsActionsPopupOpen] = useState(false);
 
   const [uploadedPDF, setUploadedPDF] = useState(null);
   const [uploadedVideo, setUploadedVideo] = useState(null);
   const [uploadedURL, setUploadedURL] = useState("");
+
+const storedUserData = localStorage.getItem("user_data");
+const user = storedUserData ? JSON.parse(storedUserData) : null;
+
+  const toggleActionsPopup = () => {
+    setIsActionsPopupOpen(!isActionsPopupOpen);
+  };
+
+  const closePopup = () => {
+    setIsActionsPopupOpen(false);
+  };
 
   // Fetch the session ID when the component mounts
   useEffect(() => {
@@ -62,7 +79,6 @@ const ChatbotContainer = () => {
     fetchSessionId();
   }, []);
 
- 
   useEffect(() => {
     const fetchSessions = async () => {
       // Retrieve user data from local storage
@@ -157,7 +173,7 @@ const ChatbotContainer = () => {
       setTimeout(() => {
         console.log("Message sent");
         setLoading(false); // Reset loading state
-    }, 1000);
+      }, 1000);
       // Retrieve user data from localStorage
       const storedUserData = localStorage.getItem("user_data");
       const userData = storedUserData
@@ -220,8 +236,10 @@ const ChatbotContainer = () => {
         await stream.getReader().read();
       } catch (error) {
         console.error("Error sending message:", error);
+      } finally {
+        // Hide loader
+        setLoading(false);
       }
-      
     }
   };
 
@@ -306,12 +324,10 @@ const ChatbotContainer = () => {
     }
   }, [messages]); // Runs every time the messages array changes
 
-
-
   const handleDownload = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URL}download_chat/cow`,
+        `${import.meta.env.VITE_API_BASE_URL}download_chat/${user.name}`,
         {
           responseType: "blob", // Important for handling binary files
         }
@@ -327,16 +343,19 @@ const ChatbotContainer = () => {
       document.body.appendChild(link);
       link.click();
       link.remove();
+      console.log("Name retrieved from localStorage:", name);
+
     } catch (error) {
       console.error("Error downloading the chat:", error);
-    }
-    
+    } 
   };
 
   return (
     <div className={Classes.chatcontainer}>
-
       <div className={Classes.topright}>
+        <div className={Classes.refresh}></div>
+        <RefreshButton />
+
         <h1 className={Classes.chathistory}>Chat History</h1>
         {/* <SearchBar /> */}
 
@@ -476,7 +495,6 @@ const ChatbotContainer = () => {
         className={Classes.centerpanel}
         style={{ overflowY: "auto", maxHeight: "80vh", padding: "10px" }}
       >
-     
         {/* <div className={Classes.titlecontainer}>
           {isEditing ? (
             <input
@@ -524,22 +542,18 @@ const ChatbotContainer = () => {
 
         <div ref={messagesEndRef} />
 
-        {
-          <div className={Classes.inputContainer}>
-            {/* Attachment Button */}
-            <button
-              className={Classes.attachmentButton}
-              onClick={toggleOptions}
-            >
-              <img
-                className={Classes.hairpin}
-                src={chatbotpindark}
-                alt="Attach"
-              />
-            </button>
+        <div className={Classes.inputContainer}>
+          {/* Attachment Button */}
+          <button className={Classes.attachmentButton} onClick={toggleOptions}>
+            <img
+              className={Classes.hairpin}
+              src={chatbotpindark}
+              alt="Attach"
+            />
+          </button>
 
-            {/* Text Input */}
-            {/* <textarea
+          {/* Text Input */}
+          {/* <textarea
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -551,42 +565,67 @@ const ChatbotContainer = () => {
                 }
               }}
             /> */}
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
-                e.target.style.height = "20px";
-                e.target.style.height = `${e.target.scrollHeight}px`;
-              }}
-              placeholder="Type a message..."
-              className={Classes.textInput}
-              rows={1} // Start with a single row
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault(); // Prevent newline on Enter
-                  sendMessage();
-                  setInput(""); // Clear the input
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => {
+              setInput(e.target.value);
+              e.target.style.height = "20px";
+              e.target.style.height = `${e.target.scrollHeight}px`;
+            }}
+            placeholder="Type a message..."
+            className={Classes.textInput}
+            rows={1} // Start with a single row
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault(); // Prevent newline on Enter
+                sendMessage();
+                setInput(""); // Clear the input
 
-                  e.target.style.height = "20px"; // Reset height to the original value
-                }
-              }}
-              style={{
-                overflow: "hidden", // Prevent scrollbars
-                resize: "none", // Disable manual resizing
-              }}
-            />
+                e.target.style.height = "20px"; // Reset height to the original value
+              }
+            }}
+            style={{
+              overflow: "hidden", // Prevent scrollbars
+              resize: "none", // Disable manual resizing
+            }}
+          />
 
-            {/* Send Button */}
-            <button className={Classes.sendButton} onClick={sendMessage}>
-              <span className={Classes.sendArrow}>&#x27A4;</span>
-            </button>
-            {loading && <div>Loading...</div>}
-            <button className={Classes.downButton} onClick={handleDownload}>
+          {/* Send Button */}
+          <button className={Classes.sendButton} onClick={sendMessage}>
+            <span className={Classes.sendArrow}>&#x27A4;</span>
+          </button>
+        
+          {/* <button className={Classes.downButton} onClick={handleDownload}>
+            <FontAwesomeIcon icon={faDownload} />
+          </button> */}
+          <div className={Styles.tooltipcontainer}>
+            <button className={Styles.downButton} onClick={handleDownload}>
               <FontAwesomeIcon icon={faDownload} />
+              <span className={Styles.tooltip}>Download chat</span>
             </button>
           </div>
-        }
+
+          {/* Trigger Button for ActionsComponent */}
+          <div className={Styles.tooltipcontainer}>
+            <button className={Styles.triggerButton} onClick={toggleActionsPopup}>
+              <GrTrigger className={Styles.triggerimg}/>
+              <span className={Styles.tooltip}>Actions</span>
+            </button>
+          </div>
+
+          
+        </div>
+        {isActionsPopupOpen && (
+          <div className={Classes.popupOverlay} onClick={closePopup}>
+            <div
+              className={Classes.popupContent}
+              onClick={(e) => e.stopPropagation()} // Prevent close on content click
+            >
+              <ActionsComponent />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

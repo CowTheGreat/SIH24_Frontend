@@ -11,7 +11,7 @@ const Markdown = ({ text, image }) => {
 
   useEffect(() => {
     // Simulate loading delay (e.g., fetching data or rendering markdown)
-    const timer = setTimeout(() => setIsLoading(false), 1000); // Adjust the delay as needed
+    const timer = setTimeout(() => setIsLoading(false), 6000); // Adjust the delay as needed
     return () => clearTimeout(timer);
   }, []);
 
@@ -24,7 +24,14 @@ const Markdown = ({ text, image }) => {
         <img src={botIcon} alt="Bot Icon" className={Classes.botIcon} />
         <div dangerouslySetInnerHTML={{ __html: sanitized }}></div>
         {/* Spinner below the bot icon */}
-        {isLoading && <div className={Classes.spinner}></div>}
+         {/* Three-dot loading effect */}
+         {isLoading && (
+          <div className={Classes.loadingdots}>
+            <div className={Classes.dot}></div>
+            <div className={Classes.dot}></div>
+            <div className={Classes.dot}></div>
+          </div>
+        )}
       </div>
       <div>
         {image && (
@@ -44,4 +51,3 @@ const Markdown = ({ text, image }) => {
 };
 
 export default Markdown;
-

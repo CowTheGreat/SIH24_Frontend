@@ -294,7 +294,7 @@ const UserInfo1 = () => {
                 onChange={(e) => setAppPassword(e.target.value)}
                 className={Classes.inputField}
               />
-              <button type="submit" className={Classes.submitButton}>
+              <button type="submit" className={Classes.submitAppBtn}>
                 Submit
               </button>
             </form>
