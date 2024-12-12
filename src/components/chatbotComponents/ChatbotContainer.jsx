@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Classes from "./ChatbotContainer.module.css";
 import UserMsg from "./UserMsg";
 import BotMsg from "./BotMsg";
+import { useNavigate } from "react-router-dom";
 import { FaFileUpload } from "react-icons/fa";
 import chatbotpin from "../../assets/chatbotpin.png";
 import chatbotpindark from "../../assets/chatbotpindark.png";
@@ -10,8 +11,12 @@ import Markdown from "./Markdown";
 import Onboarding from "./Onboarding"; // Import Onboarding
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
-import { GrTrigger } from "react-icons/gr";
+import { faDownload, faBars } from "@fortawesome/free-solid-svg-icons";
+import ActionsComponent from "./ActionsComponent";
+import Loader from "./Loader";
+import RefreshButton from "./RefreshButton";
+import UserInfo from "./UserInfo";
+import SearchIcon from "@mui/icons-material/Search";import { GrTrigger } from "react-icons/gr";
 
 // import ActionsComponent from "./ActionsComponent";
 import Loader from "./Loader";
@@ -39,11 +44,38 @@ const ChatbotContainer = () => {
   const [query, setQuery] = useState(""); // State to store the search query
   const [results, setResults] = useState([]); // State to store search results
   const [searchClicked, setSearchClicked] = useState(false);
-  const [isActionsPopupOpen, setIsActionsPopupOpen] = useState(false);
 
   const [uploadedPDF, setUploadedPDF] = useState(null);
   const [uploadedVideo, setUploadedVideo] = useState(null);
   const [uploadedURL, setUploadedURL] = useState("");
+
+  const storedUserData = localStorage.getItem("user_data");
+  const user = storedUserData ? JSON.parse(storedUserData) : null;
+
+  const toggleActionsPopup = () => {
+    setIsActionsPopupOpen(!isActionsPopupOpen);
+  };
+
+  const closePopup = () => {
+    setIsActionsPopupOpen(false);
+  };
+
+  const navigate = useNavigate(); // Hook for redirection
+
+  const profilepage = () => {
+    navigate("/profile");
+  };
+
+const storedUserData = localStorage.getItem("user_data");
+const user = storedUserData ? JSON.parse(storedUserData) : null;
+
+  const toggleActionsPopup = () => {
+    setIsActionsPopupOpen(!isActionsPopupOpen);
+  };
+
+  const closePopup = () => {
+    setIsActionsPopupOpen(false);
+  };
 
 const storedUserData = localStorage.getItem("user_data");
 const user = storedUserData ? JSON.parse(storedUserData) : null;
@@ -78,6 +110,7 @@ const user = storedUserData ? JSON.parse(storedUserData) : null;
 
     fetchSessionId();
   }, []);
+
 
   useEffect(() => {
     const fetchSessions = async () => {
@@ -174,6 +207,7 @@ const user = storedUserData ? JSON.parse(storedUserData) : null;
         console.log("Message sent");
         setLoading(false); // Reset loading state
       }, 1000);
+      }, 1000);
       // Retrieve user data from localStorage
       const storedUserData = localStorage.getItem("user_data");
       const userData = storedUserData
@@ -186,6 +220,7 @@ const user = storedUserData ? JSON.parse(storedUserData) : null;
       formData.append("name", userData.name); // Add the user's name
       if (pdfFile) {
         formData.append("pdf", pdfFile);
+        console.log("Pdf got");
       }
       if (videoFile) {
         formData.append("video", videoFile);
@@ -239,19 +274,34 @@ const user = storedUserData ? JSON.parse(storedUserData) : null;
       } finally {
         // Hide loader
         setLoading(false);
+      } finally {
+        // Hide loader
+        setLoading(false);
       }
     }
   };
 
   const toggleOptions = () => setShowOptions(!showOptions);
 
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    if (files && files.length > 0) {
-      const fileName = files[0].name;
-      if (name === "pdf") setUploadedPDF(fileName);
-      if (name === "video") setUploadedVideo(fileName);
-      toggleOptions(); // Automatically close options after uploading
+  // const handleFileChange = (e) => {
+  //   const { name, files } = e.target;
+  //   if (files && files.length > 0) {
+  //     const fileName = files[0].name;
+  //     if (name === "pdf") setUploadedPDF(fileName);
+  //     if (name === "video") setUploadedVideo(fileName);
+  //     toggleOptions(); // Automatically close options after uploading
+  //   }
+  // };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const fileType = event.target.name; // 'pdf' or 'video'
+      if (fileType === "pdf") {
+        setPdfFile(file);
+      } else if (fileType === "video") {
+        setVideoFile(file);
+      }
     }
   };
 
@@ -347,26 +397,39 @@ const user = storedUserData ? JSON.parse(storedUserData) : null;
 
     } catch (error) {
       console.error("Error downloading the chat:", error);
-    } 
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className={Classes.chatcontainer}>
       <div className={Classes.topright}>
-        <div className={Classes.refresh}></div>
-        <RefreshButton />
+        {/* Fixed Header Section */}
+        <div className={Classes.fixedTop}>
+          <div className={Classes.userinfo} onClick={profilepage}>
+            <UserInfo />
+          </div>
+          <div className={Classes.refresh}>
+            <RefreshButton />
+          </div>
 
-        <h1 className={Classes.chathistory}>Chat History</h1>
-        {/* <SearchBar /> */}
+          <h1 className={Classes.chathistory}>Recent</h1>
 
-        <div>
-          <div className={Classes.searchContainer}>
-            <form onSubmit={handleSearch}>
+          <div
+            className={`${Classes.searchContainer} ${
+              isFocused ? Classes.searchContainerFocused : ""
+            }`}
+          >
+            <form onSubmit={handleSearch} className={Classes.searchform}>
               <input
                 type="text"
-                placeholder="Search sessions..." // Placeholder for the input field
-                value={query} // Value is controlled by the query state
-                onChange={(e) => setQuery(e.target.value)} // Update the query state on input change
+                placeholder="Search sessions..."
+                value={query}
+                className={Classes.searchInput}
+                onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
               />
             </form>
             <button
@@ -374,10 +437,17 @@ const user = storedUserData ? JSON.parse(storedUserData) : null;
               onClick={handleSearch}
               className={Classes.searchiconcont}
             >
-              <span>&#x1F50D;</span>
+              <SearchIcon
+                className={`${Classes.searchIcon} ${
+                  isFocused ? Classes.searchIconFocused : ""
+                }`}
+              />{" "}
             </button>
           </div>
+        </div>
 
+        {/* Scrollable Content Section */}
+        <div className={Classes.scrollableContent}>
           <div className={Classes.historycard}>
             {results.length > 0
               ? results.map((session, index) => (
@@ -399,32 +469,31 @@ const user = storedUserData ? JSON.parse(storedUserData) : null;
                 ))
               : searchClicked && query && <p>No results found for "{query}"</p>}
           </div>
-        </div>
-        <hr className={Classes.searchline} />
-        <div className={Classes.historycard}>
-          {sessions.length > 0 ? (
-            sessions.map((session, index) => (
-              <div className={Classes.chatCard} key={index}>
-                <button
-                  className={Classes.sessionButton}
-                  onClick={() => fetchMessagesByTitle(session.session_title)}
-                >
-                  <div className={Classes.sessionContent}>
-                    <div className={Classes.iconWrapper}>
-                      <span className={Classes.msgicon}>&#x2709;</span>
+          <div className={Classes.historycard}>
+            {sessions.length > 0 ? (
+              sessions.map((session, index) => (
+                <div className={Classes.chatCard} key={index}>
+                  <button
+                    className={Classes.sessionButton}
+                    onClick={() => fetchMessagesByTitle(session.session_title)}
+                  >
+                    <div className={Classes.sessionContent}>
+                      <div className={Classes.iconWrapper}>
+                        <span className={Classes.msgicon}>&#x2709;</span>
+                      </div>
+                      <div className={Classes.textWrapper}>
+                        <p className={Classes.sessionTitle}>
+                          {session.session_title}
+                        </p>
+                      </div>
                     </div>
-                    <div className={Classes.textWrapper}>
-                      <p className={Classes.sessionTitle}>
-                        {session.session_title}
-                      </p>
-                    </div>
-                  </div>
-                </button>
-              </div>
-            ))
-          ) : (
-            <p>No sessions found</p>
-          )}
+                  </button>
+                </div>
+              ))
+            ) : (
+              <p>No sessions found</p>
+            )}
+          </div>
         </div>
       </div>
 
@@ -515,13 +584,31 @@ const user = storedUserData ? JSON.parse(storedUserData) : null;
           )}
         </div> */}
 
+        {messages.length === 0 ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh", // Ensures full-screen height for centering
+              fontSize: "24px", // Optional styling for the welcome message
+              color: "#555", // Optional color styling
+            }}
+          >
+            <div className={Classes.welcomemsg}>
+              Welcome! {user?.name || "Guest"}
+            </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
         {messages.map((msg, index) => (
           <div key={index} style={{ marginBottom: "15px" }}>
             {msg.sender === "user" ? (
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "flex-end", // Aligns user messages to the right
+                  justifyContent: "flex-end",
                 }}
               >
                 <UserMsg message={msg.text} />
@@ -530,18 +617,15 @@ const user = storedUserData ? JSON.parse(storedUserData) : null;
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "flex-start", // Aligns bot messages to the left
+                  justifyContent: "flex-start",
                 }}
               >
                 <Markdown text={msg.text} image={msg.image} />
-                {/* <BotMsg message={msg.text} /> */}
               </div>
             )}
           </div>
         ))}
-
         <div ref={messagesEndRef} />
-
         <div className={Classes.inputContainer}>
           {/* Attachment Button */}
           <button className={Classes.attachmentButton} onClick={toggleOptions}>

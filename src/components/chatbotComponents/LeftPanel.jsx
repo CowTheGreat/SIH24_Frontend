@@ -18,9 +18,9 @@ const LeftPanel = () => {
         <div className={Classes.userinfo} onClick={profilepage}>
           <UserInfo />
         </div>
-        <div className={Classes.refreshContainer}>
+        {/* <div className={Classes.refreshContainer}>
           <RefreshButton className={Classes.refresh} />
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -41,7 +41,6 @@ button {
   border: none;
   color: white;
   padding: 0px 10px;
-  margin-left: 10px;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -74,17 +73,49 @@ button:hover {
 
 .topright {
   position: fixed;
-  top: 12%;
+  top: 0;
   left: 0;
   margin-right: 50px;
-  background-color: #202020;
-  height: 72.5vh;
-  width: 15vw;
-  margin: 20px;
+  background-color: #282a2c;
+  height: 100vh;
+  width: 18vw;
+  margin: 0px;
   border-radius: 3px;
   padding: 20px;
   overflow-y: auto;
   border-radius: 6px;
+}
+
+.topright {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.userinfo {
+  margin-bottom: 20px;
+}
+
+.fixedTop {
+  position: sticky; /* Keeps it at the top when scrolling */
+  top: 0;
+  z-index: 1000; /* Ensures it stays above scrollable content */
+  padding: 1rem;
+}
+
+.scrollableContent {
+  flex-grow: 1; /* Ensures it takes up remaining height */
+  overflow-y: auto; /* Makes it scrollable */
+  padding: 1rem;
+}
+
+.historycard {
+  margin-top: 1rem;
+}
+
+.chatCard {
+  margin-bottom: 1rem;
 }
 
 .onboardingleft {
@@ -313,11 +344,38 @@ button:hover {
   align-items: center;
   background-color: #ffffff;
   border-radius: 25px;
-  width: 50vw;
+  width: 45vw;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   margin-bottom: 20px;
   position: sticky;
   bottom: 0;
+}
+
+.triggerButton {
+  background-color: orange;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popupContent {
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  z-index: 1001;
 }
 
 
@@ -371,7 +429,7 @@ button:hover {
 
 .textInput {
   flex: 1;
-  background-color: #1e1e1e; /* Slightly darker for input */
+  background-color: #1e1f20; /* Slightly darker for input */
   border: none;
   color: #1e1e1e;
   padding: 10px;
@@ -408,7 +466,7 @@ button:hover {
 
 .chathistory {
   color: #d4d4d4;
-  font-size: 20px;
+  font-size: 16px;
   margin-bottom: 10px;
   margin-left: 0;
   margin-top: 0;
@@ -461,8 +519,7 @@ button:hover {
 }
 
 .sessionTitle {
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 12px;
   margin: 0;
 }
 
@@ -489,9 +546,23 @@ button:hover {
   margin-top: 30px;
 }
 
-.centerpanel {
-  margin-left: 150px;
+.welcomemsg {
+  font-size: 2em;
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 107, 71),
+    rgb(253, 144, 79),
+    rgb(255, 157, 82)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: fixed;
 }
+
+.centerpanel {
+  margin-left: 25vw;
+}
+
 .searchContainer {
   display: flex;
   align-items: center; /* Aligns items vertically centered */
@@ -502,21 +573,63 @@ button:hover {
   flex: 1; /* Allows input to take up remaining space */
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 16px;
-}
-
-.searchContainer button {
-  padding: 8px 12px;
-  border: none;
-  background-color: #ff6b47;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-left: 0;
+  font-size: 12px;
 }
 
 .searchContainer button span {
   font-size: 18px; /* Adjusts the size of the search icon */
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 200px; /* Reduced width */
+  height: 50px; /* Increased height */
+  border: 1px solid #ccc;
+  border-radius: 25px; /* Adjusted to match new height */
+  padding-left: 15px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.searchContainerFocused {
+  border-color: orange;
+}
+
+.searchInput {
+  width: 100%;
+  height: 100%; /* Ensures the input matches the container height */
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+  background: none;
+  margin-left: 0;
+  border: 0;
+}
+
+.searchInput::placeholder {
+  color: #bbb;
+}
+
+.searchIcon {
+  color: #bbb;
+  transition: color 0.3s ease;
+  margin-left: 0;
+}
+
+.searchform {
+  width: 120px;
+  border: none;
+}
+
+.searchform {
+  border: none;
+}
+
+.searchIconFocused {
+  color: orange;
 }
 
 .sessionButton {

@@ -42,8 +42,8 @@ const UserInfo1 = () => {
     try {
       // Verify the 6-digit code
       const verifyResponse = await axios.post(
-        // "https://sih24-node-backend.onrender.com/verify",
-        "http://localhost:3000/verify",
+        "https://sih24-node-backend.onrender.com/verify",
+        // "http://localhost:3000/verify",
         {
           token: pin,
         }
