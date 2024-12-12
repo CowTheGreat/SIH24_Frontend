@@ -62,7 +62,6 @@ const HrPolicyLan = () => {
           <div key={index} className={styles.policyBox}>
             <h3 className={styles.policyTitle}>{policy.title}</h3>
             <p className={styles.policyDescription}>{policy.description}</p>
-            <button className={styles.learnMoreBtn}>Learn more</button>
           </div>
         ))}
       </div>

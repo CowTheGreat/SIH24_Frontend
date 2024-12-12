@@ -1,5 +1,5 @@
 import React from "react";
-import Classes from "./BotMsg.module.css";
+import Classes from "./Botload.module.css";
 import botIcon from "../../assets/botIcon.png";
 import Markdown from "./Markdown";
 

@@ -13,19 +13,19 @@ const UserStats = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
 
-  //   useEffect(() => {
-  //     if (uname && uname !== "Guest") {
-  //       fetchStats();
+  useEffect(() => {
+    if (uname && uname !== "Guest") {
+      fetchStats();
 
-  //       const interval = setInterval(() => {
-  //         fetchStats();
-  //       }, 5000);
+      const interval = setInterval(() => {
+        fetchStats();
+      }, 15000);
 
-  //       return () => clearInterval(interval);
-  //     } else {
-  //       setError("No username found in local storage.");
-  //     }
-  //   }, [uname]);
+      return () => clearInterval(interval);
+    } else {
+      setError("No username found in local storage.");
+    }
+  }, [uname]);
 
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 

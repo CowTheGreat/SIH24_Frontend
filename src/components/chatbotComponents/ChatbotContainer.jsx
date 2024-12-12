@@ -19,6 +19,7 @@ import UserInfo from "./UserInfo";
 import SearchIcon from "@mui/icons-material/Search";
 import { GrTrigger } from "react-icons/gr";
 import UserStats from "./UserStats";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 // import ActionsComponent from "./ActionsComponent";
 import Styles from "./Tooltip.module.css";
@@ -90,6 +91,40 @@ const ChatbotContainer = () => {
 
     fetchSessionId();
   }, []);
+
+  const deleteSession = async (sessionTitle) => {
+    const storedUserData = localStorage.getItem("user_data");
+    const user = storedUserData ? JSON.parse(storedUserData) : null;
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}deleteSession`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sessionTitle,
+            user,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        alert("Session deleted successfully");
+        // Refresh the sessions list
+        setSessions(
+          sessions.filter((session) => session.session_title !== sessionTitle)
+        );
+      } else {
+        const error = await response.json();
+        alert(`Failed to delete session: ${error.detail}`);
+      }
+    } catch (error) {
+      console.error("Error deleting session:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchSessions = async () => {
@@ -445,6 +480,31 @@ const ChatbotContainer = () => {
                 ))
               : searchClicked && query && <p>No results found for "{query}"</p>}
           </div>
+          {/* <div className={Classes.historycard}>
+            {sessions.length > 0 ? (
+              sessions.map((session, index) => (
+                <div className={Classes.chatCard} key={index}>
+                  <button
+                    className={Classes.sessionButton}
+                    onClick={() => fetchMessagesByTitle(session.session_title)}
+                  >
+                    <div className={Classes.sessionContent}>
+                      <div className={Classes.iconWrapper}>
+                        <span className={Classes.msgicon}>&#x2709;</span>
+                      </div>
+                      <div className={Classes.textWrapper}>
+                        <p className={Classes.sessionTitle}>
+                          {session.session_title}
+                        </p>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              ))
+            ) : (
+              <p>No sessions found</p>
+            )}
+          </div> */}
           <div className={Classes.historycard}>
             {sessions.length > 0 ? (
               sessions.map((session, index) => (
@@ -463,6 +523,13 @@ const ChatbotContainer = () => {
                         </p>
                       </div>
                     </div>
+                  </button>
+                  {/* Dustbin Button */}
+                  <button
+                    className={Classes.dustbinButton}
+                    onClick={() => deleteSession(session.session_title)}
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
                   </button>
                 </div>
               ))

@@ -1,6 +1,7 @@
 import React from "react";
 import RobotImage from "../../assets/robot-board.gif";
 import styles from "./HeroLan.module.css";
+import { NavLink } from "react-router-dom";
 
 const HeroLan = () => {
   return (
@@ -12,7 +13,6 @@ const HeroLan = () => {
         <p className={styles.heroSubtitle}>
           Empowering employees with AI-driven solutions
         </p>
-        <button className={styles.ctaButton}>Learn more</button>
       </div>
       <div className={styles.heroImage}>
         <img src={RobotImage} alt="Robot" />
