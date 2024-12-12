@@ -41,23 +41,48 @@
   margin-right: 20px;
 }
 
+/* Box with gradient border */
 .aboutUsBox {
-  background: #20232a;
-  border-radius: 10px;
-  padding: 20px;
+  --background: linear-gradient(to left, #f7ba2b 0%, #ea5358 100%);
+  background: var(--background);
+  padding: 4px; /* Initial border thickness */
+  border-radius: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: padding 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+.aboutUsBoxInner {
+  background: #20232a; /* Black inner container */
+  border-radius: 16px; /* Match the gradient's inner shape */
+  padding: 20px; /* Inner content padding */
+  height: 100%;
 }
 
 .aboutUsBoxTitle {
   font-size: 24px;
   color: #f77d29;
   margin-bottom: 10px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  transition: color 1s;
 }
 
 .aboutUsBoxDescription {
   font-size: 16px;
   color: #ddd;
+  transition: color 0.5s ease;
+}
+
+/* Hover effect: Border expands and glows */
+.aboutUsBox:hover {
+  padding: 8px; /* Border expands */
+  box-shadow: 0 0 25px rgba(247, 186, 43, 0.6), 0 0 50px rgba(234, 83, 88, 0.4);
+}
+
+.aboutUsBox:hover .aboutUsBoxTitle {
+  color: #f7ba2b;
 }
 
 .aboutUsImage {
@@ -95,7 +120,7 @@
   .aboutUsBox {
     width: 100%;
     margin-bottom: 15px;
-    padding: 15px;
+    padding: 4px; /* Border thickness */
   }
 
   .aboutUsHeading {

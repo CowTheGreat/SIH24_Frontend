@@ -18,6 +18,7 @@ import RefreshButton from "./RefreshButton";
 import UserInfo from "./UserInfo";
 import SearchIcon from "@mui/icons-material/Search";
 import { GrTrigger } from "react-icons/gr";
+import UserStats from "./UserStats";
 
 // import ActionsComponent from "./ActionsComponent";
 import Styles from "./Tooltip.module.css";
@@ -67,7 +68,6 @@ const ChatbotContainer = () => {
     navigate("/profile");
   };
 
-
   // Fetch the session ID when the component mounts
   useEffect(() => {
     const fetchSessionId = async () => {
@@ -90,7 +90,6 @@ const ChatbotContainer = () => {
 
     fetchSessionId();
   }, []);
-
 
   useEffect(() => {
     const fetchSessions = async () => {
@@ -125,6 +124,8 @@ const ChatbotContainer = () => {
   const handleTitleChange = (e) => {
     setCurrentTitle(e.target.value);
   };
+
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
   const updateSessionTitle = async () => {
     try {
@@ -370,7 +371,6 @@ const ChatbotContainer = () => {
       link.click();
       link.remove();
       console.log("Name retrieved from localStorage:", name);
-
     } catch (error) {
       console.error("Error downloading the chat:", error);
     } finally {
@@ -471,6 +471,7 @@ const ChatbotContainer = () => {
             )}
           </div>
         </div>
+        <UserStats />
       </div>
 
       <div className={Classes.onboardingleft}>
@@ -655,7 +656,7 @@ const ChatbotContainer = () => {
           <button className={Classes.sendButton} onClick={sendMessage}>
             <span className={Classes.sendArrow}>&#x27A4;</span>
           </button>
-        
+
           {/* <button className={Classes.downButton} onClick={handleDownload}>
             <FontAwesomeIcon icon={faDownload} />
           </button> */}
@@ -668,13 +669,14 @@ const ChatbotContainer = () => {
 
           {/* Trigger Button for ActionsComponent */}
           <div className={Styles.tooltipcontainer}>
-            <button className={Styles.triggerButton} onClick={toggleActionsPopup}>
-              <GrTrigger className={Styles.triggerimg}/>
+            <button
+              className={Styles.triggerButton}
+              onClick={toggleActionsPopup}
+            >
+              <GrTrigger className={Styles.triggerimg} />
               <span className={Styles.tooltip}>Actions</span>
             </button>
           </div>
-
-          
         </div>
         {isActionsPopupOpen && (
           <div className={Classes.popupOverlay} onClick={closePopup}>

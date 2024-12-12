@@ -42,8 +42,8 @@ const UserInfo1 = () => {
     try {
       // Verify the 6-digit code
       const verifyResponse = await axios.post(
-        "https://sih24-node-backend.onrender.com/verify",
-        // "http://localhost:3000/verify",
+        // "https://sih24-node-backend.onrender.com/verify",
+        "http://localhost:3000/verify",
         {
           token: pin,
         }
@@ -99,18 +99,20 @@ const UserInfo1 = () => {
   };
 
   const loginWithConfluence = () => {
-    const clientId = 'HB6FOgEW26cRVCgYy4ud9Y2YY29P4uvc';  // Replace with your actual client ID
-    const redirectUri = 'http://localhost:8080/callback';  // The callback URL in your backend
-    const scope = 'search:confluence read:confluence-content.all read:confluence-content.summary';
-
-
+    const clientId = "HB6FOgEW26cRVCgYy4ud9Y2YY29P4uvc"; // Replace with your actual client ID
+    const redirectUri = "http://localhost:8080/callback"; // The callback URL in your backend
+    const scope =
+      "search:confluence read:confluence-content.all read:confluence-content.summary";
 
     // Use backticks for the string to enable template literals
-    const authUrl = `https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=${clientId}&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&prompt=consent`;
+    const authUrl = `https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=${clientId}&scope=${encodeURIComponent(
+      scope
+    )}&redirect_uri=${encodeURIComponent(
+      redirectUri
+    )}&response_type=code&prompt=consent`;
 
     window.location.href = authUrl;
-};
-
+  };
 
   const handleAppPasswordSubmit = async (e) => {
     e.preventDefault();
@@ -210,7 +212,12 @@ const UserInfo1 = () => {
                     button
                   </p>
                 </div>
-                <button className={Classes.actionBtn2} onClick={loginWithConfluence}>Confluence</button>
+                <button
+                  className={Classes.actionBtn2}
+                  onClick={loginWithConfluence}
+                >
+                  Confluence
+                </button>
               </div>
               {/* <div className={Classes.actionCont}>
                 <div className={Classes.actionInfo}>

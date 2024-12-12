@@ -10,10 +10,10 @@ const Markdown = ({ text, image }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading delay (e.g., fetching data or rendering markdown)
-    const timer = setTimeout(() => setIsLoading(false), 6000); // Adjust the delay as needed
-    return () => clearTimeout(timer);
-  }, []);
+    if (text) {
+      setIsLoading(false); // Stop loading when text is available
+    }
+  }, [text]);
 
   const htmlcontent = md.render(text);
   const sanitized = DOMPurify.sanitize(htmlcontent);
@@ -24,8 +24,8 @@ const Markdown = ({ text, image }) => {
         <img src={botIcon} alt="Bot Icon" className={Classes.botIcon} />
         <div dangerouslySetInnerHTML={{ __html: sanitized }}></div>
         {/* Spinner below the bot icon */}
-         {/* Three-dot loading effect */}
-         {isLoading && (
+        {/* Three-dot loading effect */}
+        {isLoading && (
           <div className={Classes.loadingdots}>
             <div className={Classes.dot}></div>
             <div className={Classes.dot}></div>
