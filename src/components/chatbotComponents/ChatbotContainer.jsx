@@ -16,11 +16,10 @@ import ActionsComponent from "./ActionsComponent";
 import Loader from "./Loader";
 import RefreshButton from "./RefreshButton";
 import UserInfo from "./UserInfo";
-import SearchIcon from "@mui/icons-material/Search";import { GrTrigger } from "react-icons/gr";
+import SearchIcon from "@mui/icons-material/Search";
+import { GrTrigger } from "react-icons/gr";
 
 // import ActionsComponent from "./ActionsComponent";
-import Loader from "./Loader";
-import RefreshButton from "./RefreshButton";
 import Styles from "./Tooltip.module.css";
 
 import pdf from "../../assets/pdf-icon.png";
@@ -44,6 +43,8 @@ const ChatbotContainer = () => {
   const [query, setQuery] = useState(""); // State to store the search query
   const [results, setResults] = useState([]); // State to store search results
   const [searchClicked, setSearchClicked] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isActionsPopupOpen, setIsActionsPopupOpen] = useState(false);
 
   const [uploadedPDF, setUploadedPDF] = useState(null);
   const [uploadedVideo, setUploadedVideo] = useState(null);
@@ -66,27 +67,6 @@ const ChatbotContainer = () => {
     navigate("/profile");
   };
 
-const storedUserData = localStorage.getItem("user_data");
-const user = storedUserData ? JSON.parse(storedUserData) : null;
-
-  const toggleActionsPopup = () => {
-    setIsActionsPopupOpen(!isActionsPopupOpen);
-  };
-
-  const closePopup = () => {
-    setIsActionsPopupOpen(false);
-  };
-
-const storedUserData = localStorage.getItem("user_data");
-const user = storedUserData ? JSON.parse(storedUserData) : null;
-
-  const toggleActionsPopup = () => {
-    setIsActionsPopupOpen(!isActionsPopupOpen);
-  };
-
-  const closePopup = () => {
-    setIsActionsPopupOpen(false);
-  };
 
   // Fetch the session ID when the component mounts
   useEffect(() => {
@@ -207,8 +187,7 @@ const user = storedUserData ? JSON.parse(storedUserData) : null;
         console.log("Message sent");
         setLoading(false); // Reset loading state
       }, 1000);
-      }, 1000);
-      // Retrieve user data from localStorage
+
       const storedUserData = localStorage.getItem("user_data");
       const userData = storedUserData
         ? JSON.parse(storedUserData)
@@ -271,9 +250,6 @@ const user = storedUserData ? JSON.parse(storedUserData) : null;
         await stream.getReader().read();
       } catch (error) {
         console.error("Error sending message:", error);
-      } finally {
-        // Hide loader
-        setLoading(false);
       } finally {
         // Hide loader
         setLoading(false);
