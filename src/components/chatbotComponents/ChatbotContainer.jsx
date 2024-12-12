@@ -216,6 +216,19 @@ const ChatbotContainer = () => {
     if (input.trim() && sessionId) {
       const newMessage = { text: input, sender: "user" };
 
+      const start = performance.now();
+
+      // Simulate sending a message and receiving a response
+      setTimeout(() => {
+        // Simulate server processing time (e.g., receiving and processing the message)
+        const end = performance.now();
+
+        // Calculate and log the response time
+        const responseTime = end - start;
+
+        alert(responseTime);
+      });
+
       // Update the state with the new user message
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setLoading(true);
